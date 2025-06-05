@@ -10,7 +10,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { motion, AnimatePresence } from "framer-motion"
-import CircularPicker from "@/components/circular-picker"
+import CircularPicker from "./animation"
+import { Check, CheckIcon } from "@phosphor-icons/react"
 
 interface POV {
   id: string
@@ -280,7 +281,7 @@ export default function ViewerPage() {
 
   return (
     <div className="relative flex flex-col items-center min-h-screen bg-muted/40 p-4 md:p-8 overflow-hidden">
-      <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="w-full max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div
           className={`space-y-8 transition-opacity duration-300 ${isEditMode || isCameraAnimating ? "opacity-30 pointer-events-none" : "opacity-100"}`}
         >
@@ -306,9 +307,12 @@ export default function ViewerPage() {
               >
                 Load Default Duck & Reset
               </Button>
+              <Button onClick={handleEditButtonClick} className="px-8 py-3 text-lg my-5" disabled={isCameraAnimating}>
+                Edit
+              </Button>
             </CardContent>
           </Card>
-          <Card>
+          {/* <Card>
             <CardHeader>
               <CardTitle>Controls</CardTitle>
             </CardHeader>
@@ -447,12 +451,12 @@ export default function ViewerPage() {
                 </div>
               )}
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
 
         <div className={`flex flex-col items-center lg:sticky lg:top-8 h-max`}>
           <motion.div
-            className="relative w-full max-w-xl rounded-lg overflow-hidden border shadow-lg bg-card"
+            className="relative w-full max-w-xl overflow-hidden border shadow-lg bg-card"
             style={{ aspectRatio: "4 / 5" }}
             animate={{ zIndex: isEditMode ? 20 : 10 }}
             transition={{ duration: 0.1 }}
@@ -515,21 +519,19 @@ export default function ViewerPage() {
             </AnimatePresence>
           </motion.div>
           <div className="mt-6 w-full max-w-xl flex justify-center gap-4">
-            {!isEditMode ? (
-              <Button onClick={handleEditButtonClick} className="px-8 py-3 text-lg" disabled={isCameraAnimating}>
-                Edit
-              </Button>
-            ) : (
+            {isEditMode &&
               <>
                 <Button
                   onClick={handleCancelEditClick}
                   variant="outline"
                   className="px-8 py-3 text-lg"
                   disabled={isCameraAnimating}
+                  size={"sm"}
                 >
-                  Cancel
+                  <CheckIcon/>
+                  Done
                 </Button>
-                <Button
+                {/* <Button
                   onClick={() => {
                     if (isCameraAnimating) return
                     setIsCameraAnimating(true)
@@ -541,11 +543,12 @@ export default function ViewerPage() {
                   variant="secondary"
                   className="px-6 py-3"
                   disabled={isCameraAnimating}
+                  size={"sm"}
                 >
                   View Back
-                </Button>
+                </Button> */}
               </>
-            )}
+            }
           </div>
           <footer
             className={`mt-8 text-center text-sm text-muted-foreground transition-opacity duration-300 ${isEditMode || isCameraAnimating ? "opacity-30 pointer-events-none" : "opacity-100"}`}

@@ -16,7 +16,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import CircularPicker from "@/components/circular-picker";
 import Image from "next/image";
 import { X } from "lucide-react";
-
+import { Check } from "@phosphor-icons/react";
 interface PlacedSticker {
   id: string;
   uniqueKey: string;
@@ -200,7 +200,7 @@ export default function ViewerPage() {
         <div
           className={`space-y-8 transition-opacity duration-300 ${
             isEditMode || isCameraAnimating
-              ? "opacity-30 pointer-events-none"
+              ? "opacity-20 filter blur-sm pointer-events-none"
               : "opacity-100"
           }`}
         >
@@ -266,13 +266,17 @@ export default function ViewerPage() {
 
         <div className={`flex flex-col items-center lg:sticky lg:top-8 h-max`}>
           <motion.div
-            className="relative w-full max-w-2xl rounded-lg overflow-visible "
-            style={{ aspectRatio: "4 / 5" }}
-            animate={{ zIndex: isEditMode ? 20 : 10 }}
+            className="relative w-full max-w-2xl rounded-lg overflow-visible"
+            animate={{
+              zIndex: isEditMode ? 20 : 10,
+              aspectRatio: isEditMode ? "4 / 4.5" : "4 / 5",
+            }}
             transition={{ duration: 0.1 }}
           >
             <motion.div
-              className="relative w-full h-full flex items-center justify-center overflow-visible"
+              className={`relative w-full h-full flex items-center justify-center overflow-hidden ${
+                isEditMode ? " rounded-b-[20px] shadow-2xl" : ""
+              }`}
               animate={{
                 scale: imageScale,
                 x: imagePosition.x,
@@ -280,7 +284,7 @@ export default function ViewerPage() {
                 rotate: imageRotation,
               }}
               transition={{
-                duration: 0.8,
+                duration: 0.5,
                 ease: "easeInOut",
               }}
             >
@@ -288,8 +292,8 @@ export default function ViewerPage() {
                 src={macbookImage}
                 alt="MacBook"
                 fill
-                className="object-contain"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+                sizes="(max-width: 608px) 100vw, 40vw"
               />
 
               {/* Placed Stickers */}
@@ -366,25 +370,21 @@ export default function ViewerPage() {
                   onClick={handleDoneEditClick}
                   className="px-8 py-3 text-lg"
                   disabled={isCameraAnimating}
+                  size={"sm"}
+                  variant={"outline"}
                 >
+                    <Check/>
                   Done
                 </Button>
-                <Button
+                {/* <Button
                   onClick={handleClearStickers}
                   variant="destructive"
                   className="px-6 py-3 text-lg"
                   disabled={isCameraAnimating || placedStickers.length === 0}
+                  size={"sm"}
                 >
                   Clear
-                </Button>
-                <Button
-                  onClick={handleCancelEditClick}
-                  variant="outline"
-                  className="px-6 py-3 text-lg"
-                  disabled={isCameraAnimating}
-                >
-                  Cancel
-                </Button>
+                </Button> */}
               </>
             )}
           </div>
@@ -396,7 +396,7 @@ export default function ViewerPage() {
                 : "opacity-100"
             }`}
           >
-            <p>Click Edit to start placing stickers on your MacBook.</p>
+            <p>Device is not include with the sticker.</p>
           </footer>
         </div>
       </div>
