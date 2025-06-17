@@ -13,10 +13,10 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
-import CircularPicker from "@/components/circular-picker";
 import Image from "next/image";
 import { X } from "lucide-react";
 import { Check } from "@phosphor-icons/react";
+import CircularPicker from "@/components/products/jeans/animation";
 interface PlacedSticker {
   id: string;
   uniqueKey: string;
@@ -24,9 +24,9 @@ interface PlacedSticker {
   image: string;
 }
 
-export default function ViewerPage() {
+export default function HatViewerPage() {
   const [macbookImage, setMacbookImage] = useState<string>(
-    "/macbook/macbook-back.jpg"
+    "/hat/Hat-3.png"
   ); // Default MacBook image
   const [error, setError] = useState<string | null>(null);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
@@ -272,7 +272,7 @@ export default function ViewerPage() {
             transition={{ duration: 0.1 }}
           >
             <motion.div
-              className={`relative w-full h-full flex items-center justify-center overflow-hidden ${
+              className={`relative w-full h-full flex items-center justify-center overflow-hidden border ${
                 isEditMode && false ? " rounded-b-[20px] shadow-2xl" : ""
               }`}
               animate={{
@@ -340,6 +340,25 @@ export default function ViewerPage() {
               </AnimatePresence>
             </motion.div>
 
+            {/* <AnimatePresence>
+              {isEditMode && !isCameraAnimating && (
+                <motion.div
+                  className="absolute inset-0 z-10"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <HatCircularPicker
+                    className="bg-transparent"
+                    onStickerSelect={handleStickerSelect}
+                    onStickerRemove={handleStickerRemoveFromPicker}
+                    placedStickers={placedStickers}
+                    selectedStickers={placedStickers.map((s) => s.id)}
+                    maxStickers={3}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence> */}
             <AnimatePresence>
               {isEditMode && !isCameraAnimating && (
                 <motion.div
@@ -348,14 +367,7 @@ export default function ViewerPage() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 >
-                  <CircularPicker
-                    className="bg-transparent"
-                    onStickerSelect={handleStickerSelect}
-                    onStickerRemove={handleStickerRemoveFromPicker}
-                    placedStickers={placedStickers}
-                    selectedStickers={placedStickers.map((s) => s.id)}
-                    maxStickers={3}
-                  />
+                  <CircularPicker className="bg-transparent" />
                 </motion.div>
               )}
             </AnimatePresence>

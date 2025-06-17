@@ -10,6 +10,12 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+  		fontFamily: {
+  			sans: ['var(--font-satoshi)', 'ui-sans-serif', 'system-ui'],
+  			serif: ['var(--font-instrument-serif)', 'Georgia', 'serif'],
+  			lausanne: ['var(--font-lausanne)', 'Georgia', 'serif'],
+  			nippo: ['var(--font-nippo)', 'ui-sans-serif', 'system-ui'],
+  		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

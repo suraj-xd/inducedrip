@@ -206,8 +206,10 @@ export default function ViewerPage() {
         >
           <Card>
             <CardHeader>
-              <CardTitle>MacBook Sticker Designer</CardTitle>
-              <CardDescription>
+              <CardTitle className="font-lausanne font-bold">
+                Inducedrip
+              </CardTitle>
+              <CardDescription className="font-nippo font-light">
                 Upload a MacBook image or use the default.
               </CardDescription>
             </CardHeader>
@@ -222,7 +224,7 @@ export default function ViewerPage() {
               {error && <p className="text-sm text-red-500 mt-2">{error}</p>}
               <Button
                 variant="outline"
-                className="mt-4 w-full"
+                className="mt-4 w-full font-nippo font-medium"
                 onClick={handleLoadDefault}
                 disabled={isCameraAnimating}
               >
@@ -233,27 +235,27 @@ export default function ViewerPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>How to Use</CardTitle>
+              <CardTitle className="font-nippo font-bold">How to Use</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="text-sm text-muted-foreground space-y-2">
+              <div className="text-sm text-muted-foreground space-y-2 font-normal">
                 <p>1. Click "Edit" to enter sticker placement mode</p>
                 <p>2. Select up to 6 stickers from the bottom picker</p>
                 <p>3. Stickers will appear randomly around your MacBook</p>
                 <p>4. Hover over stickers to remove them</p>
-                <p>
+                <p className="font-medium">
                   5. Click "Done" when you're finished or "Clear" to remove all
                   stickers
                 </p>
               </div>
-              <div className="text-xs text-muted-foreground">
+              <div className="text-xs text-muted-foreground font-extralight">
                 <p>Stickers placed: {placedStickers.length}/6</p>
               </div>
               <div className="mt-6 w-full max-w-xl flex justify-center gap-4 z-50">
                 {!isEditMode && (
                   <Button
                     onClick={handleEditButtonClick}
-                    className="px-8 py-3 text-lg"
+                    className="px-8 py-3 text-lg font-medium"
                     disabled={isCameraAnimating}
                   >
                     Edit
@@ -364,7 +366,7 @@ export default function ViewerPage() {
               <>
                 <Button
                   onClick={handleDoneEditClick}
-                  className="px-8 py-3 text-lg"
+                  className="px-8 py-3 text-lg font-nippo font-bold"
                   disabled={isCameraAnimating}
                 >
                   Done
@@ -372,7 +374,7 @@ export default function ViewerPage() {
                 <Button
                   onClick={handleClearStickers}
                   variant="destructive"
-                  className="px-6 py-3 text-lg"
+                  className="px-6 py-3 text-lg font-nippo font-medium"
                   disabled={isCameraAnimating || placedStickers.length === 0}
                 >
                   Clear
@@ -380,7 +382,7 @@ export default function ViewerPage() {
                 <Button
                   onClick={handleCancelEditClick}
                   variant="outline"
-                  className="px-6 py-3 text-lg"
+                  className="px-6 py-3 text-lg font-nippo font-light"
                   disabled={isCameraAnimating}
                 >
                   Cancel
@@ -390,7 +392,7 @@ export default function ViewerPage() {
           </div>
 
           <footer
-            className={`mt-8 text-center text-sm text-muted-foreground transition-opacity duration-300 ${
+            className={`mt-8 text-center text-sm text-muted-foreground transition-opacity duration-300 font-nippo font-extralight ${
               isEditMode || isCameraAnimating
                 ? "opacity-30 pointer-events-none"
                 : "opacity-100"

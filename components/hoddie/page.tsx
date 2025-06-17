@@ -63,8 +63,8 @@ function Model({
   )
 }
 
-export default function ViewerPage() {
-  const [modelUrl, setModelUrl] = useState<string | null>("/jeans-shirt.glb")
+export default function HoddieViewerPage() {
+  const [modelUrl, setModelUrl] = useState<string | null>("/hoodie/white-hoodie.glb")
   const [error, setError] = useState<string | null>(null)
   const [modelRotation, setModelRotation] = useState<[number, number, number]>([0, 0, 0])
   const orbitControlsRef = useRef<OrbitControlsImpl>(null!)
@@ -73,9 +73,9 @@ export default function ViewerPage() {
   const [povNameInput, setPovNameInput] = useState<string>("")
   const [isCustomPovActive, setIsCustomPovActive] = useState<boolean>(false)
 
-  const [lightingIntensity, setLightingIntensity] = useState<number>(1.2)
+  const [lightingIntensity, setLightingIntensity] = useState<number>(0.2)
   const [useSpotlightSetup, setUseSpotlightSetup] = useState<boolean>(true)
-  const [materialOverride, setMaterialOverride] = useState<boolean>(false)
+  const [materialOverride, setMaterialOverride] = useState<boolean>(true)
 
   const [isEditMode, setIsEditMode] = useState<boolean>(false)
   const [liveCameraAngles, setLiveCameraAngles] = useState<LiveCameraAngles | null>(null)
@@ -312,7 +312,7 @@ export default function ViewerPage() {
               </Button>
             </CardContent>
           </Card>
-          {/* <Card>
+          <Card>
             <CardHeader>
               <CardTitle>Controls</CardTitle>
             </CardHeader>
@@ -451,7 +451,7 @@ export default function ViewerPage() {
                 </div>
               )}
             </CardContent>
-          </Card> */}
+          </Card>
         </div>
 
         <div className={`flex flex-col items-center lg:sticky lg:top-8 h-max`}>
