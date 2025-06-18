@@ -1,21 +1,20 @@
 "use client";
 
 import type React from "react";
-import { useState, useEffect, useCallback } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { motion, AnimatePresence } from "framer-motion";
-import CircularPicker from "@/components/circular-picker";
+import Navbar from "@/components/layout/main-page/navbar";
+import Footer from "@/components/layout/main-page/footer";
 import Image from "next/image";
-import { X } from "lucide-react";
+import { 
+  CardCurtainReveal,
+  CardCurtainRevealBody,
+  CardCurtainRevealDescription,
+  CardCurtainRevealFooter,
+  CardCurtainRevealTitle,
+  CardCurtain } from "@/components/21st/curtain-reveal"
+
+import { ArrowUpRight } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
 
 interface PlacedSticker {
   id: string;
@@ -25,383 +24,92 @@ interface PlacedSticker {
 }
 
 export default function ViewerPage() {
-  const [macbookImage, setMacbookImage] = useState<string>(
-    "/macbook/macbook-back.jpg"
-  ); // Default MacBook image
-  const [error, setError] = useState<string | null>(null);
-  const [isEditMode, setIsEditMode] = useState<boolean>(false);
-  const [isCameraAnimating, setIsCameraAnimating] = useState<boolean>(false);
-  const [imageScale, setImageScale] = useState<number>(1);
-  const [imagePosition, setImagePosition] = useState<{ x: number; y: number }>({
-    x: 0,
-    y: 0,
-  });
-  const [imageRotation, setImageRotation] = useState<number>(0);
-  const [placedStickers, setPlacedStickers] = useState<PlacedSticker[]>([]);
-
-  // Predefined positions to avoid overlap, inspired by the user's image reference
-  const threeWayStickerPositions = [
-    {
-      x: -140,
-      y: -100,
-      rotation: Math.random() * 30 - 15,
-      top: "40%",
-      left: "29%",
-    }, // Upper left
-    {
-      x: 120,
-      y: -80,
-      rotation: Math.random() * 30 - 15,
-      top: "37%",
-      left: "40%",
-    }, // Upper right
-    {
-      x: -60,
-      y: 120,
-      rotation: Math.random() * 30 - 15,
-      top: "43%",
-      left: "36%",
-    }, // Lower left
-  ];
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      if (file.type.startsWith("image/")) {
-        const objectURL = URL.createObjectURL(file);
-        setMacbookImage(objectURL);
-        setError(null);
-        setIsEditMode(false);
-        // Add automatic rotation when new image is loaded
-        setImageRotation(Math.random() * 10 - 5); // Random rotation between -5 and 5 degrees
-        if (
-          macbookImage &&
-          macbookImage !== "/macbook/macbook-back.jpg" &&
-          macbookImage.startsWith("blob:")
-        ) {
-          URL.revokeObjectURL(macbookImage);
-        }
-      } else {
-        setError("Invalid file type. Please upload an image file.");
-      }
-    }
-  };
-
-  const handleLoadDefault = () => {
-    if (isCameraAnimating) return;
-    if (
-      macbookImage &&
-      macbookImage !== "/macbook/macbook-back.jpg" &&
-      macbookImage.startsWith("blob:")
-    ) {
-      URL.revokeObjectURL(macbookImage);
-    }
-    setMacbookImage("/macbook/macbook-back.jpg");
-    setError(null);
-    setIsEditMode(false);
-    setImageScale(1);
-    setImagePosition({ x: 0, y: 0 });
-    setImageRotation(Math.random() * 10 - 5); // Add slight rotation even for default
-    setPlacedStickers([]); // Clear all stickers
-    const input = document.getElementById("image-upload") as HTMLInputElement;
-    if (input) input.value = "";
-  };
-
-  const handleEditButtonClick = () => {
-    if (isCameraAnimating) return;
-    setIsCameraAnimating(true);
-
-    // Zoom in to show detail
-    setImageScale(1.3);
-    setImagePosition({ x: 0, y: 0 });
-
-    setTimeout(() => {
-      setIsEditMode(true);
-      setIsCameraAnimating(false);
-    }, 600);
-  };
-
-  const handleCancelEditClick = () => {
-    if (isCameraAnimating) return;
-    setIsCameraAnimating(true);
-    setIsEditMode(false);
-
-    // Reset to original position and scale
-    setImageScale(1);
-    setImagePosition({ x: 0, y: 0 });
-
-    setTimeout(() => {
-      setIsCameraAnimating(false);
-    }, 600);
-  };
-
-  const handleDoneEditClick = () => {
-    if (isCameraAnimating) return;
-    setIsCameraAnimating(true);
-    setIsEditMode(false);
-
-    // Reset to original position and scale
-    setImageScale(1);
-    setImagePosition({ x: 0, y: 0 });
-
-    setTimeout(() => {
-      setIsCameraAnimating(false);
-    }, 600);
-  };
-
-  const handleClearStickers = () => {
-    if (isCameraAnimating) return;
-    setPlacedStickers([]); // Clear all stickers
-  };
-
-  const handleStickerSelect = (sticker: {
-    id: string;
-    label: string;
-    image: string;
-  }) => {
-    if (placedStickers.length >= 6) return; // Max 6 stickers for better distribution
-
-    const newSticker: PlacedSticker = {
-      ...sticker,
-      uniqueKey: `${sticker.id}-${Date.now()}`,
-    };
-
-    setPlacedStickers((prev) => [...prev, newSticker]);
-  };
-
-  const handleStickerRemove = (uniqueKey: string) => {
-    setPlacedStickers((prev) =>
-      prev.filter((sticker) => sticker.uniqueKey !== uniqueKey)
-    );
-  };
-
-  const handleStickerRemoveFromPicker = (stickerId: string) => {
-    // Remove all instances of this sticker type from placed stickers
-    setPlacedStickers((prev) =>
-      prev.filter((sticker) => sticker.id !== stickerId)
-    );
-  };
-
-  useEffect(() => {
-    return () => {
-      if (
-        macbookImage &&
-        macbookImage !== "/macbook/macbook-back.jpg" &&
-        macbookImage.startsWith("blob:")
-      ) {
-        URL.revokeObjectURL(macbookImage);
-      }
-    };
-  }, [macbookImage]);
-
   return (
-    <div className="relative flex flex-col items-center min-h-screen bg-muted/40 p-4 md:p-8 overflow-hidden">
-      <div className="w-full max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div
-          className={`space-y-8 transition-opacity duration-300 ${
-            isEditMode || isCameraAnimating
-              ? "opacity-30 pointer-events-none"
-              : "opacity-100"
-          }`}
-        >
-          <Card>
-            <CardHeader>
-              <CardTitle className="font-lausanne font-bold">
-                Inducedrip
-              </CardTitle>
-              <CardDescription className="font-nippo font-light">
-                Upload a MacBook image or use the default.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Input
-                id="image-upload"
-                type="file"
-                accept="image/*"
-                onChange={handleFileChange}
-                disabled={isCameraAnimating}
-              />
-              {error && <p className="text-sm text-red-500 mt-2">{error}</p>}
-              <Button
-                variant="outline"
-                className="mt-4 w-full font-nippo font-medium"
-                onClick={handleLoadDefault}
-                disabled={isCameraAnimating}
-              >
-                Load Default MacBook & Reset
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="font-nippo font-bold">How to Use</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="text-sm text-muted-foreground space-y-2 font-normal">
-                <p>1. Click "Edit" to enter sticker placement mode</p>
-                <p>2. Select up to 6 stickers from the bottom picker</p>
-                <p>3. Stickers will appear randomly around your MacBook</p>
-                <p>4. Hover over stickers to remove them</p>
-                <p className="font-medium">
-                  5. Click "Done" when you're finished or "Clear" to remove all
-                  stickers
-                </p>
-              </div>
-              <div className="text-xs text-muted-foreground font-extralight">
-                <p>Stickers placed: {placedStickers.length}/6</p>
-              </div>
-              <div className="mt-6 w-full max-w-xl flex justify-center gap-4 z-50">
-                {!isEditMode && (
-                  <Button
-                    onClick={handleEditButtonClick}
-                    className="px-8 py-3 text-lg font-medium"
-                    disabled={isCameraAnimating}
-                  >
-                    Edit
-                  </Button>
-                )}
-              </div>
-            </CardContent>
-          </Card>
+    <>
+      <Navbar />
+      <main>
+        <div className="flex flex-col items-center justify-center mt-28">
+          <Image src="/Frame 41.jpg" alt="AI Try On" width={500} height={500} />
         </div>
+        {/* List of models */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl mx-auto my-12 px-4">
+          <Card2 image="/models/1.png" title="HODDIE" href="/shirt" />
+          <Card2 image="/models/4.png" title="SHIRT" href="/hoddie" />
+          <Card2 image="/models/3.png" title="JACKET" href="/hat" />
+          <Card2 image="/models/2.png" title="PANTS" href="/tshirt" />
+          <Card2 image="/models/5.png" title="SHOES" href="/diary" />
+          <Card2 image="/models/6.png" title="STICKERS" href="/laptop" />
 
-        <div className={`flex flex-col items-center lg:sticky lg:top-8 h-max`}>
-          <motion.div
-            className="relative w-full max-w-2xl rounded-lg overflow-visible "
-            style={{ aspectRatio: "4 / 5" }}
-            animate={{ zIndex: isEditMode ? 20 : 10 }}
-            transition={{ duration: 0.1 }}
-          >
-            <motion.div
-              className="relative w-full h-full flex items-center justify-center overflow-visible"
-              animate={{
-                scale: imageScale,
-                x: imagePosition.x,
-                y: imagePosition.y,
-                rotate: imageRotation,
-              }}
-              transition={{
-                duration: 0.8,
-                ease: "easeInOut",
-              }}
-            >
-              <Image
-                src={macbookImage}
-                alt="MacBook"
-                fill
-                className="object-contain"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-
-              {/* Placed Stickers */}
-              <AnimatePresence>
-                {placedStickers.map((sticker, index) => (
-                  <motion.div
-                    key={sticker.uniqueKey}
-                    className="absolute group"
-                    style={{
-                      left: threeWayStickerPositions[index].left,
-                      top: threeWayStickerPositions[index].top,
-                      // transform: `translate(calc(-50% + ${sticker.x}px), calc(-50% + ${sticker.y}px)) rotate(${sticker.rotation}deg)`,
-                    }}
-                    initial={{
-                      opacity: 0,
-                      scale: 0.5,
-                      rotate: threeWayStickerPositions[index].rotation - 45,
-                    }}
-                    animate={{
-                      opacity: 1,
-                      scale: 1,
-                      rotate: threeWayStickerPositions[index].rotation,
-                    }}
-                    exit={{
-                      opacity: 0,
-                      scale: 0.5,
-                      rotate: threeWayStickerPositions[index].rotation + 45,
-                    }}
-                    transition={{
-                      duration: 0.5,
-                      ease: "easeOut",
-                    }}
-                    whileHover={{ scale: 1.1 }}
-                  >
-                    <div className="relative size-12">
-                      <Image
-                        src={sticker.image}
-                        alt={sticker.label}
-                        fill
-                        className="object-contain rounded-lg drop-shadow-lg"
-                        sizes="(max-width: 640px) 64px, 80px"
-                      />
-                    </div>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </motion.div>
-
-            <AnimatePresence>
-              {isEditMode && !isCameraAnimating && (
-                <motion.div
-                  className="absolute inset-0 z-10"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                >
-                  <CircularPicker
-                    className="bg-transparent"
-                    onStickerSelect={handleStickerSelect}
-                    onStickerRemove={handleStickerRemoveFromPicker}
-                    placedStickers={placedStickers}
-                    selectedStickers={placedStickers.map((s) => s.id)}
-                    maxStickers={3}
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-
-          <div className="mt-6 w-full max-w-xl flex justify-center gap-4 z-50">
-            {isEditMode && (
-              <>
-                <Button
-                  onClick={handleDoneEditClick}
-                  className="px-8 py-3 text-lg font-nippo font-bold"
-                  disabled={isCameraAnimating}
-                >
-                  Done
-                </Button>
-                <Button
-                  onClick={handleClearStickers}
-                  variant="destructive"
-                  className="px-6 py-3 text-lg font-nippo font-medium"
-                  disabled={isCameraAnimating || placedStickers.length === 0}
-                >
-                  Clear
-                </Button>
-                <Button
-                  onClick={handleCancelEditClick}
-                  variant="outline"
-                  className="px-6 py-3 text-lg font-nippo font-light"
-                  disabled={isCameraAnimating}
-                >
-                  Cancel
-                </Button>
-              </>
-            )}
-          </div>
-
-          <footer
-            className={`mt-8 text-center text-sm text-muted-foreground transition-opacity duration-300 font-nippo font-extralight ${
-              isEditMode || isCameraAnimating
-                ? "opacity-30 pointer-events-none"
-                : "opacity-100"
-            }`}
-          >
-            <p>Click Edit to start placing stickers on your MacBook.</p>
-          </footer>
         </div>
-      </div>
-    </div>
+      </main>
+      <Footer />
+    </>
   );
+}
+
+function Card2(props: {image: string, title: string, href: string}){
+  return(
+    <a href={props.href} className="relative w-full bg-white border group overflow-hidden hover:shadow-lg transition-all duration-300">
+    <div className="p-4 flex justify-center items-center pb-10">
+      <Image
+        src={props.image}
+        className="hover:scale-105 transition-all duration-300 cursor-pointer"
+        alt="AI Try On"
+        width={300}
+        height={300}
+      />
+    </div>
+    <div className="absolute bottom-0 left-0 right-0">
+    <div className=" w-full bg-gray-white border-t flex justify-center items-center">
+      <p className="text-md font-ppMondwest group-hover:underline py-2">
+        {props.title}
+      </p>
+    </div>
+    </div>
+  </a>
+  )
+}
+
+function Card(){
+return(
+  <div className="min-h-screen place-content-center place-items-center">
+  <CardCurtainReveal className="h-[560px] w-96 border border-zinc-100 bg-zinc-950 text-zinc-50 shadow">
+    <CardCurtainRevealBody className="">
+      <CardCurtainRevealTitle className="text-3xl font-medium tracking-tight">
+        the <br />
+        hoodie
+      </CardCurtainRevealTitle>
+      <CardCurtainRevealDescription className="my-4 ">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Accusantium voluptate, eum quia temporibus fugiat rerum nobis modi
+          dolor, delectus laboriosam, quae adipisci reprehenderit officiis
+          quidem iure ducimus incidunt officia. Magni, eligendi repellendus.
+          Fugiat, natus aut?
+        </p>
+      </CardCurtainRevealDescription>
+      <Button
+        variant={"secondary"}
+        size={"icon"}
+        className="aspect-square rounded-full"
+      >
+        <ArrowUpRight />
+      </Button>
+
+      <CardCurtain className=" bg-zinc-50" />
+    </CardCurtainRevealBody>
+
+    <CardCurtainRevealFooter className="mt-auto">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        width="100%"
+        height="100%"
+        alt="Tokyo street"
+        className=""
+        src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=2388&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      />
+    </CardCurtainRevealFooter>
+  </CardCurtainReveal>
+</div>
+)
 }

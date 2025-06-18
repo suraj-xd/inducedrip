@@ -49,6 +49,32 @@ export const nippo = localFont({
   variable: "--font-nippo",
 });
 
+export const ppMondwest = localFont({
+  src: [
+    {
+      path: "../public/fonts/mondwest/ppmondwest-regular.otf",
+    }
+  ],
+  variable: "--font-pp-mondwest",
+})
+
+export const abcOracle = localFont({
+  src: [
+    {
+      path: "../public/fonts/abc-oracle/ABCOracle-Book.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/abc-oracle/ABCOracle-Light.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    
+  ],
+  variable: "--font-abc-oracle",
+});
+
 export const satoshi = localFont({
   src: [
     {
