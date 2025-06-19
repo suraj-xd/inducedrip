@@ -6,6 +6,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
 
 export default function PaymentButton() {
@@ -53,13 +54,13 @@ export default function PaymentButton() {
   return (
     <div className="relative flex flex-col gap-y-2">
       <Tooltip>
-        <TooltipProvider delayDuration={0}>
+        <TooltipTrigger>
           <img
             className="cursor-pointer hover:opacity-80"
             src="https://pro.nft-maker.io/images/buttons/paybutton_1_1.svg"
             onClick={openPaymentWindow}
           />
-        </TooltipProvider>
+        </TooltipTrigger>
         <TooltipContent>Crypto payments are on hold</TooltipContent>
       </Tooltip>
       <button
