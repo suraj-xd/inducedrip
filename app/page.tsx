@@ -33,11 +33,11 @@ export default function ViewerPage() {
         </div>
         {/* List of models */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl mx-auto my-12 px-4">
-          <Card2 image="/models/1.png" title="HODDIE" href="/shirt" />
-          <Card2 image="/models/4.png" title="SHIRT" href="/hoddie" />
-          <Card2 image="/models/3.png" title="JACKET" href="/hat" />
-          <Card2 image="/models/2.png" title="PANTS" href="/tshirt" />
-          <Card2 image="/models/5.png" title="SHOES" href="/diary" />
+          {/* <Card2 image="/models/1.png" title="HODDIE" href="/shirt" /> */}
+          <Card2 image="/models/4.png" title="GreyMatter Suit" href="/hoddie" />
+          <Card2 image="/models/3.png" title="HAT" href="/hat" />
+          <Card2 image="/models/ChatGPT Image Jun 19, 2025, 03_24_58 PM.png" title="DENIM JACKET" href="/shirt" />
+          <Card2 image="/models/5.png" title="NOTE TAKING" href="/diary" />
           <Card2 image="/models/6.png" title="STICKERS" href="/laptop" />
 
         </div>

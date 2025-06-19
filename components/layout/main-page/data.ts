@@ -37,7 +37,7 @@ export const clothes = [
     {
         "id": 3,
        "max_img_no": 5,
-        "product_name": "Pullover Hoodie",
+        "product_name": "Book",
         "description": "A cotton/polyester blend fleece, Split stitch double needle sewing on all seams for durability, You’ll love it’s softness, A large front pouch pocket perfect for holding items and keeping your hands warm, Jersey lined hood bringing comfort for your head",
         "details": [
             "8.5 oz (280 gm) cotton/polyester blend fleece",
@@ -51,10 +51,48 @@ export const clothes = [
         ],
         "price": "₹3699.00",
         images: [
-            "https://ik.imagekit.io/ddopqt55k/3_1.png?updatedAt=1695903269709",
-            "https://ik.imagekit.io/ddopqt55k/3_2.png?updatedAt=1695903268415",
-            "https://ik.imagekit.io/ddopqt55k/3_3.png?updatedAt=1695903268060",
-            "https://ik.imagekit.io/ddopqt55k/3_4.png?updatedAt=1695903267189"
+            "/diary/diary.png",
+            // "/diary/book-cover-1.png",
+            // "/diary/book-cover-2.png",
+            // "/diary/book-cover-3.png",
+            "/diary/book-cover-4.png"
         ]
     },
+    {
+        "id": 4,
+        "max_img_no": 3,
+        "product_name": "Hoddie",
+        "description": "A cotton/polyester blend fleece, Split stitch double needle sewing on all seams for durability, You’ll love it’s softness, A large front pouch pocket perfect for holding items and keeping your hands warm, Jersey lined hood bringing comfort for your head",
+        "details": [
+            "8.5 oz (280 gm) cotton/polyester blend fleece",
+            "80% Cotton/20% Polyester with 100% cotton 20 singles face yarn for supreme print ability and softness",
+            "Jersey lined hood",
+            "split stitch double needle sewing on all seams",
+            "twill neck tape",
+            "metal eyelets",
+            "1x1 ribbing at cuffs & waistband",
+            "standard fit",
+        ],
+        "price": "₹3699.00",
+        images: [
+            "/hoodie/Frame 1145.png",
+        ]
+    },
+    {
+        "id": 5,
+        "max_img_no": 3,
+        "product_name": "Laptop Stickers",
+        "description": "A cotton/polyester blend fleece, Split stitch double needle sewing on all seams for durability, You’ll love it’s softness, A large front pouch pocket perfect for holding items and keeping your hands warm, Jersey lined hood bringing comfort for your head",
+        "details": [
+            "8.5 oz (280 gm) cotton/polyester blend fleece",
+            "80% Cotton/20% Polyester with 100% cotton 20 singles face yarn for supreme print ability and softness",
+        ],
+        "price": "₹3699.00",
+        images: [
+            "/sticker/cover/Frame 55.svg",
+            "/sticker/cover/Frame 56.svg",
+            "/sticker/cover/Frame 57.svg",
+            "/sticker/cover/Frame 58.svg",
+        ]
+    }
 ]

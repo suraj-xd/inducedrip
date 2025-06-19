@@ -5,43 +5,41 @@ import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import Image from "next/image";
 
-const initialItemsData = [
+export const initialItemsData = [
   {
-    id: "item-1",
-    label: "Gameboy",
-    image: "/patches/png/Gameboy Background Removed.png",
-    color: "bg-gradient-to-br from-gray-700 to-gray-900",
-    position: { x: -80, y: -100 }, // Top left position
+    id: "item-6",
+    label: "Star",
+    image: "/sticker/list/star.png",
+    color: "bg-gradient-to-br from-yellow-400 to-yellow-600",
+    position: { x: 0, y: 80 }, // Bottom middle position
   },
   {
-    id: "item-2",
-    label: "Space Shuttle",
-    image: "/patches/png/NASASpaceShuttle Background Removed.png",
-    color: "bg-gradient-to-br from-blue-600 to-blue-900",
-    position: { x: 80, y: -100 }, // Top right position
+    id: "item-7",
+    label: "Star 2",
+    image: "/sticker/list/star-2.png",
+    color: "bg-gradient-to-br from-yellow-300 to-orange-500",
+    position: { x: -40, y: 60 }, // Bottom left-middle position
   },
   {
-    id: "item-3",
-    label: "Tongue",
-    image: "/patches/png/TongueWithAcid_1_PC-12881 Background Removed.png",
-    color: "bg-gradient-to-br from-green-500 to-green-800",
-    position: { x: 0, y: -40 }, // Middle position
+    id: "item-8",
+    label: "Ronika",
+    image: "/sticker/list/ronika-1.png",
+    color: "bg-gradient-to-br from-purple-500 to-indigo-600",
+    position: { x: 40, y: 60 }, // Bottom right-middle position
   },
   {
-    id: "item-4",
-    label: "Bro Code",
-    image:
-      "/patches/png/The-Bro-Code-Patch-Rule-Book-Comedy-Embroidered-Iron-On-Patch-Collection-4116088 Background Removed.png",
-    color: "bg-gradient-to-br from-orange-500 to-red-600",
-    position: { x: -70, y: 20 }, // Bottom left position
+    id: "item-9",
+    label: "Induced Logo",
+    image: "/sticker/list/induced-logo.png",
+    color: "bg-gradient-to-br from-indigo-500 to-blue-700",
+    position: { x: -20, y: -80 }, // Top left-middle position
   },
   {
-    id: "item-5",
-    label: "So Fetch",
-    image:
-      "/patches/png/That_s-So-Fetch-With-Lips-Box-Embroidered-Iron-On-Patch-Patch-Collection-3458850 Background Removed.png",
-    color: "bg-gradient-to-br from-pink-500 to-purple-600",
-    position: { x: 70, y: 20 }, // Bottom right position
+    id: "item-10",
+    label: "Induced Drip",
+    image: "/sticker/list/induced-drip.png",
+    color: "bg-gradient-to-br from-blue-400 to-cyan-600",
+    position: { x: 20, y: -80 }, // Top right-middle position
   },
 ];
 

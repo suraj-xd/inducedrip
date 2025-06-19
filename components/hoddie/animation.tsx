@@ -6,9 +6,24 @@ import { Code, Pen, ChartLine } from "@phosphor-icons/react";
 import Image from "next/image";
 
 const tagOptions = [
-  { id: "eng", label: "ENG", color: "from-blue-500 to-blue-700", icon: <Code /> },
-  { id: "design", label: "DESIGN", color: "from-purple-500 to-purple-700", icon: <Pen /> },
-  { id: "research", label: "RESEARCH", color: "from-green-500 to-green-700", icon: <ChartLine /> },
+  {
+    id: "eng",
+    label: "ENG",
+    color: "from-blue-500 to-blue-700",
+    icon: <Code />,
+  },
+  {
+    id: "design",
+    label: "DESIGN",
+    color: "from-purple-500 to-purple-700",
+    icon: <Pen />,
+  },
+  {
+    id: "research",
+    label: "RESEARCH",
+    color: "from-green-500 to-green-700",
+    icon: <ChartLine />,
+  },
 ];
 
 interface CircularPickerProps {
@@ -29,7 +44,7 @@ export default function HoddieCircularPicker({
 
   // Update display text when tag changes
   useEffect(() => {
-    const selectedTagData = tagOptions.find(tag => tag.id === selectedTag);
+    const selectedTagData = tagOptions.find((tag) => tag.id === selectedTag);
     if (selectedTagData) {
       setDisplayText(selectedTagData.label);
     }
@@ -45,12 +60,12 @@ export default function HoddieCircularPicker({
         className={`relative flex flex-col items-center justify-between w-full h-full p-4 sm:p-6 overflow-hidden ${className}`}
       >
         {/* Text Display Area */}
-        <div className="flex items-center justify-center flex-col w-full h-3/5 pt-36 min-h-[180px] sm:min-h-[240px]">
+        <div className="flex items-center justify-center flex-col w-full h-3/5 pt-[6rem] min-h-[180px] sm:min-h-[240px]">
           <div className="flex w-full mb-2 items-center justify-center">
             <Image
               src="induced_logo.svg"
               alt="hoddie"
-              className="opacity-20 invert"
+              className="opacity-40 invert"
               width={80}
               height={100}
             />
@@ -80,7 +95,7 @@ export default function HoddieCircularPicker({
                 <AnimatePresence mode="wait">
                   <motion.h2
                     key={displayText}
-                    className="text-[10px] font-mono uppercase tracking-wide text-black/50 drop-shadow-lg"
+                    className="text-xs uppercase font-ppMondwest tracking-wide text-black/50 drop-shadow-lg"
                     initial={{ opacity: 0, y: 10, scale: 0.9 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -10, scale: 0.9 }}
@@ -89,7 +104,9 @@ export default function HoddieCircularPicker({
                       ease: "easeOut",
                     }}
                   >
-                    {"["}{displayText}{"]"}
+                    {"["}
+                    {displayText}
+                    {"]"}
                   </motion.h2>
                 </AnimatePresence>
               </motion.div>
@@ -99,18 +116,15 @@ export default function HoddieCircularPicker({
 
         {/* Tag Selection */}
         <div className="flex items-center justify-center w-full h-2/5 pt-4 sm:pt-6">
-          <motion.div 
-            className="gap-3 sm:gap-4 grid grid-cols-3"
-            layout
-          >
+          <motion.div className="gap-3 sm:gap-4 grid grid-cols-3" layout>
             {tagOptions.map((tag) => (
               <motion.button
                 key={tag.id}
                 onClick={() => handleTagSelect(tag.id)}
-                className={`relative px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 backdrop-blur-md border-2 ${
+                className={`relative px-4 py-2 font-bold text-xs uppercase tracking-wider transition-all duration-300 backdrop-blur-md border-2 ${
                   selectedTag === tag.id
-                    ? `bg-gradient-to-r ${tag.color} text-white border-white/40 shadow-lg`
-                    : "bg-black/40 text-white/70 border-white/20 hover:border-white/40 hover:bg-black/60"
+                    ? "shadow-none"
+                    : "shadow-none"
                 }`}
                 whileHover={
                   selectedTag !== tag.id
@@ -123,9 +137,10 @@ export default function HoddieCircularPicker({
                 whileTap={{ scale: 0.95 }}
                 animate={{
                   scale: selectedTag === tag.id ? 1.1 : 1,
-                  boxShadow: selectedTag === tag.id 
-                    ? "0px 10px 25px rgba(255,255,255,0.2)" 
-                    : "0px 2px 8px rgba(0,0,0,0.3)",
+                  boxShadow:
+                    selectedTag === tag.id
+                      ? "0px 10px 25px rgba(255,255,255,0.2)"
+                      : "0px 2px 8px rgba(0,0,0,0.3)",
                 }}
                 transition={springTransition}
               >
@@ -141,11 +156,11 @@ export default function HoddieCircularPicker({
                     transition={{ duration: 0.3 }}
                   />
                 )}
-                
+
                 {/* Glow effect for active tag */}
                 {selectedTag === tag.id && (
                   <motion.div
-                    className={`absolute inset-0 rounded-xl bg-gradient-to-r ${tag.color} opacity-50 blur-sm`}
+                    className={`absolute inset-0 font-ppMondwest blur-sm`}
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1.2, opacity: 0.3 }}
                     transition={{
@@ -154,8 +169,10 @@ export default function HoddieCircularPicker({
                     }}
                   />
                 )}
-                
-                <span className="relative z-10 flex items-center gap-2 w-full justify-center">{tag.icon} {tag.label}</span>
+
+                <span className="relative z-10 flex items-center gap-2 w-full justify-center">
+                  {tag.icon} {tag.label}
+                </span>
               </motion.button>
             ))}
           </motion.div>

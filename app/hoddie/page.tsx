@@ -1,5 +1,14 @@
-import HoddieViewerPage from "@/components/hoddie/page";
+import Footer from "@/components/layout/main-page/footer";
+import Navbar from "@/components/layout/main-page/navbar";
+import ViewerPage from "@/components/products/jeans/page";
+import CustomShirtPage from "./custom-shirt-page";
 
-export default function HoddiePage() {
-  return <HoddieViewerPage />;
+export default function ShirtPage() {
+  return(
+    <>
+    <Navbar/>
+    <CustomShirtPage/>
+    <Footer/>
+    </>
+  );
 }

@@ -25,6 +25,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Check, CheckCircleIcon, CheckIcon } from "@phosphor-icons/react";
 import CircularPicker from "@/components/products/jeans/animation";
 import ThreeDButton from "./3d-button";
+import { useResizeAnimation } from "@/hooks/use-resize-animation";
 
 interface POV {
   id: string;
@@ -106,6 +107,9 @@ export default function CustomJeansViewer() {
   const [liveCameraAngles, setLiveCameraAngles] =
     useState<LiveCameraAngles | null>(null);
   const [isCameraAnimating, setIsCameraAnimating] = useState<boolean>(false);
+
+  // Use the global resize animation utility
+  const { heightPercentage, triggerResizeAnimation } = useResizeAnimation();
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -288,6 +292,9 @@ export default function CustomJeansViewer() {
     if (isCameraAnimating) return;
     setIsCameraAnimating(true);
 
+    // Trigger resize animation
+    triggerResizeAnimation();
+
     if (orbitControlsRef.current) {
       orbitControlsRef.current.enabled = false;
     }
@@ -337,8 +344,11 @@ export default function CustomJeansViewer() {
 
   return (
     <div
-      className="h-full w-full bg-gradient-to-br from-[#ebebeb] to-[#f2f2f2] overflow-hidden relative max-h-[600px]"
-      style={{ aspectRatio: "5/6.3" }}
+      className="h-full w-full bg-gradient-to-br from-[#ebebeb] to-[#f2f2f2] overflow-hidden relative max-h-[600px] transition-all duration-200 ease-in-out"
+      style={{ 
+        aspectRatio: "5/6.3",
+        height: `${heightPercentage}%`
+      }}
     >
       <div className={`flex flex-col items-center lg:sticky lg:top-8 h-full`}>
         <motion.div
