@@ -17,6 +17,8 @@ import AiTryOn from "./ai-try-on";
 import PaymentButton from "./payment-button";
 import { CubeFocusIcon, PerspectiveIcon } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "framer-motion";
+import YouMayAlsoLike from "@/components/comman/you-may-also-like";
+import JoinWaitlistModal from "@/components/join-waitlist-modal";
 
 export default function CustomShirtPage() {
   const product_id = "1";
@@ -26,6 +28,7 @@ export default function CustomShirtPage() {
 
   const [showIn3D, setShowIn3D] = useState(false);
   const [showAiTryOn, setShowAiTryOn] = useState(false);
+  const [showWaitlistModal, setShowWaitlistModal] = useState(false);
 
   const data = clothes[3];
 
@@ -45,7 +48,7 @@ export default function CustomShirtPage() {
   };
 
   return (
-    <section className="w-[90%] md:w-[95%] flex flex-col gap-4 mt-12 md:mt-16 mx-auto">
+    <section className="w-[90%] md:w-[95%] flex flex-col gap-4 mt-12 md:mt-16 mx-auto pt-5">
       <div className="w-full flex justify-end relative flex-col md:flex-row z-[1]">
         <div className="w-full m-auto flex flex-col justify-center items-center gap-y-4 z-[2] ">
           <div
@@ -138,33 +141,16 @@ export default function CustomShirtPage() {
                                 </option>
                             </select> */}
             </div>
-            <div className="mt-4 flex flex-col gap-y-2 ">
-              <motion.button
-                onClick={() => setShowIn3D(!showIn3D)}
-                className="border w-full flex justify-center items-center gap-2 bg-white text-black p-4 text-xs uppercase font-semibold tracking-[1.1px]"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ duration: 0.2 }}
+            <div className="mt-4">
+              <button 
+                onClick={() => setShowWaitlistModal(true)}
+                className="w-full bg-black text-white p-4 text-xs uppercase font-semibold tracking-[1.1px] hover:bg-gray-800 transition-colors"
               >
-                {showIn3D ? (
-                  <>
-                    <PerspectiveIcon size={16} />
-                    Back to 2D
-                  </>
-                ) : (
-                  <>
-                    <CubeFocusIcon size={16} />
-                    View in 3D
-                  </>
-                )}
-              </motion.button>
+                JOIN WAITLIST
+              </button>
             </div>
 
             <p className="mt-4 text-xs">{data?.description}</p>
-            <div className="flex gap-4 my-5">
-              <PaymentButton />
-            </div>
-
             <div className="mt-4 text-xs">
               <div
                 onClick={() =>
@@ -242,43 +228,20 @@ export default function CustomShirtPage() {
         </div>
       </div>
 
-      <div className="mt-20 flex flex-col gap-3">
-        <div className="text-xs tracking-[1px] font-medium">
-          YOU MAY ALSO LIKE
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-7">
-          {Array(4)
-            .fill(0)
-            .map((_, i) => (
-              <Link
-                href={`/product/${i + 5}`}
-                key={i}
-                className="flex flex-col gap-2 md:pb-10 group cursor-pointer"
-              >
-                <Image
-                  src={"/hat.png"}
-                  width={1000}
-                  height={1000}
-                  className="w-full h-full object-cover"
-                  alt="hat"
-                />
-                <div className="flex flex-col text-xs text-black group-hover:text-[#767676] transition-all duration-150">
-                  <div className="uppercase leading-4">Fear of god </div>
-                  <div className="leading-4">Cotton Hat</div>
-                  <div className="text-[#757575] mt-1 font-medium tracking-[1.8px]">
-                    Rs. 43,700
-                  </div>
-                </div>
-              </Link>
-            ))}
-        </div>
-      </div>
+      <YouMayAlsoLike currentProductId={data?.id} />
 
       {/* AI Try On Dialog */}
       <AiTryOn
         isOpen={showAiTryOn}
         onClose={() => setShowAiTryOn(false)}
         imageUrl={data?.images[0] || ""}
+      />
+
+      {/* Join Waitlist Modal */}
+      <JoinWaitlistModal
+        isOpen={showWaitlistModal}
+        onClose={() => setShowWaitlistModal(false)}
+        productName={data?.product_name}
       />
     </section>
   );

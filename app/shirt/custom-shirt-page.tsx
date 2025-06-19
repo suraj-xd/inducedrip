@@ -15,8 +15,13 @@ import CustomJeansViewer from "./custom-jeans-viewer";
 import ThreeDButton from "./3d-button";
 import AiTryOn from "./ai-try-on";
 import PaymentButton from "./payment-button";
-import { CubeFocusIcon, PerspectiveIcon } from "@phosphor-icons/react";
+import {
+  ArrowLeftIcon,
+  CubeFocusIcon,
+  PerspectiveIcon,
+} from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "framer-motion";
+import YouMayAlsoLike from "@/components/comman/you-may-also-like";
 
 export default function CustomShirtPage() {
   const product_id = "1";
@@ -123,20 +128,16 @@ export default function CustomShirtPage() {
         {/* Content */}
         <div className="relative z-[2]">
           <div className="max-w-[450px] sticky top-[90px] md:-translate-x-16 pt-[20px] md:pt-[15vh]">
+            <div className="cursor-pointer uppercase text-xs font-semibold flex items-center gap-x-2">
+              <ArrowLeftIcon size={16} />
+              <span>Back</span>
+            </div>
             <div className="flex flex-col gap-y-1">
-              <div className="cursor-pointer uppercase text-xs font-semibold">
+              {/* <div className="cursor-pointer uppercase text-xs font-semibold">
                 FYI
-              </div>
+              </div> */}
               <div className="text-2xl font-semibold">{data?.product_name}</div>
               <div className="text-xs text-[#757575]">{data?.price}</div>
-            </div>
-            <div className="mt-4 flex items-center gap-x-4">
-              {/* <button className="flex-1 text-xs px-4 py-2 border-[#cbcbcb] hover:border-black border-2 text-left">Dusty Beige</button> */}
-              {/* <select className="flex-1 text-xs px-4 py-2 border-[#cbcbcb] hover:border-black border-2 text-left" name="" id="">
-                                <option selected value="">
-                                    XS
-                                </option>
-                            </select> */}
             </div>
             <div className="mt-4 flex flex-col gap-y-2 ">
               <motion.button
@@ -242,37 +243,7 @@ export default function CustomShirtPage() {
         </div>
       </div>
 
-      <div className="mt-20 flex flex-col gap-3">
-        <div className="text-xs tracking-[1px] font-medium">
-          YOU MAY ALSO LIKE
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-7">
-          {Array(4)
-            .fill(0)
-            .map((_, i) => (
-              <Link
-                href={`/product/${i + 5}`}
-                key={i}
-                className="flex flex-col gap-2 md:pb-10 group cursor-pointer"
-              >
-                <Image
-                  src={"/hat.png"}
-                  width={1000}
-                  height={1000}
-                  className="w-full h-full object-cover"
-                  alt="hat"
-                />
-                <div className="flex flex-col text-xs text-black group-hover:text-[#767676] transition-all duration-150">
-                  <div className="uppercase leading-4">Fear of god </div>
-                  <div className="leading-4">Cotton Hat</div>
-                  <div className="text-[#757575] mt-1 font-medium tracking-[1.8px]">
-                    Rs. 43,700
-                  </div>
-                </div>
-              </Link>
-            ))}
-        </div>
-      </div>
+      <YouMayAlsoLike currentProductId={data?.id} />
 
       {/* AI Try On Dialog */}
       <AiTryOn

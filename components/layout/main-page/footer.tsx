@@ -3,6 +3,8 @@ import DiaFooter from "./dia-footer";
 const Footer = () => {
   return (
     <>
+    <footer className="w-full flex flex-col gap-10 md:gap-0 py-20 justify-center items-center bg-gradient-to-b from-white via-gray-50 to-blue-50">
+
       <div className="w-[90%] md:w-[95%] flex justify-between items-start md:items-center flex-col md:flex-row gap-16 md:gap-5">
         <div className="flex flex-col gap-1 w-full md:w-auto"></div>
 
@@ -16,15 +18,16 @@ const Footer = () => {
           </a>
         </div>
       </div>
-      <div className="row-start-1 col-span-12 1000:col-span-4 1000:col-start-5 flex flex-col justify-center self-end">
+      <div className="">
         <div className="text-center max-w-prose mx-auto rich-text">
           <p className="font-ppMondwest opacity-70 my-5" >
             Designed and Built by
             <br />
-            <a href="https://thebrowser.company/">The XD Code of New York</a>
+            <a className="underline font-semibold" href="https://thebrowser.company/">The XD Code of New York</a>
           </p>
         </div>
       </div>
+    </footer>
       {/* <DiaFooter/> */}
     </>
   );

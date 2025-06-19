@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { ShoppingBag, Info } from "@phosphor-icons/react";
+import { ShoppingBag, Info, CurrencyBtcIcon } from "@phosphor-icons/react";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { OrContinueWith } from "@/components/comman/or-continue-with";
 
 export default function PaymentButton() {
   const [showTooltip, setShowTooltip] = useState(false);
@@ -53,6 +54,17 @@ export default function PaymentButton() {
 
   return (
     <div className="relative flex flex-col gap-y-2">
+      
+      <button
+        onClick={openPaymentWindow}
+        onMouseEnter={() => setShowTooltip(true)}
+        onMouseLeave={() => setShowTooltip(false)}
+        className="w-full flex justify-center py-5 rounded-[30px] items-center gap-2 bg-black text-white p-4 text-xs uppercase font-semibold tracking-[1.1px] hover:bg-gray-800 transition-colors duration-200"
+      >
+        <ShoppingBag size={16} />
+        Buy Now
+      </button>
+      <OrContinueWith content="or pay with crypto" className="text-xs">OR</OrContinueWith>
       <Tooltip>
         <TooltipTrigger>
           <img
@@ -63,15 +75,6 @@ export default function PaymentButton() {
         </TooltipTrigger>
         <TooltipContent>Crypto payments are on hold</TooltipContent>
       </Tooltip>
-      <button
-        onClick={openPaymentWindow}
-        onMouseEnter={() => setShowTooltip(true)}
-        onMouseLeave={() => setShowTooltip(false)}
-        className="w-full flex justify-center py-5 rounded-[30px] items-center gap-2 bg-black text-white p-4 text-xs uppercase font-semibold tracking-[1.1px] hover:bg-gray-800 transition-colors duration-200"
-      >
-        <ShoppingBag size={16} />
-        Buy Now
-      </button>
 
       {/* Tooltip */}
     </div>

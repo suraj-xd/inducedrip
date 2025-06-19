@@ -58,7 +58,7 @@ export default function ViewerPage() {
             title="OVERISZE DRIP TEE"
             href="/tshirt-2"
           />
-          <Card2
+          {/* <Card2
             image="/patches/chatgpt/ChatGPT Image Jun 19, 2025, 01_23_20 PM Background Removed.png"
             title="RONIKA PATCH"
             href="/patch-1"
@@ -97,7 +97,7 @@ export default function ViewerPage() {
             image="/sticker/list/induced-drip.png"
             title="INDUCED DRIP STICKER"
             href="/sticker-2"
-          />
+          /> */}
         </div>
       </main>
       <Footer />

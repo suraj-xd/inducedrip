@@ -51,7 +51,7 @@ export default function YouMayAlsoLike({ currentProductId }: YouMayAlsoLikeProps
       <div className="grid grid-cols-2 md:grid-cols-4 gap-7">
         {selectedProducts.slice(0, 4).map((product) => (
           <Link
-            href={`/product/${product.id}`}
+            href={product.href}
             key={product.id}
             className="flex flex-col gap-2 md:pb-10 group cursor-pointer p-5"
           >

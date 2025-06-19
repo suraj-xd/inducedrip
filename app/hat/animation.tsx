@@ -25,6 +25,12 @@ const initialItemsData = [
     color: "bg-gradient-to-br from-yellow-500 to-amber-700",
   },
   {
+    id: "item-10",
+    label: "ChatGPT Image 4",
+    image: "/sticker/list/induced-drip.png",
+    color: "bg-gradient-to-br from-purple-500 to-purple-800",
+  },
+  {
     id: "item-9",
     label: "ChatGPT Image 4",
     image: "/patches/chatgpt/ChatGPT Image Jun 19, 2025, 01_23_20 PM Background Removed.png",
