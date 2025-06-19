@@ -47,7 +47,7 @@ const initialItemsData = [
   {
     id: "item-7",
     label: "29-510x510",
-    image: "/patches/29-510x510 Background Removed.png",
+    image: "/sticker/list/induced-drip.png",
     color: "bg-gradient-to-br from-yellow-500 to-yellow-800",
   },
   // {

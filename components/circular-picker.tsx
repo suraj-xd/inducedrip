@@ -21,18 +21,18 @@ export const initialItemsData = [
     position: { x: -40, y: 60 }, // Bottom left-middle position
   },
   {
-    id: "item-8",
-    label: "Ronika",
-    image: "/sticker/list/ronika-1.png",
-    color: "bg-gradient-to-br from-purple-500 to-indigo-600",
-    position: { x: 40, y: 60 }, // Bottom right-middle position
-  },
-  {
     id: "item-9",
     label: "Induced Logo",
     image: "/sticker/list/induced-logo.png",
     color: "bg-gradient-to-br from-indigo-500 to-blue-700",
     position: { x: -20, y: -80 }, // Top left-middle position
+  },
+  {
+    id: "item-8",
+    label: "Ronika",
+    image: "/sticker/list/ronika-1.png",
+    color: "bg-gradient-to-br from-purple-500 to-indigo-600",
+    position: { x: 40, y: 60 }, // Bottom right-middle position
   },
   {
     id: "item-10",

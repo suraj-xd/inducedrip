@@ -38,7 +38,7 @@ export const clothes = [
         "id": 3,
        "max_img_no": 5,
         "product_name": "Book",
-        "description": "A cotton/polyester blend fleece, Split stitch double needle sewing on all seams for durability, You’ll love it’s softness, A large front pouch pocket perfect for holding items and keeping your hands warm, Jersey lined hood bringing comfort for your head",
+        "description": "A cotton/polyester blend fleece, Split stitch double needle sewing on all seams for durability, You'll love it's softness, A large front pouch pocket perfect for holding items and keeping your hands warm, Jersey lined hood bringing comfort for your head",
         "details": [
             "8.5 oz (280 gm) cotton/polyester blend fleece",
             "80% Cotton/20% Polyester with 100% cotton 20 singles face yarn for supreme print ability and softness",
@@ -62,7 +62,7 @@ export const clothes = [
         "id": 4,
         "max_img_no": 3,
         "product_name": "Hoddie",
-        "description": "A cotton/polyester blend fleece, Split stitch double needle sewing on all seams for durability, You’ll love it’s softness, A large front pouch pocket perfect for holding items and keeping your hands warm, Jersey lined hood bringing comfort for your head",
+        "description": "A cotton/polyester blend fleece, Split stitch double needle sewing on all seams for durability, You'll love it's softness, A large front pouch pocket perfect for holding items and keeping your hands warm, Jersey lined hood bringing comfort for your head",
         "details": [
             "8.5 oz (280 gm) cotton/polyester blend fleece",
             "80% Cotton/20% Polyester with 100% cotton 20 singles face yarn for supreme print ability and softness",
@@ -82,7 +82,7 @@ export const clothes = [
         "id": 5,
         "max_img_no": 3,
         "product_name": "Laptop Stickers",
-        "description": "A cotton/polyester blend fleece, Split stitch double needle sewing on all seams for durability, You’ll love it’s softness, A large front pouch pocket perfect for holding items and keeping your hands warm, Jersey lined hood bringing comfort for your head",
+        "description": "A cotton/polyester blend fleece, Split stitch double needle sewing on all seams for durability, You'll love it's softness, A large front pouch pocket perfect for holding items and keeping your hands warm, Jersey lined hood bringing comfort for your head",
         "details": [
             "8.5 oz (280 gm) cotton/polyester blend fleece",
             "80% Cotton/20% Polyester with 100% cotton 20 singles face yarn for supreme print ability and softness",
@@ -93,6 +93,163 @@ export const clothes = [
             "/sticker/cover/Frame 56.svg",
             "/sticker/cover/Frame 57.svg",
             "/sticker/cover/Frame 58.svg",
+        ]
+    },
+    {
+        "id": 6,
+        "max_img_no": 3,
+        "product_name": "Classic Tee",
+        "description": "A cotton/polyester blend fleece, Split stitch double needle sewing on all seams for durability, You'll love it's softness, A large front pouch pocket perfect for holding items and keeping your hands warm, Jersey lined hood bringing comfort for your head",
+        "details": [
+            "8.5 oz (280 gm) cotton/polyester blend fleece",
+            "80% Cotton/20% Polyester with 100% cotton 20 singles face yarn for supreme print ability and softness",
+        ],
+        "price": "₹3699.00",
+        images: [
+            "/tshirt/Frame 50.svg",
+            "/tshirt/Frame 51.svg",
+        ]
+    },
+    {
+        "id": 7,
+        "max_img_no": 3,
+        "product_name": "Overisze Drip Tee",
+        "description": "A cotton/polyester blend fleece, Split stitch double needle sewing on all seams for durability, You'll love it's softness, A large front pouch pocket perfect for holding items and keeping your hands warm, Jersey lined hood bringing comfort for your head",
+        "details": [
+            "8.5 oz (280 gm) cotton/polyester blend fleece",
+            "80% Cotton/20% Polyester with 100% cotton 20 singles face yarn for supreme print ability and softness",
+        ],
+        "price": "₹3699.00",
+        images: [
+            "/tshirt/Frame 52.svg",
+        ]
+    },
+    {
+        "id": 8,
+        "max_img_no": 3,
+        "product_name": "Ronika Patch",
+        "description": "High-quality embroidered patch perfect for customizing your clothing, bags, or accessories. Made with premium materials for lasting durability and vibrant colors.",
+        "details": [
+            "Embroidered Design",
+            "Iron-on Backing",
+            "Washable",
+            "Made In India",
+        ],
+        "price": "₹299.00",
+        images: [
+            "/patches/chatgpt/ChatGPT Image Jun 19, 2025, 01_23_20 PM Background Removed.png",
+        ]
+    },
+    {
+        "id": 9,
+        "max_img_no": 3,
+        "product_name": "DNTEL Patch",
+        "description": "Unique artistic patch design featuring DNTEL branding. Perfect for adding a creative touch to your favorite garments and accessories.",
+        "details": [
+            "Embroidered Design",
+            "Iron-on Backing",
+            "Washable",
+            "Made In India",
+        ],
+        "price": "₹349.00",
+        images: [
+            "/patches/chatgpt/ChatGPT Image Jun 19, 2025, 01_16_13 PM.png",
+        ]
+    },
+    {
+        "id": 10,
+        "max_img_no": 3,
+        "product_name": "Ronika Patch Blue",
+        "description": "Stylish blue variant of the popular Ronika patch design. Features high-quality embroidery and premium materials for long-lasting wear.",
+        "details": [
+            "Embroidered Design",
+            "Iron-on Backing",
+            "Washable",
+            "Made In India",
+        ],
+        "price": "₹329.00",
+        images: [
+            "/patches/chatgpt/ChatGPT Image Jun 19, 2025, 01_28_09.png",
+        ]
+    },
+    {
+        "id": 11,
+        "max_img_no": 3,
+        "product_name": "Ronika Patch Black",
+        "description": "Classic black design patch with intricate detailing. Perfect for adding a subtle yet stylish element to any garment or accessory.",
+        "details": [
+            "Embroidered Design",
+            "Iron-on Backing",
+            "Washable",
+            "Made In India",
+        ],
+        "price": "₹299.00",
+        images: [
+            "/sticker/list/star.png",
+        ]
+    },
+    {
+        "id": 12,
+        "max_img_no": 3,
+        "product_name": "Star Golden Sticker",
+        "description": "Premium gold star sticker with metallic finish. Weather-resistant and perfect for customizing laptops, phones, or any smooth surface.",
+        "details": [
+            "Metallic Finish",
+            "Weather Resistant",
+            "Easy Application",
+            "Removable",
+        ],
+        "price": "₹199.00",
+        images: [
+            "/sticker/list/star-2.png",
+        ]
+    },
+    {
+        "id": 13,
+        "max_img_no": 3,
+        "product_name": "Patch Induced Logo",
+        "description": "Official Induced brand logo patch. High-quality embroidered design perfect for representing the brand on your favorite items.",
+        "details": [
+            "Embroidered Design",
+            "Iron-on Backing",
+            "Washable",
+            "Made In India",
+        ],
+        "price": "₹399.00",
+        images: [
+            "/sticker/list/induced-logo.png",
+        ]
+    },
+    {
+        "id": 14,
+        "max_img_no": 3,
+        "product_name": "Patch Ronika Brown",
+        "description": "Earth-toned brown variant of the Ronika patch collection. Features premium embroidery work with attention to detail.",
+        "details": [
+            "Embroidered Design",
+            "Iron-on Backing",
+            "Washable",
+            "Made In India",
+        ],
+        "price": "₹319.00",
+        images: [
+            "/sticker/list/ronika-1.png",
+        ]
+    },
+    {
+        "id": 15,
+        "max_img_no": 3,
+        "product_name": "Induced Drip Sticker",
+        "description": "Trendy drip design sticker from Induced collection. High-quality vinyl material with excellent adhesion and durability.",
+        "details": [
+            "Vinyl Material",
+            "Weather Resistant",
+            "Easy Application",
+            "Removable",
+        ],
+        "price": "₹249.00",
+        images: [
+            "/sticker/list/induced-drip.png",
         ]
     }
 ]
