@@ -22,7 +22,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, CheckIcon } from "@phosphor-icons/react";
+import { Check, CheckCircleIcon, CheckIcon } from "@phosphor-icons/react";
 import CircularPicker from "@/components/products/jeans/animation";
 import ThreeDButton from "./3d-button";
 
@@ -85,7 +85,9 @@ function Model({
 }
 
 export default function CustomJeansViewer() {
-  const [modelUrl, setModelUrl] = useState<string | null>("/glb/Denim_Elegance.glb");
+  const [modelUrl, setModelUrl] = useState<string | null>(
+    "/glb/Denim_Elegance.glb"
+  );
   const [error, setError] = useState<string | null>(null);
   const [modelRotation, setModelRotation] = useState<[number, number, number]>([
     0, 0, 0,
@@ -334,103 +336,109 @@ export default function CustomJeansViewer() {
     !isEditMode && !isCustomPovActive && !isCameraAnimating ? 1.5 : false;
 
   return (
-    <div style={{"aspectRatio":"5/6.3"}} className="h-full bg-gradient-to-br from-[#ebebeb] to-[#f2f2f2] overflow-hidden relative">
-        <div className={`flex flex-col items-center lg:sticky lg:top-8 h-full`}>
-          <motion.div
-            className="relative w-full overflow-hidden h-full"
-            style={{ aspectRatio: "4 / 5" }}
-            animate={{ zIndex: isEditMode ? 20 : 10 }}
-            transition={{ duration: 0.1 }}
-          >
-            <Canvas camera={{ position: [0, 2, 5], fov: 50 }}>
-              <ControlsUpdater controlsRef={orbitControlsRef} />
-              <Suspense
-                fallback={
-                  <Html center className="text-foreground">
-                    Loading...
-                  </Html>
-                }
-                key={modelUrl}
-              >
-                <Stage
-                  environment="city"
-                  intensity={lightingIntensity}
-                  adjustCamera={stageAdjustCamera}
-                  shadows={{ type: "contact", opacity: 0.2, blur: 2 }}
-                >
-                  <ambientLight intensity={0.4} />
-                  {useSpotlightSetup && (
-                    <>
-                      <spotLight
-                        position={[5, 5, 5]}
-                        intensity={1}
-                        angle={0.3}
-                        penumbra={0.2}
-                        castShadow
-                      />
-                      <spotLight
-                        position={[-5, 5, 5]}
-                        intensity={0.7}
-                        angle={0.3}
-                        penumbra={0.2}
-                      />
-                      <spotLight
-                        position={[0, 5, -5]}
-                        intensity={0.5}
-                        angle={0.3}
-                        penumbra={0.2}
-                      />
-                    </>
-                  )}
-                  {modelUrl ? (
-                    <Model
-                      url={modelUrl}
-                      rotation={modelRotation}
-                      materialOverride={materialOverride}
-                    />
-                  ) : (
-                    <Html center>No model</Html>
-                  )}
-                </Stage>
-              </Suspense>
-              <OrbitControls
-                ref={orbitControlsRef}
-                makeDefault
-                minDistance={0.5}
-                maxDistance={30}
-                onChange={handleOrbitControlsChange}
-                enableDamping
-                dampingFactor={0.1}
-                enabled={!isEditMode && !isCameraAnimating}
-              />
-              <Environment preset="city" />
-            </Canvas>
-
-            <AnimatePresence>
-              {isEditMode && !isCameraAnimating && (
-                <motion.div
-                  className="absolute inset-0 z-10"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                >
-                  <CircularPicker className="bg-transparent" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        </div>
-        
-        {!isEditMode && (
-          <div className="absolute bottom-10 left-0 right-0 flex justify-center z-[100]">
-            <ThreeDButton 
-              className="px-5 py-3" 
-              onClick={handleEditButtonClick}
+    <div
+      className="h-full w-full bg-gradient-to-br from-[#ebebeb] to-[#f2f2f2] overflow-hidden relative max-h-[600px]"
+      style={{ aspectRatio: "5/6.3" }}
+    >
+      <div className={`flex flex-col items-center lg:sticky lg:top-8 h-full`}>
+        <motion.div
+          className="relative w-full overflow-hidden h-full"
+          style={{ aspectRatio: "5/6.3" }}
+          animate={{ zIndex: isEditMode ? 20 : 10 }}
+          transition={{ duration: 0.1 }}
+        >
+          <Canvas camera={{ position: [0, 2, 5], fov: 50 }}>
+            <ControlsUpdater controlsRef={orbitControlsRef} />
+            <Suspense
+              fallback={
+                <Html center className="text-foreground">
+                  Loading...
+                </Html>
+              }
+              key={modelUrl}
             >
-              Select Patch
-            </ThreeDButton>
-          </div>
-        )}
+              <Stage
+                environment="city"
+                intensity={lightingIntensity}
+                adjustCamera={stageAdjustCamera}
+                shadows={{ type: "contact", opacity: 0.2, blur: 2 }}
+              >
+                <ambientLight intensity={0.4} />
+                {useSpotlightSetup && (
+                  <>
+                    <spotLight
+                      position={[5, 5, 5]}
+                      intensity={1}
+                      angle={0.3}
+                      penumbra={0.2}
+                      castShadow
+                    />
+                    <spotLight
+                      position={[-5, 5, 5]}
+                      intensity={0.7}
+                      angle={0.3}
+                      penumbra={0.2}
+                    />
+                    <spotLight
+                      position={[0, 5, -5]}
+                      intensity={0.5}
+                      angle={0.3}
+                      penumbra={0.2}
+                    />
+                  </>
+                )}
+                {modelUrl ? (
+                  <Model
+                    url={modelUrl}
+                    rotation={modelRotation}
+                    materialOverride={materialOverride}
+                  />
+                ) : (
+                  <Html center>No model</Html>
+                )}
+              </Stage>
+            </Suspense>
+            <OrbitControls
+              ref={orbitControlsRef}
+              makeDefault
+              minDistance={0.5}
+              maxDistance={30}
+              onChange={handleOrbitControlsChange}
+              enableDamping
+              dampingFactor={0.1}
+              enabled={!isEditMode && !isCameraAnimating}
+            />
+            <Environment preset="city" />
+          </Canvas>
+
+          <AnimatePresence>
+            {isEditMode && !isCameraAnimating && (
+              <motion.div
+                className="absolute inset-0 z-10"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <CircularPicker className="bg-transparent" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      </div>
+
+      {!isEditMode ? (
+        <div className="absolute bottom-10 left-0 right-0 flex justify-center z-[100]">
+          <ThreeDButton className="px-5 py-3" onClick={handleEditButtonClick}>
+            Select Patch
+          </ThreeDButton>
+        </div>
+      ) : (
+        <div className="absolute bottom-3 left-0 right-0 flex justify-center z-[1000]">
+          <ThreeDButton className="px-5 py-3" onClick={handleCancelEditClick}>
+            Save Changes
+          </ThreeDButton>
+        </div>
+      )}
       {/* </div> */}
     </div>
   );

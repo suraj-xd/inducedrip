@@ -36,19 +36,22 @@ export default function CustomShirtPage() {
   const fadeVariants = {
     initial: { opacity: 0, scale: 0.95 },
     animate: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.95 }
+    exit: { opacity: 0, scale: 0.95 },
   };
 
   const fadeTransition = {
     duration: 0.4,
-    ease: [0.4, 0.0, 0.2, 1]
+    ease: [0.4, 0.0, 0.2, 1],
   };
 
   return (
     <section className="w-[90%] md:w-[95%] flex flex-col gap-4 mt-12 md:mt-16 mx-auto">
       <div className="w-full flex justify-end relative flex-col md:flex-row z-[1]">
         <div className="w-full m-auto flex flex-col justify-center items-center gap-y-4 z-[2] ">
-          <div className="w-full md:w-[500px] relative md:mr-[100px]">
+          <div
+            style={{ aspectRatio: "5/6.3" }}
+            className=" w-full md:w-[500px] relative md:mr-[100px] max-h-[600px]"
+          >
             <AnimatePresence mode="wait">
               {showIn3D ? (
                 <motion.div
@@ -58,6 +61,7 @@ export default function CustomShirtPage() {
                   animate="animate"
                   exit="exit"
                   transition={fadeTransition}
+                  className="h-full"
                 >
                   <CustomJeansViewer />
                 </motion.div>
@@ -69,11 +73,12 @@ export default function CustomShirtPage() {
                   animate="animate"
                   exit="exit"
                   transition={fadeTransition}
+                  className="h-full"
                 >
                   <Swiper
                     slidesPerView={1}
                     parallax={true}
-                    className="banner-carousel"
+                    className="banner-carousel h-full"
                     pagination={{
                       el: ".bullet-buttons",
                       clickable: true,
@@ -90,12 +95,12 @@ export default function CustomShirtPage() {
                     modules={[Pagination]}
                   >
                     {data?.images.map((_, id) => (
-                      <SwiperSlide className={""} key={id}>
+                      <SwiperSlide className={"h-full"} key={id}>
                         <Image
                           src={_}
                           width={1000}
                           height={1000}
-                          className="w-full h-full object-contain"
+                          className="w-full h-full object-cover"
                           alt="hat"
                         />
                       </SwiperSlide>
@@ -106,12 +111,13 @@ export default function CustomShirtPage() {
             </AnimatePresence>
             <div className="relative z-[100] -top-4 bullet-buttons flex  justify-center items-center gap-4 "></div>
           </div>
-          {!showIn3D &&
-          <div className="absolute bottom-0 left-0 flex w-full h-full justify-center items-center gap-4">
-            <ThreeDButton onClick={() => setShowAiTryOn(true)}>
-              AI Try On
-            </ThreeDButton>
-          </div>}
+          {!showIn3D && (
+            <div className="absolute bottom-0 left-0 flex w-full h-full justify-center items-center gap-4">
+              <ThreeDButton onClick={() => setShowAiTryOn(true)}>
+                AI Try On
+              </ThreeDButton>
+            </div>
+          )}
         </div>
 
         {/* Content */}
@@ -133,29 +139,30 @@ export default function CustomShirtPage() {
                             </select> */}
             </div>
             <div className="mt-4 flex flex-col gap-y-2 ">
-              <motion.button 
-                onClick={() => setShowIn3D(!showIn3D)} 
+              <motion.button
+                onClick={() => setShowIn3D(!showIn3D)}
                 className="border w-full flex justify-center items-center gap-2 bg-white text-black p-4 text-xs uppercase font-semibold tracking-[1.1px]"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.2 }}
               >
-                {showIn3D ? <>
-                <PerspectiveIcon size={16} />
-                Back to 2D
-                </>
-                 : 
-                 <>
-                 <CubeFocusIcon size={16} />
-                 View in 3D
-                 </>
-                }
+                {showIn3D ? (
+                  <>
+                    <PerspectiveIcon size={16} />
+                    Back to 2D
+                  </>
+                ) : (
+                  <>
+                    <CubeFocusIcon size={16} />
+                    View in 3D
+                  </>
+                )}
               </motion.button>
             </div>
 
             <p className="mt-4 text-xs">{data?.description}</p>
             <div className="flex gap-4 my-5">
-            <PaymentButton />
+              <PaymentButton />
             </div>
 
             <div className="mt-4 text-xs">
@@ -268,10 +275,10 @@ export default function CustomShirtPage() {
       </div>
 
       {/* AI Try On Dialog */}
-      <AiTryOn 
-        isOpen={showAiTryOn} 
-        onClose={() => setShowAiTryOn(false)} 
-        imageUrl={data?.images[0] || ""} 
+      <AiTryOn
+        isOpen={showAiTryOn}
+        onClose={() => setShowAiTryOn(false)}
+        imageUrl={data?.images[0] || ""}
       />
     </section>
   );

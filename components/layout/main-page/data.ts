@@ -11,9 +11,10 @@ export const clothes = [
         ],
         "price": "₹2999.00",
         images: [
-            "https://ik.imagekit.io/ddopqt55k/1_1.png?updatedAt=1695903287884",
-            "https://ik.imagekit.io/ddopqt55k/1_2.png?updatedAt=1695903289219",
-            "https://ik.imagekit.io/ddopqt55k/1_3.png?updatedAt=1695903286070"
+            // "/jacket/Frame 47.svg",
+            "/jacket/jacket-photo-1.avif",
+            "https://plus.unsplash.com/premium_photo-1664439709174-6ccbd3d8a8b9?q=80&w=986&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "https://images.unsplash.com/photo-1614697688184-66a55d41e298?q=80&w=1064&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         ]
     },
     {
@@ -28,9 +29,9 @@ export const clothes = [
         ],
         "price": "₹2999.00",
         images: [
-            "https://ik.imagekit.io/ddopqt55k/2_1.png?updatedAt=1695903253640",
-            "https://ik.imagekit.io/ddopqt55k/2_2.png?updatedAt=1695903253635",
-            "https://ik.imagekit.io/ddopqt55k/2_3.png?updatedAt=1695903243390"
+            "/hat/chip-hat-export-1.jpg",
+            "/hat/chip-hat-export-5.jpg",
+            "/hat/chip-hat-export-6.jpg",
         ]
     },
     {

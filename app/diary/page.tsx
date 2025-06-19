@@ -16,6 +16,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { X } from "lucide-react";
 import { Check } from "@phosphor-icons/react";
+import { Book } from "@/components/21st/book-cover";
 
 interface PlacedSticker {
   id: string;
@@ -25,9 +26,7 @@ interface PlacedSticker {
 }
 
 export default function DiaryViewerPage() {
-  const [macbookImage, setMacbookImage] = useState<string>(
-    "/diary/diary.png"
-  ); // Default MacBook image
+  const [macbookImage, setMacbookImage] = useState<string>("/diary/diary.png"); // Default MacBook image
   const [error, setError] = useState<string | null>(null);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [isCameraAnimating, setIsCameraAnimating] = useState<boolean>(false);
@@ -38,59 +37,61 @@ export default function DiaryViewerPage() {
   });
   const [imageRotation, setImageRotation] = useState<number>(0);
   const [placedStickers, setPlacedStickers] = useState<PlacedSticker[]>([]);
-  
+
   // Canvas drawing state
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState<boolean>(false);
   const [isDrawingMode, setIsDrawingMode] = useState<boolean>(true);
-  const [lastPosition, setLastPosition] = useState<{x: number, y: number} | null>(null);
-
+  const [lastPosition, setLastPosition] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
 
   // Canvas drawing functions
   const startDrawing = (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (!isDrawingMode) return;
     setIsDrawing(true);
-    
+
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
-    const ctx = canvas.getContext('2d');
+
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
-    
+
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     // Set up drawing style
-    ctx.strokeStyle = '#ffffff';
+    ctx.strokeStyle = "#ffffff";
     ctx.lineWidth = 2;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+
     // Start a new path
     ctx.beginPath();
     ctx.moveTo(x, y);
-    
+
     setLastPosition({ x, y });
   };
 
   const draw = (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (!isDrawing || !isDrawingMode || !lastPosition) return;
-    
+
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
-    const ctx = canvas.getContext('2d');
+
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
-    
+
     const rect = canvas.getBoundingClientRect();
     const currentX = e.clientX - rect.left;
     const currentY = e.clientY - rect.top;
-    
+
     // Continue the current path - this creates smooth connected lines
     ctx.lineTo(currentX, currentY);
     ctx.stroke();
-    
+
     // Update last position
     setLastPosition({ x: currentX, y: currentY });
   };
@@ -99,7 +100,7 @@ export default function DiaryViewerPage() {
     if (isDrawing) {
       const canvas = canvasRef.current;
       if (canvas) {
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext("2d");
         if (ctx) {
           // Close the current path
           ctx.closePath();
@@ -112,19 +113,19 @@ export default function DiaryViewerPage() {
 
   const handleHoverDraw = (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (!isDrawingMode) return;
-    
+
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
-    const ctx = canvas.getContext('2d');
+
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
-    
+
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     // Create very light hover preview
-    ctx.fillStyle = '#ffffff20';
+    ctx.fillStyle = "#ffffff20";
     ctx.beginPath();
     ctx.arc(x, y, 1, 0, 2 * Math.PI);
     ctx.fill();
@@ -133,10 +134,10 @@ export default function DiaryViewerPage() {
   const clearCanvas = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
-    const ctx = canvas.getContext('2d');
+
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
-    
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   };
 
@@ -148,20 +149,20 @@ export default function DiaryViewerPage() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
+
     const resizeCanvas = () => {
       const container = canvas.parentElement;
       if (!container) return;
-      
+
       canvas.width = container.clientWidth;
       canvas.height = container.clientHeight;
     };
-    
+
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-    
+    window.addEventListener("resize", resizeCanvas);
+
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener("resize", resizeCanvas);
     };
   }, []);
 
@@ -257,41 +258,10 @@ export default function DiaryViewerPage() {
               </Button>
             </CardContent>
           </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Drawing Controls</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex gap-2">
-                <Button
-                  onClick={toggleDrawingMode}
-                  variant={isDrawingMode ? "default" : "outline"}
-                  className="flex-1"
-                >
-                  {isDrawingMode ? "Drawing Mode ON" : "Enable Drawing"}
-                </Button>
-                <Button
-                  onClick={clearCanvas}
-                  variant="outline"
-                  className="flex-1"
-                >
-                  Clear Drawings
-                </Button>
-              </div>
-              <div className="text-sm text-muted-foreground space-y-2">
-                <p>• Enable drawing mode to start drawing lines</p>
-                <p>• Click and drag to draw sharp lines</p>
-                <p>• Release to end the current line</p>
-                <p>• Use "Clear Drawings" to remove all lines</p>
-              </div>
-            </CardContent>
-          </Card>
-
         </div>
 
         <div className={`flex flex-col items-center lg:sticky lg:top-8 h-max`}>
-          <motion.div
+          {/* <motion.div
             className="relative w-full max-w-2xl rounded-lg overflow-visible "
             style={{ aspectRatio: "4 / 5" }}
             animate={{
@@ -322,17 +292,16 @@ export default function DiaryViewerPage() {
                 sizes="(max-width: 608px) 100vw, 40vw"
               />
 
-              {/* Drawing Canvas Overlay */}
               <canvas
                 ref={canvasRef}
                 className={`absolute inset-0 w-full h-full pointer-events-auto ${
-                  isDrawingMode ? 'cursor-pen' : 'cursor-default'
+                  isDrawingMode ? "cursor-pen" : "cursor-default"
                 }`}
-                style={{ 
+                style={{
                   zIndex: 15,
-                  cursor: isDrawingMode 
+                  cursor: isDrawingMode
                     ? `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' className="invert" stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19l7-7 3 3-7 7-3-3z'/%3E%3Cpath d='M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z'/%3E%3Cpath d='M2 2l7.586 7.586'/%3E%3Ccircle cx='11' cy='11' r='2'/%3E%3C/svg%3E") 12 12, crosshair`
-                    : 'default'
+                    : "default",
                 }}
                 onMouseDown={startDrawing}
                 onMouseMove={isDrawing ? draw : handleHoverDraw}
@@ -340,7 +309,32 @@ export default function DiaryViewerPage() {
                 onMouseLeave={stopDrawing}
               />
             </motion.div>
-          </motion.div>
+          </motion.div> */}
+
+          <Book
+            color="#0f172a"
+            cover={
+              <img
+                src="/diary/book-cover-1.png"
+                alt="manga cover"
+                className="w-full h-full object-cover"
+              />
+            }
+            backOfCover={
+              <img
+                src="/diary/book-cover-2.png"
+                alt="manga page 1"
+                className="w-full h-full object-cover"
+              />
+            }
+            content={
+              <img
+                src="/diary/book-cover-1.png"
+                alt="manga page 2"
+                className="w-full h-full object-cover"
+              />
+            }
+          />
         </div>
       </div>
     </div>

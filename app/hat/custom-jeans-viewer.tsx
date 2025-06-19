@@ -23,8 +23,8 @@ import {
 } from "@/components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, CheckIcon } from "@phosphor-icons/react";
-import CircularPicker from "@/components/products/jeans/animation";
 import ThreeDButton from "./3d-button";
+import CircularPickerHat from "./animation";
 
 interface POV {
   id: string;
@@ -291,7 +291,7 @@ export default function CustomJeansViewer() {
     }
     setIsCustomPovActive(true);
 
-    setViewPreset("front", () => {
+    setViewPreset("right", () => {
       setIsEditMode(true);
       setIsCameraAnimating(false);
     });
@@ -414,7 +414,7 @@ export default function CustomJeansViewer() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 >
-                  <CircularPicker className="bg-transparent" />
+                  <CircularPickerHat className="bg-transparent" />
                 </motion.div>
               )}
             </AnimatePresence>

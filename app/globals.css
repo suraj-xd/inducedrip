@@ -247,3 +247,133 @@ body {
 .slide-in-from-right-full {
   animation-name: slide-in-from-right-full;
 }
+
+/* Patch outline */
+
+.image-outlined {
+  -webkit-filter: drop-shadow(2px 2px 0 white)
+                  drop-shadow(-2px 2px 0 white)
+                  drop-shadow(2px -2px 0 white)
+                  drop-shadow(-2px -2px 0 white);
+
+  filter: drop-shadow(2px 2px 0 white)
+          drop-shadow(-2px 2px 0 white)
+          drop-shadow(2px -2px 0 white)
+          drop-shadow(-2px -2px 0 white);
+}
+
+/* Animated outline that traces around the image */
+.image-outlined-animated {
+  animation: outline-trace 0.5s ease-in-out forwards;
+}
+
+@keyframes outline-trace {
+  0% {
+    -webkit-filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 0))
+                    drop-shadow(2px 2px 0 rgba(255, 255, 255, 0))
+                    drop-shadow(-2px 2px 0 rgba(255, 255, 255, 0))
+                    drop-shadow(-2px -2px 0 rgba(255, 255, 255, 0));
+    filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 0))
+            drop-shadow(2px 2px 0 rgba(255, 255, 255, 0))
+            drop-shadow(-2px 2px 0 rgba(255, 255, 255, 0))
+            drop-shadow(-2px -2px 0 rgba(255, 255, 255, 0));
+  }
+  25% {
+    -webkit-filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 1))
+                    drop-shadow(2px 2px 0 rgba(255, 255, 255, 0))
+                    drop-shadow(-2px 2px 0 rgba(255, 255, 255, 0))
+                    drop-shadow(-2px -2px 0 rgba(255, 255, 255, 0));
+    filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 1))
+            drop-shadow(2px 2px 0 rgba(255, 255, 255, 0))
+            drop-shadow(-2px 2px 0 rgba(255, 255, 255, 0))
+            drop-shadow(-2px -2px 0 rgba(255, 255, 255, 0));
+  }
+  50% {
+    -webkit-filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 1))
+                    drop-shadow(2px 2px 0 rgba(255, 255, 255, 1))
+                    drop-shadow(-2px 2px 0 rgba(255, 255, 255, 0))
+                    drop-shadow(-2px -2px 0 rgba(255, 255, 255, 0));
+    filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 1))
+            drop-shadow(2px 2px 0 rgba(255, 255, 255, 1))
+            drop-shadow(-2px 2px 0 rgba(255, 255, 255, 0))
+            drop-shadow(-2px -2px 0 rgba(255, 255, 255, 0));
+  }
+  75% {
+    -webkit-filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 1))
+                    drop-shadow(2px 2px 0 rgba(255, 255, 255, 1))
+                    drop-shadow(-2px 2px 0 rgba(255, 255, 255, 1))
+                    drop-shadow(-2px -2px 0 rgba(255, 255, 255, 0));
+    filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 1))
+            drop-shadow(2px 2px 0 rgba(255, 255, 255, 1))
+            drop-shadow(-2px 2px 0 rgba(255, 255, 255, 1))
+            drop-shadow(-2px -2px 0 rgba(255, 255, 255, 0));
+  }
+  100% {
+    -webkit-filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 1))
+                    drop-shadow(2px 2px 0 rgba(255, 255, 255, 1))
+                    drop-shadow(-2px 2px 0 rgba(255, 255, 255, 1))
+                    drop-shadow(-2px -2px 0 rgba(255, 255, 255, 1));
+    filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 1))
+            drop-shadow(2px 2px 0 rgba(255, 255, 255, 1))
+            drop-shadow(-2px 2px 0 rgba(255, 255, 255, 1))
+            drop-shadow(-2px -2px 0 rgba(255, 255, 255, 1));
+  }
+}
+
+/* Continuous looping version */
+.image-outlined-loop {
+  animation: outline-trace-loop 3s ease-in-out infinite;
+}
+
+@keyframes outline-trace-loop {
+  0%, 20% {
+    -webkit-filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 0))
+                    drop-shadow(2px 2px 0 rgba(255, 255, 255, 0))
+                    drop-shadow(-2px 2px 0 rgba(255, 255, 255, 0))
+                    drop-shadow(-2px -2px 0 rgba(255, 255, 255, 0));
+    filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 0))
+            drop-shadow(2px 2px 0 rgba(255, 255, 255, 0))
+            drop-shadow(-2px 2px 0 rgba(255, 255, 255, 0))
+            drop-shadow(-2px -2px 0 rgba(255, 255, 255, 0));
+  }
+  35% {
+    -webkit-filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 1))
+                    drop-shadow(2px 2px 0 rgba(255, 255, 255, 0))
+                    drop-shadow(-2px 2px 0 rgba(255, 255, 255, 0))
+                    drop-shadow(-2px -2px 0 rgba(255, 255, 255, 0));
+    filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 1))
+            drop-shadow(2px 2px 0 rgba(255, 255, 255, 0))
+            drop-shadow(-2px 2px 0 rgba(255, 255, 255, 0))
+            drop-shadow(-2px -2px 0 rgba(255, 255, 255, 0));
+  }
+  50% {
+    -webkit-filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 1))
+                    drop-shadow(2px 2px 0 rgba(255, 255, 255, 1))
+                    drop-shadow(-2px 2px 0 rgba(255, 255, 255, 0))
+                    drop-shadow(-2px -2px 0 rgba(255, 255, 255, 0));
+    filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 1))
+            drop-shadow(2px 2px 0 rgba(255, 255, 255, 1))
+            drop-shadow(-2px 2px 0 rgba(255, 255, 255, 0))
+            drop-shadow(-2px -2px 0 rgba(255, 255, 255, 0));
+  }
+  65% {
+    -webkit-filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 1))
+                    drop-shadow(2px 2px 0 rgba(255, 255, 255, 1))
+                    drop-shadow(-2px 2px 0 rgba(255, 255, 255, 1))
+                    drop-shadow(-2px -2px 0 rgba(255, 255, 255, 0));
+    filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 1))
+            drop-shadow(2px 2px 0 rgba(255, 255, 255, 1))
+            drop-shadow(-2px 2px 0 rgba(255, 255, 255, 1))
+            drop-shadow(-2px -2px 0 rgba(255, 255, 255, 0));
+  }
+  80%, 100% {
+    -webkit-filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 1))
+                    drop-shadow(2px 2px 0 rgba(255, 255, 255, 1))
+                    drop-shadow(-2px 2px 0 rgba(255, 255, 255, 1))
+                    drop-shadow(-2px -2px 0 rgba(255, 255, 255, 1));
+    filter: drop-shadow(2px -2px 0 rgba(255, 255, 255, 1))
+            drop-shadow(2px 2px 0 rgba(255, 255, 255, 1))
+            drop-shadow(-2px 2px 0 rgba(255, 255, 255, 1))
+            drop-shadow(-2px -2px 0 rgba(255, 255, 255, 1));
+  }
+}

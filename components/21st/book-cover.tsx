@@ -43,11 +43,18 @@ export const Book = ({
         className={cn("relative w-52 h-80 transform-3d", className)}
       >
         <motion.div
+          style={{ z: 10 }}
+          className="absolute top-[1%] left-0 w-[calc(100%-3%)] h-[calc(100%-2%)] bg-zinc-50 overflow-hidden"
+        >
+          {content}
+        </motion.div>
+
+        <motion.div
           style={{
             rotateY: rotateSpring,
-            z: 15,
+            z: 20,
           }}
-          className="z-10 shadow-2xl w-full h-full absolute transform-3d origin-left"
+          className="w-full h-full absolute transform-3d origin-left shadow-2xl"
         >
           <div
             style={{ transform: "rotateY(180deg)" }}
@@ -65,13 +72,6 @@ export const Book = ({
           >
             {cover}
           </div>
-        </motion.div>
-
-        <motion.div
-          style={{ z: 14 }}
-          className="absolute z-20 top-[1%] left-0 w-[calc(100%-3%)] h-[calc(100%-2%)] bg-zinc-50 overflow-hidden"
-        >
-          {content}
         </motion.div>
 
         <div className="absolute top-[1%] -right-[4%] h-[calc(100%-2%)] w-[29px] transform rotate-y-90  bg-gradient-to-r from-zinc-50 via-zinc-300 to-zinc-50 bg-[length:5%_100%] bg-repeat-x shadow-2xl" />

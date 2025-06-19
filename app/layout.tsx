@@ -29,10 +29,8 @@ export default function RootLayout({
       className={`${satoshi.variable} ${instrumentSerif.variable} ${lausanne.variable} ${nippo.variable} ${abcOracle.variable} ${ppMondwest.variable} overscroll-contain scroll-smooth`}
     >
       <body>
-        <TooltipProvider>
-          {children}
-          <AiTryonNotifications />
-        </TooltipProvider>
+        <TooltipProvider>{children}</TooltipProvider>
+        <AiTryonNotifications />
       </body>
     </html>
   );

@@ -27,7 +27,7 @@ export default function CustomShirtPage() {
   const [showIn3D, setShowIn3D] = useState(false);
   const [showAiTryOn, setShowAiTryOn] = useState(false);
 
-  const data = clothes[0];
+  const data = clothes[1];
 
   if (!product_id) {
     return <>Invalid</>;
