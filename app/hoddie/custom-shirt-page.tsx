@@ -63,7 +63,7 @@ export default function CustomShirtPage() {
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  transition={fadeTransition}
+                  transition={fadeTransition as any}
                   className="h-full"
                 >
                   <CustomJeansViewer />
@@ -75,7 +75,7 @@ export default function CustomShirtPage() {
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  transition={fadeTransition}
+                  transition={fadeTransition as any}
                   className="h-full"
                 >
                   <Swiper
