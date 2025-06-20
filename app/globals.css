@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  font-family: var(--font-abc-oracle);
+  font-family: var(--font-sans);
 }
 
 @layer utilities {

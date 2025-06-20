@@ -36,6 +36,12 @@ const initialItemsData = [
     image: "/patches/chatgpt/ChatGPT Image Jun 19, 2025, 01_23_20 PM Background Removed.png",
     color: "bg-gradient-to-br from-purple-500 to-purple-800",
   },
+  {
+    id: "item-11",
+    label: "ChatGPT Image 5",
+    image: "/sticker/list/star.png",
+    color: "bg-gradient-to-br from-purple-500 to-purple-800",
+  },
 ];
 
 interface CircularPickerProps {

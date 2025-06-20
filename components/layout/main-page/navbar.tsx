@@ -10,7 +10,7 @@ const Navbar = () => {
                 <div className="flex justify-between items-center">
                     <div className="flex-1 hidden md:flex gap-8 items-center uppercase font-medium text-[10px] tracking-[1.8px]">
                     </div>
-                    <Link href={"/test"}>
+                    <Link href={"/"}>
                         <div className="flex items-center gap-x-4">
                             <Image src={"/Frame 41.svg"} width={150} height={150} alt="fyi-text" />
                         </div>
