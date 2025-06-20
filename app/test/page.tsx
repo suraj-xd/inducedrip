@@ -9,13 +9,30 @@ import Floating, {
 } from "@/components/21st/parallax-floating"
 import { clothes } from "@/components/layout/main-page/data"
 import Image from "next/image"
+import AnimatedScreen from "@/components/codex/animated-screen"
+import { FollowerPointerCard } from "@/components/comman/following-pointer"
+
+// Arrow component for the pointer
+const ArrowUpRight = () => (
+  <div className="flex items-center space-x-1">
+    <span>↗</span>
+  </div>
+)
+
+// Title component with product name and arrow
+const ProductTitle = ({ title }: { title: string }) => (
+  <div className="flex items-center space-x-2">
+    <span className="text-sm font-medium">{title}</span>
+    <ArrowUpRight />
+  </div>
+)
 
 // Hardcoded product images from the data
 const productImages = [
   {
-    url: "/hoodie/Frame 1145.png",
-    href: "/shirt",
-    title: "Basic T-Shirt",
+    url: "/models/4.png",
+    href: "/hoddie",
+    title: "GreyMatter Suit",
     price: "₹2999.00",
     id: 1
   },
@@ -73,7 +90,7 @@ const productImages = [
   {
     url: "/hat/hat-2.png",
     href: "/hat",
-    title: "Sweat Shirt",
+    title: "INDCD CAP",
     price: "₹2999.00",
     id: 9
   }
@@ -93,7 +110,7 @@ export default function Preview() {
 
   return (
     <div
-      className="flex w-full h-full min-h-screen justify-center items-center bg-black overflow-hidden"
+      className="flex w-full h-full min-h-screen justify-center items-center bg-white overflow-hidden"
       ref={scope}
     >
       <motion.div
@@ -105,10 +122,10 @@ export default function Preview() {
         {/* <p className="text-5xl md:text-7xl z-50 text-white font-calendas italic">
           inducedrip.
         </p> */}
-        <Image src={"/models/Frame 60.svg"} width={400} height={400} alt="fyi-text" />
+        {/* <Image src={"/models/Frame 52.svg"} width={400} height={400} alt="fyi-text" /> */}
 
         <p 
-          className="text-xs z-50 hover:scale-110 transition-transform bg-white text-black rounded-full py-2 w-fit px-4 cursor-pointer"
+          className="text-xs z-50 hover:scale-110 transition-transform border bg-white text-black rounded-full py-2 w-fit px-4 cursor-pointer"
           onClick={() => router.push('/')}
         >
           Explore all products
@@ -116,79 +133,95 @@ export default function Preview() {
       </motion.div>
 
       <Floating sensitivity={-1} className="overflow-hidden">
-        <FloatingElement depth={0.5} className="top-[8%] left-[11%]">
-          <motion.img
-            initial={{ opacity: 0 }}
-            src={productImages[0]?.url}
-            className="w-16 h-16 md:w-24 md:h-32 object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
-            onClick={() => handleImageClick(productImages[0]?.href)}
-            alt={productImages[0]?.title}
-          />
+        <FloatingElement depth={0.5} className="cursor-none top-[15%] left-[10%]">
+          <FollowerPointerCard title={<ProductTitle title={productImages[0]?.title} />}>
+            <motion.img
+              initial={{ opacity: 0 }}
+              src={productImages[0]?.url}
+              className="w-[100px] h-fit md:w-[200px] object-cover hover:scale-105 duration-200 cursor-none transition-transform"
+              onClick={() => handleImageClick(productImages[0]?.href)}
+              alt={productImages[0]?.title}
+            />
+          </FollowerPointerCard>
         </FloatingElement>
-        <FloatingElement depth={1} className="top-[10%] left-[32%]">
-          <motion.img
-            initial={{ opacity: 0 }}
-            src={productImages[1]?.url}
-            className="w-20 h-20 md:w-28 md:h-28 object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
-            onClick={() => handleImageClick(productImages[1]?.href)}
-            alt={productImages[1]?.title}
-          />
+        <FloatingElement depth={1} className="cursor-none top-[10%] left-[32%]">
+          <FollowerPointerCard title={<ProductTitle title={productImages[1]?.title} />}>
+            <motion.img
+              initial={{ opacity: 0 }}
+              src={productImages[1]?.url}
+              className="w-16 h-16 md:w-20 md:h-20 object-cover hover:scale-105 duration-200 cursor-none transition-transform"
+              onClick={() => handleImageClick(productImages[1]?.href)}
+              alt={productImages[1]?.title}
+            />
+          </FollowerPointerCard>
         </FloatingElement>
-        <FloatingElement depth={2} className="top-[2%] left-[53%]">
-          <motion.img
-            initial={{ opacity: 0 }}
-            src={productImages[2]?.url}
-            className="w-28 h-40 md:w-40 md:h-52 object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
-            onClick={() => handleImageClick(productImages[2]?.href)}
-            alt={productImages[2]?.title}
-          />
+        <FloatingElement depth={2} className="cursor-none top-[2%] left-[53%]">
+          <FollowerPointerCard title={<ProductTitle title={productImages[2]?.title} />}>
+            <motion.img
+              initial={{ opacity: 0 }}
+              src={productImages[2]?.url}
+              className="w-28 h-40 md:w-40 md:h-52 object-cover hover:scale-105 duration-200 cursor-none transition-transform"
+              onClick={() => handleImageClick(productImages[2]?.href)}
+              alt={productImages[2]?.title}
+            />
+          </FollowerPointerCard>
         </FloatingElement>
-        <FloatingElement depth={1} className="top-[20%] left-[83%]">
-          <motion.img
-            initial={{ opacity: 0 }}
-            src={productImages[8]?.url}
-            className="w-24 h-24 md:w-32 md:h-32 object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
-            onClick={() => handleImageClick(productImages[8]?.href)}
-            alt={productImages[8]?.title}
-          />
-        </FloatingElement>
-
-        <FloatingElement depth={1} className="top-[40%] left-[2%]">
-          <motion.img
-            initial={{ opacity: 0 }}
-            src={productImages[4]?.url}
-            className="w-28 h-28 md:w-36 md:h-36 object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
-            onClick={() => handleImageClick(productImages[4]?.href)}
-            alt={productImages[4]?.title}
-          />
-        </FloatingElement>
-        <FloatingElement depth={2} className="top-[70%] left-[77%]">
-          <motion.img
-            initial={{ opacity: 0 }}
-            src={productImages[5]?.url}
-            className="w-28 h-28 md:w-36 md:h-48 object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
-            onClick={() => handleImageClick(productImages[5]?.href)}
-            alt={productImages[5]?.title}
-          />
+        <FloatingElement depth={1} className="cursor-none top-[20%] left-[83%]">
+          <FollowerPointerCard title={<ProductTitle title={productImages[8]?.title} />}>
+            <motion.img
+              initial={{ opacity: 0 }}
+              src={productImages[8]?.url}
+              className="w-24 h-24 md:w-32 md:h-32 object-cover hover:scale-105 duration-200 cursor-none transition-transform"
+              onClick={() => handleImageClick(productImages[8]?.href)}
+              alt={productImages[8]?.title}
+            />
+          </FollowerPointerCard>
         </FloatingElement>
 
-        <FloatingElement depth={4} className="top-[73%] left-[25%]">
-          <motion.img
-            initial={{ opacity: 0 }}
-            src={productImages[6]?.url}
-            className="w-40 md:w-52 h-full object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
-            onClick={() => handleImageClick(productImages[6]?.href)}
-            alt={productImages[6]?.title}
-          />
+        <FloatingElement depth={1} className="cursor-none top-[30%] left-[30%] md:left-[40%]">
+          <FollowerPointerCard title={<ProductTitle title={productImages[4]?.title} />}>
+            <motion.img
+              initial={{ opacity: 0 }}
+              src={productImages[4]?.url}
+              className="w-[250px] h-[250px] md:w-[400px] md:h-[400px] object-cover hover:scale-105 duration-200 cursor-none transition-transform"
+              onClick={() => handleImageClick(productImages[4]?.href)}
+              alt={productImages[4]?.title}
+            />
+          </FollowerPointerCard>
         </FloatingElement>
-        <FloatingElement depth={1} className="top-[80%] left-[50%]">
-          <motion.img
-            initial={{ opacity: 0 }}
-            src={productImages[7]?.url}
-            className="w-24 h-24 md:w-32 md:h-32 object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
-            onClick={() => handleImageClick(productImages[7]?.href)}
-            alt={productImages[7]?.title}
-          />
+        <FloatingElement depth={2} className="cursor-none top-[70%] left-[77%]">
+          <FollowerPointerCard title={<ProductTitle title={productImages[5]?.title} />}>
+            <motion.img
+              initial={{ opacity: 0 }}
+              src={productImages[5]?.url}
+              className="w-[150px] h-[150px] md:w-[320px] md:h-[320px] object-cover hover:scale-105 duration-200 cursor-none transition-transform"
+              onClick={() => handleImageClick(productImages[5]?.href)}
+              alt={productImages[5]?.title}
+            />
+          </FollowerPointerCard>
+        </FloatingElement>
+
+        <FloatingElement depth={4} className="cursor-none top-[73%] left-[25%]">
+          <FollowerPointerCard title={<ProductTitle title={productImages[6]?.title} />}>
+            <motion.img
+              initial={{ opacity: 0 }}
+              src={productImages[6]?.url}
+              className="w-40 md:w-52 h-full object-cover hover:scale-105 duration-200 cursor-none transition-transform"
+              onClick={() => handleImageClick(productImages[6]?.href)}
+              alt={productImages[6]?.title}
+            />
+          </FollowerPointerCard>
+        </FloatingElement>
+        <FloatingElement depth={1} className="cursor-none top-[80%] left-[50%]">
+          <FollowerPointerCard title={<ProductTitle title={productImages[7]?.title} />}>
+            <motion.img
+              initial={{ opacity: 0 }}
+              src={productImages[7]?.url}
+              className="w-16 h-16 md:w-20 md:h-20 object-cover hover:scale-105 duration-200 cursor-none transition-transform"
+              onClick={() => handleImageClick(productImages[7]?.href)}
+              alt={productImages[7]?.title}
+            />
+          </FollowerPointerCard>
         </FloatingElement>
       </Floating>
     </div>

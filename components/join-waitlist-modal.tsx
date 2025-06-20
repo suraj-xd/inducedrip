@@ -67,7 +67,7 @@ export default function JoinWaitlistModal({
             Be the first to know when{" "}
             <span className="font-semibold">{productName}</span> is available.
           </DialogDescription>
-          <p className="text-center text-xs flex items-center gap-1 text-green-600 bg-green-50 font-medium border w-fit mx-auto px-2 py-1 rounded-md"><GiftIcon weight="fill" size={12} /> We'll send you free digital stickers and patches</p>
+          <p className="text-center text-xs flex items-center gap-1 text-green-600 bg-green-50 font-medium border w-fit mx-auto px-2 py-1 rounded-md"><GiftIcon weight="fill" size={12} /> We'll send you free digital stickers</p>
         </DialogHeader>
 
         <div className="flex flex-col gap-4 py-4 pt-0">

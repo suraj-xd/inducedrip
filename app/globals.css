@@ -377,3 +377,69 @@ body {
             drop-shadow(-2px -2px 0 rgba(255, 255, 255, 1));
   }
 }
+
+/* Codex */
+
+@layer utilities {
+  .underline-color {
+      text-decoration-color: #3141FC;
+      -moz-text-decoration-color: #3141FC;
+  }
+}
+
+
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+
+.bg-lines-dark {
+  /* horizontal line */
+  /* background: repeating-linear-gradient(0deg, #ccc, #ccc 1px, transparent 1px, transparent 200px); */
+
+  /* verticle line */
+  background: repeating-linear-gradient(90deg, #FFFFFF1A, #FFFFFF1A 1px, transparent 1px, transparent 192px);
+}
+
+.bg-lines-light {
+  background: repeating-linear-gradient(90deg, #0000001A, #0000001A 1px, transparent 1px, transparent 192px);
+}
+
+.bg-lines-green {
+  background: repeating-linear-gradient(90deg, #FFFFFF0D, #FFFFFF0D 1px, transparent 1px, transparent 192px);
+}
+
+.bg-lines-three {
+  background: repeating-linear-gradient(90deg, #FFFFFF33, #FFFFFF33 1px, transparent 1px, transparent 33.33%);
+}
+
+@media (max-width: 768px) {
+  .bg-lines-dark {
+      background: repeating-linear-gradient(90deg, #FFFFFF1A, #FFFFFF1A 1px, transparent 1px, transparent 33.33%);
+  }
+  .bg-lines-light {
+      background: repeating-linear-gradient(90deg, #0000001A, #0000001A 1px, transparent 1px, transparent 33.33%);
+  }
+  .bg-lines-three {
+      background: repeating-linear-gradient(90deg, #FFFFFF33, #FFFFFF33 1px, transparent 1px, transparent 50%);
+  }
+  .bg-lines-green {
+      background: repeating-linear-gradient(90deg, #FFFFFF0D, #FFFFFF0D 1px, transparent 1px, transparent 33.33%);
+  }
+}

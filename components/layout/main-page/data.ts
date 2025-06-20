@@ -85,7 +85,7 @@ export const clothes = [
     {
         "id": 5,
         "max_img_no": 3,
-        "product_name": "Laptop Stickers",
+        "product_name": "Stickers Pack",
         "href": "/laptop",
         "description": "A cotton/polyester blend fleece, Split stitch double needle sewing on all seams for durability, You'll love it's softness, A large front pouch pocket perfect for holding items and keeping your hands warm, Jersey lined hood bringing comfort for your head",
         "details": [

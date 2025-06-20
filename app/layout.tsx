@@ -13,9 +13,9 @@ import { AiTryonNotifications } from "@/components/ai-tryon-notifications";
 import ProgressBar from "@/components/comman/top-progress-bar";
 
 export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
-  generator: "v0.dev",
+  title: "Inducedrip",
+  description: "Inducedrip",
+  generator: "Inducedrip",
 };
 
 export default function RootLayout({
@@ -23,6 +23,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html
       suppressHydrationWarning
@@ -30,7 +31,7 @@ export default function RootLayout({
       className={`${satoshi.variable} ${instrumentSerif.variable} ${lausanne.variable} ${nippo.variable} ${abcOracle.variable} ${ppMondwest.variable} overscroll-contain scroll-smooth`}
     >
       <body>
-      <ProgressBar />
+        <ProgressBar />
         <TooltipProvider>{children}</TooltipProvider>
         <AiTryonNotifications />
       </body>
