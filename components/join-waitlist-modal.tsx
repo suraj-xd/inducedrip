@@ -12,7 +12,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { motion } from "framer-motion";
-import { GiftIcon, Upload } from "@phosphor-icons/react";
+import { GiftIcon, SpinnerIcon, Upload } from "@phosphor-icons/react";
+import { useToast } from "@/hooks/use-toast";
 
 interface JoinWaitlistModalProps {
   isOpen: boolean;
@@ -27,6 +28,7 @@ export default function JoinWaitlistModal({
 }: JoinWaitlistModalProps) {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
 
   const handleAddJoinWaitlist = async () => {
     if (!email.trim()) return;
@@ -34,20 +36,42 @@ export default function JoinWaitlistModal({
     setIsLoading(true);
 
     try {
-      // Simulate API call - replace with actual implementation
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email.trim(),
+          message: `User joined the waitlist for ${productName}`,
+          type: "waitlist",
+          productName: productName,
+        }),
+      });
 
-      // Add your actual waitlist API call here
-      console.log("Adding to waitlist:", { email, product: productName });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to join waitlist");
+      }
 
       // Reset form and close modal
       setEmail("");
       onClose();
 
-      // You might want to show a success toast here
+      // Show success toast
+      toast({
+        title: "🎉 You're on the waitlist!",
+        description: `We'll notify you when ${productName} is available. Check your email for confirmation!`,
+      });
     } catch (error) {
       console.error("Failed to join waitlist:", error);
-      // Handle error - maybe show error toast
+      // Show error toast
+      toast({
+        title: "Oops! Something went wrong",
+        description: error instanceof Error ? error.message : "Failed to join waitlist. Please try again.",
+        variant: "destructive",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -103,12 +127,19 @@ export default function JoinWaitlistModal({
               </motion.button>
               <motion.button
                 onClick={handleAddJoinWaitlist}
-                disabled={!email}
+                disabled={!email || isLoading}
                 className="px-4 py-2 bg-black text-white font-ppMondwest hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
-                whileHover={{ scale: !email ? 1 : 1.05 }}
-                whileTap={{ scale: !email ? 1 : 0.95 }}
+                whileHover={{ scale: !email || isLoading ? 1 : 1.05 }}
+                whileTap={{ scale: !email || isLoading ? 1 : 0.95 }}
               >
-                Submit
+                {isLoading ? (
+                  <>
+                    <SpinnerIcon size={16} className="animate-spin" />
+                    Joining...
+                  </>
+                ) : (
+                  "Submit"
+                )}
               </motion.button>
             </div>
           </div>
