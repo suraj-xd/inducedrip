@@ -57,6 +57,28 @@ export async function POST(req: NextRequest) {
     }
 
     // Construct the detailed prompt for the AI
+    const detailedPrompt2 = `{
+      "technical_approach": "Treat as intelligent image inpainting rather than image replacement",
+      
+      "preprocessing_analysis": {
+        "pose_extraction": "Identify key body landmarks and pose structure from user image",
+        "garment_segmentation": "Isolate garment from source image with precise boundaries",
+        "occlusion_mapping": "Determine which areas of person need modification vs preservation"
+      },
+      
+      "integration_strategy": {
+        "inpainting_focus": "Use the person image as base canvas, inpaint only necessary regions",
+        "pose_guided_fitting": "Use extracted pose information to guide garment deformation",
+        "texture_preservation": "Maintain exact garment texture/material properties during integration",
+        "boundary_blending": "Focus on seamless edge integration rather than wholesale replacement"
+      },
+      
+      "advanced_constraints": {
+        "pose_consistency": "Garment must conform to detected pose keypoints and body structure",
+        "occlusion_awareness": "Intelligently handle how garment interacts with existing body parts/clothing",
+        "material_physics": "Simulate realistic draping based on garment type and pose"
+      }
+    }`;
     const detailedPrompt = `{
       "prompt_version": "2.0", // Updated version
       "objective": "Generate a photorealistic virtual try-on image, seamlessly integrating a specified clothing item onto a person while rigidly preserving their facial identity, the clothing's exact appearance, and placing them in a completely new, distinct background.",
