@@ -16,6 +16,20 @@ import { useResizeAnimation } from "@/hooks/use-resize-animation";
 import ThreeDButton from "@/components/command-drip/3d-button";
 import JacketPatchPicker from "./jacket-patch-picker";
 
+interface POV {
+  id: string;
+  name: string;
+  modelRotation: [number, number, number];
+  cameraPosition: [number, number, number];
+  cameraTarget: [number, number, number];
+}
+
+interface LiveCameraAngles {
+  azimuthal: number;
+  polar: number;
+}
+
+// New component to handle useFrame for OrbitControls
 function ControlsUpdater({
   controlsRef,
 }: {
@@ -62,7 +76,9 @@ function Model({
 
 const modelUrl = "/glb/Denim_Elegance.glb";
 export default function ThreeDJacketViewer() {
-  const modelRotation: [number, number, number] = [0, 0, 0];
+  const [modelRotation, setModelRotation] = useState<[number, number, number]>([
+    0, 0, 0,
+  ]);
   const orbitControlsRef = useRef<OrbitControlsImpl>(null!);
 
   const [isCustomPovActive, setIsCustomPovActive] = useState<boolean>(false);
@@ -72,7 +88,8 @@ export default function ThreeDJacketViewer() {
   const materialOverride = false;
 
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
-
+  const [liveCameraAngles, setLiveCameraAngles] =
+    useState<LiveCameraAngles | null>(null);
   const [isCameraAnimating, setIsCameraAnimating] = useState<boolean>(false);
 
   // Use the global resize animation utility
@@ -82,6 +99,10 @@ export default function ThreeDJacketViewer() {
     if (orbitControlsRef.current) {
       const azimuthal = orbitControlsRef.current.getAzimuthalAngle();
       const polar = orbitControlsRef.current.getPolarAngle();
+      setLiveCameraAngles({
+        azimuthal: (azimuthal * 180) / Math.PI,
+        polar: (polar * 180) / Math.PI,
+      });
     }
   }, []);
 
@@ -195,9 +216,9 @@ export default function ThreeDJacketViewer() {
   return (
     <div
       className="h-full w-full bg-gradient-to-br from-[#ebebeb] to-[#f2f2f2] overflow-hidden relative max-h-[600px] transition-all duration-200 ease-in-out"
-      style={{
+      style={{ 
         aspectRatio: "5/6.3",
-        height: `${heightPercentage}%`,
+        height: `${heightPercentage}%`
       }}
     >
       <div className={`flex flex-col items-center lg:sticky lg:top-8 h-full`}>
