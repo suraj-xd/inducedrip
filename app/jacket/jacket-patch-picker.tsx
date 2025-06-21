@@ -113,7 +113,7 @@ export default function JacketPatchPicker({ className }: CircularPickerProps) {
                 layoutId={selectedItem.id}
                 className="relative flex items-center justify-center cursor-pointer"
                 onClick={() => setSelectedItem(null)}
-                transition={springTransition}
+                transition={springTransition as any}
                 style={{ originX: 0.5, originY: 0.5 }}
                 initial={{ opacity: 0, scale: 0.7 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -122,7 +122,7 @@ export default function JacketPatchPicker({ className }: CircularPickerProps) {
                   scale: 0.7,
                   transition: {
                     duration: 0.2,
-                    ...springTransition,
+                    ...springTransition as any,
                     stiffness: 300,
                     damping: 30,
                   },
@@ -241,7 +241,7 @@ export default function JacketPatchPicker({ className }: CircularPickerProps) {
                       rotateY: 5,
                     }
               }
-              transition={springTransition}
+              transition={springTransition as any}
               style={{ originX: 0.5, originY: 0.5 }}
             >
               <Image
