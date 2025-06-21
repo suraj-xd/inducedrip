@@ -10,7 +10,7 @@ export const clothes = [
             "Made In India",
         ],
         "price": "₹2999.00",
-        "href": "/shirt",
+        "href": "/jacket",
         images: [
             "/chatgpt-jacket.png",
             "/jacket/Frame 47.svg",

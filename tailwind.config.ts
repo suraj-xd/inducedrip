@@ -12,10 +12,6 @@ const config: Config = {
   	extend: {
   		fontFamily: {
   			sans: ['var(--font-satoshi)', 'ui-sans-serif', 'system-ui'],
-  			serif: ['var(--font-instrument-serif)', 'Georgia', 'serif'],
-  			lausanne: ['var(--font-lausanne)', 'Georgia', 'serif'],
-  			nippo: ['var(--font-nippo)', 'ui-sans-serif', 'system-ui'],
-  			abcOracle: ['var(--font-abc-oracle)', 'ui-sans-serif', 'system-ui'],
   			ppMondwest: ['var(--font-pp-mondwest)', 'ui-sans-serif', 'system-ui'],
   		},
   		colors: {

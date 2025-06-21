@@ -87,7 +87,7 @@ interface CircularPickerProps {
   className?: string;
 }
 
-export default function CircularPickerJacket({ className }: CircularPickerProps) {
+export default function JacketPatchPicker({ className }: CircularPickerProps) {
   const [selectedItem, setSelectedItem] = useState<{
     id: string;
     label: string;

@@ -6,6 +6,13 @@ import ContactNotificationEmail from "@/components/emails/contact-notification";
 import ThankYouEmail from "@/components/emails/thank-you";
 import WaitlistNotificationEmail from "@/components/emails/waitlist-notification";
 import WaitlistConfirmationEmail from "@/components/emails/waitlist-confirmation";
+import { Redis } from "@upstash/redis";
+
+// Create a new redis client.
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL!,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+});
 
 // Define the type for the request body
 interface EmailRequestBody {
@@ -117,6 +124,20 @@ export async function POST(request: NextRequest) {
     const body = (await request.json()) as EmailRequestBody;
     const { message, email, name, type, productName } = emailSchema.parse(body);
 
+    if (type === "waitlist" && email && productName) {
+      const waitlistKey = `waitlist:${productName}`;
+      const isMember = await redis.sismember(waitlistKey, email);
+      if (isMember) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: "You are already on the waitlist for this product.",
+          },
+          { status: 409 } // Conflict
+        );
+      }
+    }
+
     // Create a transporter object using Gmail SMTP settings
     const transporter: Transporter = nodemailer.createTransport({
       service: "Gmail",
@@ -170,6 +191,12 @@ export async function POST(request: NextRequest) {
     const myResponse = (await transporter.sendMail(
       myMailOptions,
     )) as EmailResponse;
+
+    // Add user to waitlist in Redis if applicable
+    if (type === "waitlist" && email && productName) {
+      const waitlistKey = `waitlist:${productName}`;
+      await redis.sadd(waitlistKey, email);
+    }
 
     // Send confirmation email to the sender in the background (if email provided)
     if (email) {

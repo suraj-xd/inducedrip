@@ -7,9 +7,6 @@ import { useRouter } from "next/navigation"
 import Floating, {
   FloatingElement,
 } from "@/components/21st/parallax-floating"
-import { clothes } from "@/components/layout/main-page/data"
-import Image from "next/image"
-import AnimatedScreen from "@/components/codex/animated-screen"
 import { FollowerPointerCard } from "@/components/comman/following-pointer"
 import Link from "next/link"
 
@@ -97,7 +94,7 @@ const productImages = [
   },
   {
     url: "/chatgpt-jacket.png",
-    href: "/shirt",
+    href: "/jacket",
     title: "Denim Jacket",
     price: "₹1999.00",
     id: 10
@@ -111,10 +108,6 @@ export default function Preview() {
   useEffect(() => {
     animate("img", { opacity: [0, 1] }, { duration: 0.5, delay: stagger(0.15) })
   }, [])
-
-  const handleImageClick = (href: string) => {
-    router.push(href)
-  }
 
   return (
     <div

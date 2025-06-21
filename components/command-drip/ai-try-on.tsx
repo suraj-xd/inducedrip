@@ -8,6 +8,8 @@ import { useAiTryonStore } from "@/lib/stores/ai-tryon-store";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDropzone } from "react-dropzone";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
+import { InfoIcon } from "@phosphor-icons/react";
 
 const mainVariant = {
   initial: {
@@ -162,6 +164,17 @@ export default function AiTryOn({ isOpen, onClose, imageUrl }: AiTryOnProps) {
         signal: abortController.signal,
       });
 
+      if (response.status === 429) {
+        const rateLimitError = await response.json();
+        toast.error(rateLimitError.error || "You've reached the generation limit.");
+        updateGeneration(generationId, {
+          status: "failed",
+          error: rateLimitError.error || "Rate limit exceeded.",
+          abortController: undefined,
+        });
+        return;
+      }
+
       if (abortController.signal.aborted) {
         return; // Request was cancelled
       }
@@ -231,10 +244,9 @@ export default function AiTryOn({ isOpen, onClose, imageUrl }: AiTryOnProps) {
   };
 
   const dialogTransition = {
-    type: "spring",
+    type: "spring" as const,
     damping: 25,
     stiffness: 300,
-    duration: 0.3,
   };
 
   return (
@@ -278,6 +290,16 @@ export default function AiTryOn({ isOpen, onClose, imageUrl }: AiTryOnProps) {
 
             {/* Content */}
             <div className="p-6 py-2 overflow-y-auto max-h-[calc(90vh-140px)]">
+              {/* Lite Mode Notice */}
+              <div className="mb-4 px-2.5 bg-blue-50 border border-blue-100 rounded-lg text-xs py-1.5 text-blue-700 flex items-center">
+                <div className="mr-2 flex-shrink-0">
+                 <InfoIcon size={16} weight="fill" />
+                </div>
+                <p>
+                  Running in lite-mode. Premium tier coming soon with higher-res rendering, advanced pose estimation, and enhanced texture mapping.
+                </p>
+              </div>
+
               <div className="">
                 {/* File input */}
                 <input

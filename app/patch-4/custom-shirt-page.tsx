@@ -10,10 +10,10 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import AiTryOn from "../shirt/ai-try-on";
-import PaymentButton from "../shirt/payment-button";
-import ThreeDButton from "../shirt/3d-button";
+import AiTryOn from "../jacket/ai-try-on";
+import ThreeDButton from "../jacket/3d-button";
 import YouMayAlsoLike from "@/components/comman/you-may-also-like";
+import PaymentButton from "@/components/command-drip/payment-button";
 
 export default function CustomShirtPage() {
   const product_id = "1";

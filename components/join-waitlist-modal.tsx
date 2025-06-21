@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { motion } from "framer-motion";
 import { GiftIcon, SpinnerIcon, Upload } from "@phosphor-icons/react";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 
 interface JoinWaitlistModalProps {
   isOpen: boolean;
@@ -28,10 +28,22 @@ export default function JoinWaitlistModal({
 }: JoinWaitlistModalProps) {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
+  const [isAlreadyJoined, setIsAlreadyJoined] = useState(false);
+
+  const waitlistKey = `waitlist-joined-${productName}`;
+
+  useEffect(() => {
+    // Check local storage when the modal opens or product changes
+    if (isOpen) {
+      const alreadyJoined = localStorage.getItem(waitlistKey) === "true";
+      if (alreadyJoined) {
+        setIsAlreadyJoined(true);
+      }
+    }
+  }, [isOpen, waitlistKey]);
 
   const handleAddJoinWaitlist = async () => {
-    if (!email.trim()) return;
+    if (!email.trim() || isAlreadyJoined) return;
 
     setIsLoading(true);
 
@@ -52,25 +64,34 @@ export default function JoinWaitlistModal({
       const data = await response.json();
 
       if (!response.ok) {
+        // Handle case where user is already on the waitlist (from server)
+        if (response.status === 409) {
+          setIsAlreadyJoined(true);
+          localStorage.setItem(waitlistKey, "true");
+        }
         throw new Error(data.error || "Failed to join waitlist");
       }
+
+      // Set flag in local storage on successful signup
+      localStorage.setItem(waitlistKey, "true");
+      setIsAlreadyJoined(true);
 
       // Reset form and close modal
       setEmail("");
       onClose();
 
       // Show success toast
-      toast({
-        title: "🎉 You're on the waitlist!",
+      toast.success("You're on the waitlist!", {
         description: `We'll notify you when ${productName} is available. Check your email for confirmation!`,
       });
     } catch (error) {
       console.error("Failed to join waitlist:", error);
       // Show error toast
-      toast({
-        title: "Oops! Something went wrong",
-        description: error instanceof Error ? error.message : "Failed to join waitlist. Please try again.",
-        variant: "destructive",
+      toast.error("Oops! Something went wrong", {
+        description:
+          error instanceof Error
+            ? error.message
+            : "Failed to join waitlist. Please try again.",
       });
     } finally {
       setIsLoading(false);
@@ -88,8 +109,9 @@ export default function JoinWaitlistModal({
         <DialogHeader className="pt-3 border-b border-gray-200 pb-2">
           <DialogTitle className="text-center font-ppMondwest">Join Waitlist</DialogTitle>
           <DialogDescription className="text-center">
-            Be the first to know when{" "}
-            <span className="font-semibold">{productName}</span> is available.
+            {isAlreadyJoined
+              ? "You're already on the waitlist!"
+              : `Be the first to know when ${productName} is available.`}
           </DialogDescription>
           <p className="text-center text-xs flex items-center gap-1 text-green-600 bg-green-50 font-medium border w-fit mx-auto px-2 py-1 rounded-md"><GiftIcon weight="fill" size={12} /> We'll send you free digital stickers</p>
         </DialogHeader>
@@ -105,6 +127,7 @@ export default function JoinWaitlistModal({
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              disabled={isAlreadyJoined || isLoading}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   handleAddJoinWaitlist();
@@ -127,7 +150,7 @@ export default function JoinWaitlistModal({
               </motion.button>
               <motion.button
                 onClick={handleAddJoinWaitlist}
-                disabled={!email || isLoading}
+                disabled={!email || isLoading || isAlreadyJoined}
                 className="px-4 py-2 bg-black text-white font-ppMondwest hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
                 whileHover={{ scale: !email || isLoading ? 1 : 1.05 }}
                 whileTap={{ scale: !email || isLoading ? 1 : 0.95 }}
@@ -137,6 +160,8 @@ export default function JoinWaitlistModal({
                     <SpinnerIcon size={16} className="animate-spin" />
                     Joining...
                   </>
+                ) : isAlreadyJoined ? (
+                  "You're on the list!"
                 ) : (
                   "Submit"
                 )}

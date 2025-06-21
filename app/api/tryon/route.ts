@@ -1,7 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
 // History types might not be needed if we simplify the input structure
 // import { HistoryItem, HistoryPart } from "@/libs/types";
+
+// Create a new redis client.
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL!,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+});
+
+// Create a new ratelimiter, that allows 5 requests per 1 day
+const ratelimit = new Ratelimit({
+  redis: redis,
+  limiter: Ratelimit.slidingWindow(5, "1 d"),
+  analytics: true,
+  /**
+   * Optional prefix for the keys used in redis. This is useful if you want to share a redis
+   * instance with other applications and want to avoid key collisions. The default prefix is
+   * "@upstash/ratelimit"
+   */
+  prefix: "@upstash/ratelimit",
+});
 
 // Helper function to convert ArrayBuffer to Base64
 function arrayBufferToBase64(buffer: ArrayBuffer): string {
@@ -28,6 +49,20 @@ const MODEL_ID = "gemini-2.0-flash-exp-image-generation";
 // Removed FormattedHistoryItem interface as history handling is simplified
 
 export async function POST(req: NextRequest) {
+  const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
+  const { success, pending, limit, reset, remaining } = await ratelimit.limit(
+    `ratelimit_middleware_${ip}`
+  );
+  if (!success) {
+    return NextResponse.json(
+      {
+        error: "You have reached your daily limit of 5 generations.",
+        reset: new Date(reset).toLocaleString(),
+      },
+      { status: 429 }
+    );
+  }
+
   let formData;
   try {
     // Parse FormData request instead of JSON
