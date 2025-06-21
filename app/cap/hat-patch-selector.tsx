@@ -2,41 +2,44 @@
 
 import { useState } from "react";
 import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
 import Image from "next/image";
 
 const initialItemsData = [
   {
-    id: "item-1",
-    label: "Gameboy",
-    image: "/patches/png/Gameboy Background Removed.png",
-    color: "bg-gradient-to-br from-gray-700 to-gray-900",
+    id: "item-6",
+    label: "ChatGPT Image 1",
+    image: "/patches/chatgpt/ChatGPT Image Jun 19, 2025, 01_16_08 PM.png",
+    color: "bg-gradient-to-br from-teal-500 to-teal-700",
   },
   {
-    id: "item-2",
-    label: "Space Shuttle",
-    image: "/patches/png/NASASpaceShuttle Background Removed.png",
-    color: "bg-gradient-to-br from-blue-600 to-blue-900",
+    id: "item-7",
+    label: "ChatGPT Image 2",
+    image: "/patches/chatgpt/ChatGPT Image Jun 19, 2025, 01_16_13 PM.png",
+    color: "bg-gradient-to-br from-indigo-500 to-indigo-800",
   },
   {
-    id: "item-3",
-    label: "Tongue",
-    image: "/patches/png/TongueWithAcid_1_PC-12881 Background Removed.png",
-    color: "bg-gradient-to-br from-green-500 to-green-800",
+    id: "item-8",
+    label: "ChatGPT Image 3",
+    image: "/patches/chatgpt/ChatGPT Image Jun 19, 2025, 01_28_09.png",
+    color: "bg-gradient-to-br from-yellow-500 to-amber-700",
   },
   {
-    id: "item-4",
-    label: "Bro Code",
-    image:
-      "/patches/png/The-Bro-Code-Patch-Rule-Book-Comedy-Embroidered-Iron-On-Patch-Collection-4116088 Background Removed.png",
-    color: "bg-gradient-to-br from-orange-500 to-red-600",
+    id: "item-10",
+    label: "ChatGPT Image 4",
+    image: "/sticker/list/induced-drip.png",
+    color: "bg-gradient-to-br from-purple-500 to-purple-800",
   },
   {
-    id: "item-5",
-    label: "So Fetch",
-    image:
-      "/patches/png/That_s-So-Fetch-With-Lips-Box-Embroidered-Iron-On-Patch-Patch-Collection-3458850 Background Removed.png",
-    color: "bg-gradient-to-br from-pink-500 to-purple-600",
+    id: "item-9",
+    label: "ChatGPT Image 4",
+    image: "/patches/chatgpt/ChatGPT Image Jun 19, 2025, 01_23_20 PM Background Removed.png",
+    color: "bg-gradient-to-br from-purple-500 to-purple-800",
+  },
+  {
+    id: "item-11",
+    label: "ChatGPT Image 5",
+    image: "/sticker/list/star.png",
+    color: "bg-gradient-to-br from-purple-500 to-purple-800",
   },
 ];
 
@@ -44,7 +47,7 @@ interface CircularPickerProps {
   className?: string;
 }
 
-export default function CircularPicker({ className }: CircularPickerProps) {
+export default function HatPatchSelector({ className }: CircularPickerProps) {
   const [selectedItem, setSelectedItem] = useState<{
     id: string;
     label: string;
@@ -63,14 +66,14 @@ export default function CircularPicker({ className }: CircularPickerProps) {
       <div
         className={`relative flex flex-col items-center justify-between w-full h-full p-4 sm:p-6 overflow-hidden ${className}`}
       >
-        <div className="flex items-center justify-center w-full h-3/5 pt-36 min-h-[180px] sm:min-h-[240px]">
+        <div className="flex items-center justify-center w-full h-3/5 pt-[14rem] min-h-[180px] sm:min-h-[240px]">
           <AnimatePresence>
             {selectedItem && (
               <motion.div
                 layoutId={selectedItem.id}
                 className="relative flex items-center justify-center cursor-pointer"
                 onClick={() => setSelectedItem(null)}
-                transition={springTransition}
+                transition={springTransition as any}
                 style={{ originX: 0.5, originY: 0.5 }}
                 initial={{ opacity: 0, scale: 0.7 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -79,7 +82,8 @@ export default function CircularPicker({ className }: CircularPickerProps) {
                   scale: 0.7,
                   transition: {
                     duration: 0.2,
-                    ...springTransition,
+                
+                    ...springTransition as any,
                     stiffness: 300,
                     damping: 30,
                   },
@@ -126,7 +130,7 @@ export default function CircularPicker({ className }: CircularPickerProps) {
 
                 {/* Main patch container */}
                 <motion.div
-                  className="relative size-20 rounded-2xl overflow-hidden bg-transparent"
+                  className="relative size-12 rounded-2xl overflow-hidden bg-transparent"
                  
                   transition={{
                     duration: 2,
@@ -139,26 +143,16 @@ export default function CircularPicker({ className }: CircularPickerProps) {
                     alt={selectedItem.label}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 640px) 96px, 128px"
+                    sizes="(max-width: 640px) 30px, 30px"
                   />
                   <div className="absolute inset-0" />
                 </motion.div>
-
-                {/* Close button */}
-                {/* <motion.div
-                  className="absolute -top-2 -right-2 bg-black/70 rounded-full p-2 hover:bg-black/90 transition-colors backdrop-blur-sm"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1, transition: { delay: 0.15, ...springTransition } }}
-                  exit={{ opacity: 0, scale: 0, transition: { duration: 0.1 } }}
-                >
-                  <X className="size-3 text-white" />
-                </motion.div> */}
               </motion.div>
             )}
           </AnimatePresence>
         </div>
 
-        <div className="flex items-center justify-center space-x-2 sm:space-x-3 w-full h-2/5 pt-4 sm:pt-6">
+        <div className="flex items-center justify-center space-x-2 sm:space-x-3 w-full h-2/5 pt-4 sm:pt-10">
           {initialItemsData.map((item) => (
             <motion.div
               key={item.id}
@@ -198,7 +192,7 @@ export default function CircularPicker({ className }: CircularPickerProps) {
                       rotateY: 5,
                     }
               }
-              transition={springTransition}
+              transition={springTransition as any}
               style={{ originX: 0.5, originY: 0.5 }}
             >
               <Image
@@ -206,7 +200,7 @@ export default function CircularPicker({ className }: CircularPickerProps) {
                 alt={item.label}
                 fill
                 className="object-cover"
-                sizes="(max-width: 640px) 56px, 64px"
+                sizes="(max-width: 640px) 40px, 40px"
               />
               {/* <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" /> */}
 

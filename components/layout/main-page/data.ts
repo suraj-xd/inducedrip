@@ -21,7 +21,7 @@ export const clothes = [
         "id": 2,
         "max_img_no": 3,
         "product_name": "Sweat Shirt",
-        "href": "/hat",
+        "href": "/cap",
         "description": "Adorn the modern look with this white screen printed  sweatshirt from fyi clothing, crafted in 280gsm heavy jersey cotton knit featuring long sleeves, crewneck, pullover style",
         "details": [
             "Unisex",
@@ -63,8 +63,8 @@ export const clothes = [
     {
         "id": 4,
         "max_img_no": 3,
-        "product_name": "Hoddie",
-        "href": "/hoddie",
+        "product_name": "Graymatter Suit",
+        "href": "/graymatter-suit",
         "description": "A cotton/polyester blend fleece, Split stitch double needle sewing on all seams for durability, You'll love it's softness, A large front pouch pocket perfect for holding items and keeping your hands warm, Jersey lined hood bringing comfort for your head",
         "details": [
             "8.5 oz (280 gm) cotton/polyester blend fleece",

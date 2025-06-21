@@ -11,29 +11,10 @@ import {
   Stage,
 } from "@react-three/drei";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, CheckCircleIcon, CheckIcon } from "@phosphor-icons/react";
-import ThreeDButton from "./3d-button";
-import CircularPickerHat from "./animation";
+import ThreeDButton from "@/components/command-drip/3d-button";
+import CircularPickerHat from "./hat-patch-selector";
 import { useResizeAnimation } from "@/hooks/use-resize-animation";
-
-interface POV {
-  id: string;
-  name: string;
-  modelRotation: [number, number, number];
-  cameraPosition: [number, number, number];
-  cameraTarget: [number, number, number];
-}
 
 interface LiveCameraAngles {
   azimuthal: number;
@@ -85,23 +66,20 @@ function Model({
   );
 }
 
-export default function CustomJeansViewer() {
-  const [modelUrl, setModelUrl] = useState<string | null>(
-    "/glb/Black_Cap.glb"
-  );
-  const [error, setError] = useState<string | null>(null);
+const modelUrl = "/glb/Black_Cap.glb";
+
+export default function ThreeDHatViewer() {
+
   const [modelRotation, setModelRotation] = useState<[number, number, number]>([
     0, 0, 0,
   ]);
   const orbitControlsRef = useRef<OrbitControlsImpl>(null!);
 
-  const [povs, setPovs] = useState<POV[]>([]);
-  const [povNameInput, setPovNameInput] = useState<string>("");
   const [isCustomPovActive, setIsCustomPovActive] = useState<boolean>(false);
 
-  const [lightingIntensity, setLightingIntensity] = useState<number>(1.2);
-  const [useSpotlightSetup, setUseSpotlightSetup] = useState<boolean>(true);
-  const [materialOverride, setMaterialOverride] = useState<boolean>(false);
+  const lightingIntensity = 1.2;
+  const useSpotlightSetup = true;
+  const materialOverride = false;
 
   // Use the global resize animation utility
   const { heightPercentage, triggerResizeAnimation } = useResizeAnimation();
@@ -111,29 +89,6 @@ export default function CustomJeansViewer() {
     useState<LiveCameraAngles | null>(null);
   const [isCameraAnimating, setIsCameraAnimating] = useState<boolean>(false);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      if (file.name.endsWith(".glb") || file.name.endsWith(".gltf")) {
-        const objectURL = URL.createObjectURL(file);
-        setModelUrl(objectURL);
-        setError(null);
-        setModelRotation([0, 0, 0]);
-        setIsCustomPovActive(false);
-        setIsEditMode(false);
-        if (
-          modelUrl &&
-          modelUrl !== "/assets/3d/duck.glb" &&
-          modelUrl.startsWith("blob:")
-        ) {
-          URL.revokeObjectURL(modelUrl);
-        }
-      } else {
-        setError("Invalid file type. Please upload a .glb or .gltf file.");
-        setModelUrl(null);
-      }
-    }
-  };
 
   const handleOrbitControlsChange = useCallback(() => {
     if (orbitControlsRef.current) {
@@ -211,82 +166,6 @@ export default function CustomJeansViewer() {
     ]
   );
 
-  const handleLoadDefault = () => {
-    if (isCameraAnimating) return;
-    if (
-      modelUrl &&
-      modelUrl !== "/assets/3d/duck.glb" &&
-      modelUrl.startsWith("blob:")
-    ) {
-      URL.revokeObjectURL(modelUrl);
-    }
-    setModelUrl("/assets/3d/duck.glb");
-    setError(null);
-    setModelRotation([0, 0, 0]);
-    setIsCustomPovActive(false);
-    setIsEditMode(false);
-    const input = document.getElementById("model-upload") as HTMLInputElement;
-    if (input) input.value = "";
-
-    setIsCameraAnimating(true);
-    setViewPreset("front", () => {
-      setIsCameraAnimating(false);
-      if (orbitControlsRef.current) orbitControlsRef.current.enabled = true;
-    });
-  };
-
-  const handleModelRotationChange = (axis: "x" | "y" | "z", value: string) => {
-    const degrees = Number.parseFloat(value);
-    if (isNaN(degrees)) return;
-    const radians = (degrees * Math.PI) / 180;
-    const newRotation = [...modelRotation] as [number, number, number];
-    if (axis === "x") newRotation[0] = radians;
-    else if (axis === "y") newRotation[1] = radians;
-    else if (axis === "z") newRotation[2] = radians;
-    setModelRotation(newRotation);
-  };
-
-  const handleAddPov = () => {
-    if (!povNameInput.trim() || !orbitControlsRef.current?.object) return;
-    const newPov: POV = {
-      id: crypto.randomUUID(),
-      name: povNameInput.trim(),
-      modelRotation: [...modelRotation],
-      cameraPosition: orbitControlsRef.current.object.position.toArray() as [
-        number,
-        number,
-        number
-      ],
-      cameraTarget: orbitControlsRef.current.target.toArray() as [
-        number,
-        number,
-        number
-      ],
-    };
-    setPovs((prev) => [...prev, newPov]);
-    setPovNameInput("");
-  };
-
-  const applyPov = (povId: string) => {
-    if (isCameraAnimating) return;
-    const pov = povs.find((p) => p.id === povId);
-    if (!pov || !orbitControlsRef.current?.object) return;
-
-    setIsCameraAnimating(true);
-    setIsCustomPovActive(true);
-
-    requestAnimationFrame(() => {
-      if (!orbitControlsRef.current || !orbitControlsRef.current.object) {
-        setIsCameraAnimating(false);
-        return;
-      }
-      setModelRotation([...pov.modelRotation]);
-      orbitControlsRef.current.object.position.set(...pov.cameraPosition);
-      orbitControlsRef.current.target.set(...pov.cameraTarget);
-      handleOrbitControlsChange();
-      setTimeout(() => setIsCameraAnimating(false), 150);
-    });
-  };
 
   const handleEditButtonClick = () => {
     if (isCameraAnimating) return;
@@ -326,18 +205,6 @@ export default function CustomJeansViewer() {
       handleOrbitControlsChange();
     }
   }, [handleOrbitControlsChange]);
-
-  useEffect(() => {
-    return () => {
-      if (
-        modelUrl &&
-        modelUrl !== "/assets/3d/duck.glb" &&
-        modelUrl.startsWith("blob:")
-      ) {
-        URL.revokeObjectURL(modelUrl);
-      }
-    };
-  }, [modelUrl]);
 
   const stageAdjustCamera =
     !isEditMode && !isCustomPovActive && !isCameraAnimating ? 1.5 : false;
@@ -454,4 +321,4 @@ export default function CustomJeansViewer() {
   );
 }
 
-useGLTF.preload("/assets/3d/duck.glb");
+useGLTF.preload(modelUrl);

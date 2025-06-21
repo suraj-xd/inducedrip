@@ -18,7 +18,7 @@ const ProductTitle = ({ title }: { title: string }) => (
 const productImages = [
   {
     url: "/models/4.png",
-    href: "/hoddie",
+    href: "/graymatter-suit",
     title: "GreyMatter Suit",
     price: "₹2999.00",
     id: 1,
@@ -76,7 +76,7 @@ const productImages = [
   },
   {
     url: "/chatgpt-hat-2.png",
-    href: "/hat",
+    href: "/cap",
     title: "INDCD CAP",
     price: "₹1999.00",
     id: 9,

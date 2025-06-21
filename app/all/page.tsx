@@ -4,25 +4,6 @@ import type React from "react";
 import Navbar from "@/components/layout/main-page/navbar";
 import Footer from "@/components/layout/main-page/footer";
 import Image from "next/image";
-import {
-  CardCurtainReveal,
-  CardCurtainRevealBody,
-  CardCurtainRevealDescription,
-  CardCurtainRevealFooter,
-  CardCurtainRevealTitle,
-  CardCurtain,
-} from "@/components/21st/curtain-reveal";
-
-import { ArrowUpRight } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-
-interface PlacedSticker {
-  id: string;
-  uniqueKey: string;
-  label: string;
-  image: string;
-}
 
 export default function ViewerPage() {
   return (
@@ -30,21 +11,36 @@ export default function ViewerPage() {
       <Navbar />
       <main>
         <div className="flex flex-col items-center justify-center mt-28">
-          {/* <Image src="/Frame 41.jpg" alt="AI Try On" width={500} height={500} /> */}
-          <h1 className="text-4xl text-left font-bold font-ppMondwest">All Products<span className="text-green-400">.</span> </h1>
+          <h1 className="text-4xl text-left font-bold font-ppMondwest">
+            All Products<span className="text-green-400">.</span>{" "}
+          </h1>
         </div>
         {/* List of models */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl mx-auto my-12 px-4">
-          {/* <Card2 image="/models/1.png" title="HODDIE" href="/shirt" /> */}
-          <Card2 image="/models/4.png" title="GreyMatter Suit" href="/hoddie" price="₹3699.00" />
-          <Card2 image="/models/3.png" title="HAT" href="/hat" price="₹3699.00" />
+          <Card2
+            image="/models/4.png"
+            title="GreyMatter Suit"
+            href="/hoddie"
+            price="₹3699.00"
+          />
+          <Card2
+            image="/models/3.png"
+            title="HAT"
+            href="/hat"
+            price="₹3699.00"
+          />
           <Card2
             image="/models/ChatGPT Image Jun 19, 2025, 03_24_58 PM.png"
             title="DENIM JACKET"
             href="/shirt"
             price="₹3699.00"
           />
-          <Card2 image="/diary/diary.png" title="NOTE TAKING" href="/diary" price="₹3699.00" />
+          <Card2
+            image="/diary/diary.png"
+            title="NOTE TAKING"
+            href="/diary"
+            price="₹3699.00"
+          />
           <Card2
             image="/sticker/cover/Frame 55.svg"
             title="STICKERS"
@@ -98,7 +94,7 @@ export default function ViewerPage() {
             title="PATCH INDUCED LOGO"
             href="/patch-5"
             price="₹3699.00"
-            />
+          />
           <Card2
             image="/sticker/list/ronika-1.png"
             title="PATCH RONIKA BROWN"
@@ -118,7 +114,12 @@ export default function ViewerPage() {
   );
 }
 
-function Card2(props: { image: string; title: string; href: string; price: string }) {
+function Card2(props: {
+  image: string;
+  title: string;
+  href: string;
+  price: string;
+}) {
   return (
     <a
       href={props.href}
@@ -138,53 +139,12 @@ function Card2(props: { image: string; title: string; href: string; price: strin
           <p className="text-md font-ppMondwest group-hover:underline py-2">
             {props.title}
           </p>
-          <p className="text-sm font-mono group-hover:underline py-2 opacity-50"> {props.price} </p>
+          <p className="text-sm font-mono group-hover:underline py-2 opacity-50">
+            {" "}
+            {props.price}{" "}
+          </p>
         </div>
       </div>
     </a>
-  );
-}
-
-function Card() {
-  return (
-    <div className="min-h-screen place-content-center place-items-center">
-      <CardCurtainReveal className="h-[560px] w-96 border border-zinc-100 bg-zinc-950 text-zinc-50 shadow">
-        <CardCurtainRevealBody className="">
-          <CardCurtainRevealTitle className="text-3xl font-medium tracking-tight">
-            the <br />
-            hoodie
-          </CardCurtainRevealTitle>
-          <CardCurtainRevealDescription className="my-4 ">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Accusantium voluptate, eum quia temporibus fugiat rerum nobis modi
-              dolor, delectus laboriosam, quae adipisci reprehenderit officiis
-              quidem iure ducimus incidunt officia. Magni, eligendi repellendus.
-              Fugiat, natus aut?
-            </p>
-          </CardCurtainRevealDescription>
-          <Button
-            variant={"secondary"}
-            size={"icon"}
-            className="aspect-square rounded-full"
-          >
-            <ArrowUpRight />
-          </Button>
-
-          <CardCurtain className=" bg-zinc-50" />
-        </CardCurtainRevealBody>
-
-        <CardCurtainRevealFooter className="mt-auto">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            width="100%"
-            height="100%"
-            alt="Tokyo street"
-            className=""
-            src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=2388&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          />
-        </CardCurtainRevealFooter>
-      </CardCurtainReveal>
-    </div>
   );
 }
