@@ -1,14 +1,10 @@
-import Footer from "@/components/layout/main-page/footer";
-import Navbar from "@/components/layout/main-page/navbar";
-import ViewerPage from "@/components/products/jeans/page";
-import CustomShirtPage from "./custom-shirt-page";
+import ProductsLayout from "@/components/command-drip/products-layout";
+import CustomDiaryPage from "./custom-diary-page";
 
-export default function ShirtPage() {
-  return(
-    <>
-    <Navbar/>
-    <CustomShirtPage/>
-    <Footer/>
-    </>
+export default function DiaryPage() {
+  return (
+    <ProductsLayout>
+      <CustomDiaryPage />
+    </ProductsLayout>
   );
 }

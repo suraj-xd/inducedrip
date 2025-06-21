@@ -16,20 +16,11 @@ import { useResizeAnimation } from "@/hooks/use-resize-animation";
 import ThreeDButton from "@/components/command-drip/3d-button";
 import JacketPatchPicker from "./jacket-patch-picker";
 
-interface POV {
-  id: string;
-  name: string;
-  modelRotation: [number, number, number];
-  cameraPosition: [number, number, number];
-  cameraTarget: [number, number, number];
-}
-
 interface LiveCameraAngles {
   azimuthal: number;
   polar: number;
 }
 
-// New component to handle useFrame for OrbitControls
 function ControlsUpdater({
   controlsRef,
 }: {
@@ -40,7 +31,7 @@ function ControlsUpdater({
       controlsRef.current.update();
     }
   });
-  return null; // This component doesn't render anything itself
+  return null; 
 }
 
 function Model({
