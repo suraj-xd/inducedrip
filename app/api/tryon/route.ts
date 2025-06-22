@@ -44,7 +44,7 @@ if (!GEMINI_API_KEY) {
 const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
 // Define the model ID for Gemini 2.0 Flash experimental
-const MODEL_ID = "gemini-2.0-flash-exp-image-generation";
+const MODEL_ID = "gemini-2.0-flash-preview-image-generation";
 
 // Removed FormattedHistoryItem interface as history handling is simplified
 
@@ -93,27 +93,100 @@ export async function POST(req: NextRequest) {
 
     // Construct the detailed prompt for the AI
     const detailedPrompt2 = `{
-      "technical_approach": "Treat as intelligent image inpainting rather than image replacement",
-      
-      "preprocessing_analysis": {
-        "pose_extraction": "Identify key body landmarks and pose structure from user image",
-        "garment_segmentation": "Isolate garment from source image with precise boundaries",
-        "occlusion_mapping": "Determine which areas of person need modification vs preservation"
-      },
-      
-      "integration_strategy": {
-        "inpainting_focus": "Use the person image as base canvas, inpaint only necessary regions",
-        "pose_guided_fitting": "Use extracted pose information to guide garment deformation",
-        "texture_preservation": "Maintain exact garment texture/material properties during integration",
-        "boundary_blending": "Focus on seamless edge integration rather than wholesale replacement"
-      },
-      
-      "advanced_constraints": {
-        "pose_consistency": "Garment must conform to detected pose keypoints and body structure",
-        "occlusion_awareness": "Intelligently handle how garment interacts with existing body parts/clothing",
-        "material_physics": "Simulate realistic draping based on garment type and pose"
-      }
-    }`;
+  "objective": "Intelligent Contextual Virtual Try-On with Dynamic Understanding",
+  
+  "core_philosophy": "UNDERSTAND, ANALYZE, ADAPT - Don't just place items, intelligently integrate them",
+  
+  "analysis_framework": {
+    "user_image_understanding": {
+      "spatial_analysis": "Identify visible body areas, pose, orientation, and angles",
+      "contextual_analysis": "Understand lighting direction, environment mood, photographic style",
+      "anatomical_analysis": "Assess body proportions, build, posture, and physical characteristics",
+      "existing_items_analysis": "Catalog current clothing/accessories and their fit/style"
+    },
+    
+    "target_item_understanding": {
+      "visual_properties": "Extract exact colors, textures, patterns, materials, and design details",
+      "dimensional_analysis": "Understand the item's 3D structure, draping behavior, and coverage area",
+      "style_context": "Determine the item's formality, season, and typical wearing context",
+      "perspective_analysis": "Identify the viewing angle and orientation of the item in its source image"
+    }
+  },
+  
+  "adaptive_integration_principles": {
+    "perspective_matching": {
+      "challenge": "Item and user may be photographed from different angles",
+      "solution": "Intelligently transform the item's appearance to match user's pose and viewing angle",
+      "example_scenario": "User facing right profile + front-view item → generate right-profile version of item"
+    },
+    
+    "anatomical_adaptation": {
+      "challenge": "Items must conform to user's unique body shape and proportions",
+      "solution": "Analyze user's visible anatomy and realistically adapt item's fit, drape, and positioning",
+      "considerations": "Account for body type, muscle definition, posture variations, and natural body curves"
+    },
+    
+    "environmental_harmony": {
+      "challenge": "New item must belong naturally in the user's environment",
+      "solution": "Match lighting conditions, shadow patterns, and environmental reflections on the new item",
+      "considerations": "Indoor vs outdoor, natural vs artificial light, time of day, weather conditions"
+    },
+    
+    "contextual_appropriateness": {
+      "challenge": "Item must make sense with existing outfit and setting",
+      "solution": "Consider style compatibility, layering logic, and situational appropriateness",
+      "considerations": "Formal vs casual, seasonal appropriateness, cultural context"
+    }
+  },
+  
+  "intelligent_modification_approach": {
+    "analysis_first": "Before any modification, thoroughly understand both images and their relationship",
+    "minimal_intervention": "Preserve maximum amount of original user image while achieving realistic integration",
+    "adaptive_generation": "When extending or generating, maintain consistency with established visual patterns",
+    "quality_over_convenience": "Prioritize realistic, believable results over simple copy-paste operations"
+  },
+  
+  "dynamic_strategies": {
+    "when_direct_replacement_possible": {
+      "approach": "Seamlessly replace existing item while maintaining all surrounding elements",
+      "focus": "Perfect edge blending, lighting consistency, and natural interaction with adjacent areas"
+    },
+    
+    "when_perspective_adjustment_needed": {
+      "approach": "Reconstruct item appearance to match user's pose and viewing angle",
+      "focus": "Maintain item's essential visual properties while adapting to new perspective"
+    },
+    
+    "when_body_extension_required": {
+      "approach": "Naturally extend visible anatomy while preserving established proportions and style",
+      "focus": "Seamless continuation of user's body characteristics and environmental context"
+    },
+    
+    "when_creative_adaptation_needed": {
+      "approach": "Generate contextually appropriate solution that honors both user and item characteristics",
+      "focus": "Believable integration that feels natural and intentional"
+    }
+  },
+  
+  "quality_assurance_criteria": {
+    "visual_coherence": "Result should look like a single, naturally-taken photograph",
+    "anatomical_accuracy": "All body proportions and item fit should appear realistic and natural",
+    "lighting_consistency": "All elements should share the same lighting environment",
+    "style_harmony": "New item should feel like it belongs in the user's context",
+    "perspective_accuracy": "All elements should share consistent viewing angles and spatial relationships"
+  },
+  
+  "forbidden_approaches": [
+    "Simple copy-paste without perspective adjustment",
+    "Ignoring user's body proportions or pose",
+    "Maintaining item's original perspective when it conflicts with user's pose", 
+    "Adding items that don't match the environmental lighting",
+    "Creating results that look obviously edited or artificial",
+    "Forcing items to fit without considering anatomical reality"
+  ],
+  
+  "success_definition": "The final image should appear as if the user was naturally photographed wearing the target item in their original environment, with no indication of digital manipulation"
+}`;
     const detailedPrompt = `{
       "prompt_version": "2.0", // Updated version
       "objective": "Generate a photorealistic virtual try-on image, seamlessly integrating a specified clothing item onto a person while rigidly preserving their facial identity, the clothing's exact appearance, and placing them in a completely new, distinct background.",
@@ -232,7 +305,7 @@ export async function POST(req: NextRequest) {
         {
           role: "user",
           parts: [
-            { text: detailedPrompt }, // Use the constructed detailed prompt
+            { text: detailedPrompt2 }, // Use the constructed detailed prompt
             {
               inlineData: {
                 mimeType: userImageMimeType,

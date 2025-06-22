@@ -296,7 +296,7 @@ export default function AiTryOn({ isOpen, onClose, imageUrl }: AiTryOnProps) {
                  <InfoIcon size={16} weight="fill" />
                 </div>
                 <p>
-                  Running in lite-mode. Premium tier coming soon with higher-res rendering, advanced pose estimation, and enhanced texture mapping.
+                  Currently running in lite-mode with limited capabilities. Upgrade to premium tier soon for photorealistic rendering, precise body mapping, and enhanced garment visualization with accurate texture and lighting.
                 </p>
               </div>
 

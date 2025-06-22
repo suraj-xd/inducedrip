@@ -18,7 +18,6 @@ interface Product {
   details: string[];
   images: string[];
   paymentLink: string;
-  new: boolean;
 }
 
 interface ProductDetailsPageProps {
