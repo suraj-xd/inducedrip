@@ -10,6 +10,7 @@ import {
   stickers,
   patches,
 } from "@/components/layout/main-page/data";
+import { SparkleIcon } from "@phosphor-icons/react";
 
 const allProducts = [...clothes, ...tshirts, ...stickers, ...patches];
 
@@ -55,7 +56,8 @@ function Card2(props: {
       className="relative w-full bg-white border group overflow-hidden hover:shadow-lg transition-all duration-300"
     >
         {props.isNew && (
-          <div className=" absolute top-1 right-1 w-fit bg-gray-100 rounded-lg text-black px-2 text-xs py-1 font-bold">
+          <div className=" absolute top-1 right-1 w-fit bg-gray-100 rounded text-black px-2 text-xs py-1 font-normal flex items-center gap-1">
+           <SparkleIcon size={12} weight="bold" />
             New
           </div>
         )}

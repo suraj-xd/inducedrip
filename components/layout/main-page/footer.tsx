@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { InfoIcon } from "@phosphor-icons/react";
 
@@ -21,19 +21,17 @@ const Footer = () => {
         </div>
         <div className="">
           <div className="text-center max-w-prose mx-auto rich-text">
-            <p className="font-ppMondwest opacity-70 my-5">
-              <span className="font-bold font-sans text-xs">All rights reserved 2025</span>
-              <br />
-              <a
-                className="underline font-semibold"
-              >
-                The XD Code Network
-              </a>
-            </p>
             <p className="font-ppMondwest opacity-70 my-5 px-2 text-sm border flex items-center border-gray-200 py-1 bg-gray-100 rounded-md">
               {" "}
               <InfoIcon size={16} className="inline-block mr-2" /> This is not
               the official swag store of the company.
+            </p>
+            <p className="font-ppMondwest opacity-70 my-5">
+              <span className="font-bold font-sans text-xs">
+                All rights reserved 2025
+              </span>
+              <br />
+              <a className="underline font-semibold">The XD Code Network</a>
             </p>
           </div>
         </div>

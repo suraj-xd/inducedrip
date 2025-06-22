@@ -94,8 +94,8 @@ const floatingProducts = [
   {
     ...productImages[0], // GREYMATTER SUIT
     depth: 0.5,
-    positionClassName: "top-[15%] left-[10%]",
-    imageClassName: "w-[100px] h-fit md:w-[200px]",
+    positionClassName: "top-[15%] left-[0] md:left-[10%]",
+    imageClassName: "w-[150px] md:w-[200px]",
   },
   {
     ...productImages[1], // INDUCED LOGO
@@ -124,8 +124,8 @@ const floatingProducts = [
   {
     ...productImages[4], // OVERISZE DRIP TEE
     depth: 1,
-    positionClassName: "top-[30%] left-[30%] md:left-[40%]",
-    imageClassName: "w-[250px] h-[250px] md:w-[400px] md:h-[400px]",
+    positionClassName: "top-[30%] left-[32%] md:left-[40%]",
+    imageClassName: "w-[200px] h-[200px] md:w-[400px] md:h-[400px]",
   },
   {
     ...productImages[5], // CLASSIC TEE
