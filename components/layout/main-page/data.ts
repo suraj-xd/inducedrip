@@ -132,6 +132,24 @@ export const tshirts = [
     images: ["/tshirt/Frame 52.png"],
     paymentLink:"https://rzp.io/rzp/ZaVPb4lm"
   },
+  {
+    id: 17,
+    max_img_no: 3,
+    product_name: "DRIP Classic Tee",
+    tag: "tshirt",
+    href: "/tshirt/17",
+    description:
+      "Minimal drip design tee from Induced collection. High-quality cotton fabric with excellent durability and comfort.",
+    details: [
+      "100% Cotton",
+      "Soft and breathable",
+      "Classic fit",
+      "Made In India",
+    ],
+    price: "₹999",
+    images: ["/tshirt/Frame 64.png"],
+    paymentLink:"https://rzp.io/rzp/aFrmUXJ"
+  }
 ];
 
 export const stickers = [
