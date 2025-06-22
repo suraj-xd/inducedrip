@@ -32,6 +32,17 @@ Welcome to Inducedrip, the official swag store for Induced AI. Explore our produ
 - **Deployment:** ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 - **Emails:** ![React Email](https://img.shields.io/badge/React_Email-000000?style=for-the-badge&logo=react&logoColor=white) & ![Nodemailer](https://img.shields.io/badge/Nodemailer-2A7A7E?style=for-the-badge&logo=nodemailer&logoColor=white)
 
+## 🎨 Design & 3D Modeling Tools
+
+- **Design:** ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
+- **AI Assistant:** ![ChatGPT](https://img.shields.io/badge/ChatGPT-412991?style=for-the-badge&logo=openai&logoColor=white)
+- **3D Modeling:** ![Meshy.ai](https://img.shields.io/badge/Meshy.ai-000000?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTMuMDkgOC4yNkwyMCA5TDEzLjA5IDE1Ljc0TDEyIDIyTDEwLjkxIDE1Ljc0TDQgOUwxMC45MSA4LjI2TDEyIDJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K&logoColor=white)
+
+Our design and 3D modeling workflow combines:
+- **🎨 Figma** for UI/UX design and product mockups
+- **🤖 ChatGPT** for design ideation and creative assistance  
+- **🧊 Meshy.ai** for AI-powered 3D model generation from text and images
+
 ## ⚙️ Getting Started
 
 To get a local copy up and running, follow these simple steps.
