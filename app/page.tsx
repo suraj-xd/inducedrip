@@ -62,7 +62,7 @@ const productImages = [
   },
   {
     url: "/sticker/cover/Frame 55.png",
-    href: "/sticker-pack",
+    href: "/stickers-pack",
     title: "Laptop Stickers",
     price: "₹3699.00",
     id: 7,

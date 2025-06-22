@@ -16,8 +16,11 @@ import { lazy } from "react";
 import SpinnerLoadingCenter from "@/components/command-drip/spinner-loading-center";
 import ThreeDJacketViewer from "./3d-jacket-viewer";
 import PatchNotIncluded from "@/components/command-drip/patch-not-included";
+import ThreeDMobileStrip from "@/components/command-drip/3d-mobile-strip";
 
-const YouMayAlsoLike = lazy(() => import("@/components/comman/you-may-also-like"));
+const YouMayAlsoLike = lazy(
+  () => import("@/components/comman/you-may-also-like")
+);
 
 export default function CustomJacketPage() {
   const [showIn3D, setShowIn3D] = useState(false);
@@ -37,7 +40,10 @@ export default function CustomJacketPage() {
             <AnimatePresence mode="wait">
               {showIn3D ? (
                 <MotionFadeVarientWrapper>
-                  <ThreeDJacketViewer />
+                  <>
+                    <ThreeDJacketViewer />
+                    <ThreeDMobileStrip />
+                  </>
                 </MotionFadeVarientWrapper>
               ) : (
                 <MotionFadeVarientWrapper>
@@ -66,10 +72,7 @@ export default function CustomJacketPage() {
             <PatchNotIncluded />
 
             <div className="mt-4 flex flex-col gap-y-2 ">
-              <Toggle3DButton
-                showIn3D={showIn3D}
-                setShowIn3D={setShowIn3D}
-              />
+              <Toggle3DButton showIn3D={showIn3D} setShowIn3D={setShowIn3D} />
             </div>
 
             <p className="mt-4 text-xs">{data?.description}</p>

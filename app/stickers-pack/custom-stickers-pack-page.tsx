@@ -13,6 +13,8 @@ import BackButton from "@/components/command-drip/back-button";
 import { lazy } from "react";
 import SpinnerLoadingCenter from "@/components/command-drip/spinner-loading-center";
 import TryOnMacbook from "./try-on-macbook";
+import ThreeDMobileStrip from "@/components/command-drip/3d-mobile-strip";
+import ThreeDButton from "@/components/command-drip/3d-button";
 
 const YouMayAlsoLike = lazy(() => import("@/components/comman/you-may-also-like"));
 
@@ -33,7 +35,10 @@ export default function CustomJacketPage() {
             <AnimatePresence mode="wait">
               {showIn3D ? (
                 <MotionFadeVarientWrapper>
-                  <TryOnMacbook setShowIn3D={setShowIn3D} />
+                  <>
+                    <TryOnMacbook setShowIn3D={setShowIn3D} />
+                    <ThreeDMobileStrip />
+                  </>
                 </MotionFadeVarientWrapper>
               ) : (
                 <MotionFadeVarientWrapper>
@@ -43,6 +48,13 @@ export default function CustomJacketPage() {
             </AnimatePresence>
             <div className="relative z-[100] -top-4 bullet-buttons flex  justify-center items-center gap-4 "></div>
           </div>
+          {!showIn3D && (
+            <div className="absolute bottom-0 left-0 flex w-full h-full justify-center items-center gap-4">
+              <ThreeDButton onClick={() => setShowIn3D(true)}>
+                Try on Macbook
+              </ThreeDButton>
+            </div>
+          )}
         </div>
 
         {/* Right Side Content */}
@@ -51,12 +63,6 @@ export default function CustomJacketPage() {
             <BackButton />
             {/* Product Name and Price */}
             <ProductInfo name={data?.product_name} price={data?.price} />
-            <div className="mt-4 flex flex-col gap-y-2 ">
-              <Toggle3DButton
-                showIn3D={showIn3D}
-                setShowIn3D={setShowIn3D}
-              />
-            </div>
 
             <p className="mt-4 text-xs">{data?.description}</p>
             <div className="flex gap-4 my-5">

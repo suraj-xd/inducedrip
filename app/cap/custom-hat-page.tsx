@@ -16,6 +16,7 @@ import { lazy } from "react";
 import SpinnerLoadingCenter from "@/components/command-drip/spinner-loading-center";
 import PatchNotIncluded from "@/components/command-drip/patch-not-included";
 import ThreeDHatViewer from "./3d-hat-viewer";
+import ThreeDMobileStrip from "@/components/command-drip/3d-mobile-strip";
 
 const YouMayAlsoLike = lazy(
   () => import("@/components/comman/you-may-also-like")
@@ -40,7 +41,10 @@ export default function CustomHatPage() {
               <AnimatePresence mode="wait">
                 {showIn3D ? (
                   <MotionFadeVarientWrapper>
+                    <>
                       <ThreeDHatViewer />
+                      <ThreeDMobileStrip />
+                    </>
                   </MotionFadeVarientWrapper>
                 ) : (
                   <MotionFadeVarientWrapper>
