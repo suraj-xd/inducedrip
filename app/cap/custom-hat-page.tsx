@@ -17,7 +17,9 @@ import SpinnerLoadingCenter from "@/components/command-drip/spinner-loading-cent
 import ThreeDHatViewer from "./3d-hat-viewer";
 import PatchNotIncluded from "@/components/command-drip/patch-not-included";
 
-const YouMayAlsoLike = lazy(() => import("@/components/comman/you-may-also-like"));
+const YouMayAlsoLike = lazy(
+  () => import("@/components/comman/you-may-also-like")
+);
 
 export default function CustomHatPage() {
   const [showIn3D, setShowIn3D] = useState(false);
@@ -29,33 +31,35 @@ export default function CustomHatPage() {
     <section className="w-[90%] md:w-[95%] flex flex-col gap-4 mt-12 md:mt-16 mx-auto">
       <div className="w-full flex justify-end relative flex-col md:flex-row z-[1]">
         {/* Left Side */}
-        <div className="w-full m-auto flex flex-col justify-center items-center gap-y-4 z-[2] ">
-          <div
-            style={{ aspectRatio: "5/6.3" }}
-            className=" w-full md:w-[500px] relative md:mr-[100px] max-h-[600px]"
-          >
-            <AnimatePresence mode="wait">
-              {showIn3D ? (
-                <MotionFadeVarientWrapper>
-                  <ThreeDHatViewer />
-                </MotionFadeVarientWrapper>
-              ) : (
-                <MotionFadeVarientWrapper>
-                  <ProductImageSwiper images={data?.images} />
-                </MotionFadeVarientWrapper>
-              )}
-            </AnimatePresence>
-            <div className="relative z-[100] -top-4 bullet-buttons flex  justify-center items-center gap-4 "></div>
-          </div>
-          {/* Toggle 3D Button */}
-          {!showIn3D && (
-            <div className="absolute bottom-0 left-0 flex w-full h-full justify-center items-center gap-4">
-              <ThreeDButton onClick={() => setShowAiTryOn(true)}>
-                AI Try On
-              </ThreeDButton>
+        <Suspense fallback={<SpinnerLoadingCenter />}>
+          <div className="w-full m-auto flex flex-col justify-center items-center gap-y-4 z-[2] ">
+            <div
+              style={{ aspectRatio: "5/6.3" }}
+              className=" w-full md:w-[500px] relative md:mr-[100px] max-h-[600px]"
+            >
+              <AnimatePresence mode="wait">
+                {showIn3D ? (
+                  <MotionFadeVarientWrapper>
+                    <ThreeDHatViewer />
+                  </MotionFadeVarientWrapper>
+                ) : (
+                  <MotionFadeVarientWrapper>
+                    <ProductImageSwiper images={data?.images} />
+                  </MotionFadeVarientWrapper>
+                )}
+              </AnimatePresence>
+              <div className="relative z-[100] -top-4 bullet-buttons flex  justify-center items-center gap-4 "></div>
             </div>
-          )}
-        </div>
+            {/* Toggle 3D Button */}
+            {!showIn3D && (
+              <div className="absolute bottom-0 left-0 flex w-full h-full justify-center items-center gap-4">
+                <ThreeDButton onClick={() => setShowAiTryOn(true)}>
+                  AI Try On
+                </ThreeDButton>
+              </div>
+            )}
+          </div>
+        </Suspense>
 
         {/* Right Side Content */}
         <div className="relative z-[2]">
@@ -64,10 +68,7 @@ export default function CustomHatPage() {
             {/* Product Name and Price */}
             <ProductInfo name={data?.product_name} price={data?.price} />
             <div className="mt-4 flex flex-col gap-y-2 ">
-              <Toggle3DButton
-                showIn3D={showIn3D}
-                setShowIn3D={setShowIn3D}
-              />
+              <Toggle3DButton showIn3D={showIn3D} setShowIn3D={setShowIn3D} />
             </div>
 
             <p className="mt-4 text-xs">{data?.description}</p>
@@ -86,11 +87,13 @@ export default function CustomHatPage() {
       </Suspense>
 
       {/* AI Try On Dialog */}
-      <AiTryOn
-        isOpen={showAiTryOn}
-        onClose={() => setShowAiTryOn(false)}
-        imageUrl={data?.images[0] || ""}
-      />
+      <Suspense fallback={<SpinnerLoadingCenter />}>
+        <AiTryOn
+          isOpen={showAiTryOn}
+          onClose={() => setShowAiTryOn(false)}
+          imageUrl={data?.images[0] || ""}
+        />
+      </Suspense>
     </section>
   );
 }

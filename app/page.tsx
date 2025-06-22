@@ -169,11 +169,6 @@ export default function Preview() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.88, delay: 1.5 }}
       >
-        {/* <p className="text-5xl md:text-7xl z-50 text-white font-calendas italic">
-          inducedrip.
-        </p> */}
-        {/* <Image src={"/models/Frame 52.svg"} width={400} height={400} alt="fyi-text" /> */}
-
         <Link
           className="text-xs z-50 hover:scale-110 transition-transform border bg-white text-black rounded-full py-2 w-fit px-4 cursor-pointer"
           href={"/all"}

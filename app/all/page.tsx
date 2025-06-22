@@ -32,6 +32,7 @@ export default function ViewerPage() {
               title={product.product_name}
               href={product.href}
               price={product.price}
+              isNew={'new' in product ? product.new as boolean : false}
             />
           ))}
         </div>
@@ -46,12 +47,18 @@ function Card2(props: {
   title: string;
   href: string;
   price: string;
+  isNew: boolean;
 }) {
   return (
     <a
       href={props.href}
       className="relative w-full bg-white border group overflow-hidden hover:shadow-lg transition-all duration-300"
     >
+        {props.isNew && (
+          <div className=" absolute top-1 right-1 w-fit bg-gray-100 rounded-lg text-black px-2 text-xs py-1 font-bold">
+            New
+          </div>
+        )}
       <div className="p-4 flex justify-center items-center pb-10">
         <Image
           src={props.image}
