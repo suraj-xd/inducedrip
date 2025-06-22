@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/tooltip";
 import { OrContinueWith } from "@/components/comman/or-continue-with";
 
-export default function PaymentButton() {
+export default function PaymentButton({paymentLink}:{paymentLink:string}) {
   const [showTooltip, setShowTooltip] = useState(false);
 
   const openPaymentWindow = () => {
@@ -56,7 +56,7 @@ export default function PaymentButton() {
     <div className="relative flex flex-col gap-y-2">
       
       <button
-        onClick={openPaymentWindow}
+        onClick={() => window.open(paymentLink, "_blank")}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
         className="w-full flex justify-center py-5 rounded-[30px] items-center gap-2 bg-black text-white p-4 text-xs uppercase font-semibold tracking-[1.1px] hover:bg-gray-800 transition-colors duration-200"

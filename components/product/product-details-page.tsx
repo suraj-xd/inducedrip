@@ -17,6 +17,8 @@ interface Product {
   description: string;
   details: string[];
   images: string[];
+  paymentLink: string;
+  new: boolean;
 }
 
 interface ProductDetailsPageProps {
@@ -62,7 +64,7 @@ export default function ProductDetailsPage({
 
             <p className="mt-4 text-xs">{product?.description}</p>
             <div className="flex gap-4 my-5">
-              <PaymentButton />
+              <PaymentButton paymentLink={product?.paymentLink || ""} />
             </div>
             <ProductDetailsAccordion details={product?.details} />
           </div>

@@ -77,7 +77,7 @@ export default function CustomJacketPage() {
 
             <p className="mt-4 text-xs">{data?.description}</p>
             <div className="flex gap-4 my-5">
-              <PaymentButton />
+              <PaymentButton paymentLink={data?.paymentLink || ""} />
             </div>
             {/* Details */}
             <ProductDetailsAccordion details={data?.details || []} />

@@ -78,7 +78,7 @@ export default function CustomHatPage() {
             <p className="mt-4 text-xs">{data?.description}</p>
             <PatchNotIncluded />
             <div className="flex gap-4 my-5">
-              <PaymentButton />
+              <PaymentButton paymentLink={data?.paymentLink || ""} />
             </div>
             {/* Details */}
             <ProductDetailsAccordion details={data?.details || []} />

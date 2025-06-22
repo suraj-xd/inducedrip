@@ -7,7 +7,7 @@ export const clothes = [
     description:
       "A timeless denim jacket with a modern fit. Crafted from durable denim, it features classic details like button cuffs, chest pockets, and a comfortable lining. Perfect for layering in any season.",
     details: ["Unisex", "100% Cotton Denim", "Made In India", "Button Closure"],
-    price: "$120.00",
+    price: "₹3,499",
     href: "/jacket",
     images: [
       "/public/jacket/chatgpt-jacket.png",
@@ -15,6 +15,7 @@ export const clothes = [
       "/public/jacket/jacket-photo-1.avif",
     ],
     new: true,
+    paymentLink:"https://rzp.io/rzp/VOQMwRb"
   },
   {
     id: 2,
@@ -25,8 +26,9 @@ export const clothes = [
     description:
       "A classic six-panel cap made from durable cotton twill. Features a pre-curved visor and an adjustable strap for a perfect fit. Finished with a subtle embroidered logo.",
     details: ["Unisex", "100% Cotton", "Made In India", "Adjustable Strap"],
-    price: "$45.00",
+    price: "₹999",
     images: ["/chatgpt-hat-2.png", "/hat/hat-4.png", "/hat/hat-5.png"],
+    paymentLink:"https://rzp.io/rzp/Nqlu5hn"
   },
   {
     id: 3,
@@ -42,11 +44,12 @@ export const clothes = [
       "Acid-free paper",
       "Lay-flat binding",
     ],
-    price: "$30.00",
+    price: "₹799",
     images: [
       "/diary/diary.png",
       "/diary/book-cover-4.png",
     ],
+    paymentLink:"https://rzp.io/rzp/BiS8kOh"
   },
   {
     id: 4,
@@ -63,8 +66,9 @@ export const clothes = [
       "Flat-front trousers",
     ],
     new: true,
-    price: "$150.00",
+    price: "₹8,999",
     images: ["/public/graymatter-suit/Frame 1145.png"],
+    paymentLink:"https://rzp.io/rzp/7vDzR2M"
   },
   {
     id: 5,
@@ -80,13 +84,14 @@ export const clothes = [
       "Weather-resistant",
       "Easy to apply and remove",
     ],
-    price: "$20.00",
+    price: "₹499",
     images: [
       "/sticker/cover/Frame 55.png",
       "/sticker/cover/Frame 56.png",
       "/sticker/cover/Frame 57.png",
       "/sticker/cover/Frame 58.png",
     ],
+    paymentLink:"https://rzp.io/rzp/2DHyii2"
   },
 ];
 
@@ -105,8 +110,9 @@ export const tshirts = [
       "Classic fit",
       "Made In India",
     ],
-    price: "$40.00",
+    price: "₹999",
     images: ["/tshirt/Frame 50.png", "/tshirt/Frame 51.png"],
+    paymentLink:"https://rzp.io/rzp/sx2IfxT"
   },
   {
     id: 7,
@@ -122,8 +128,9 @@ export const tshirts = [
       "High-quality graphic print",
       "Made In India",
     ],
-    price: "$50.00",
+    price: "₹1,499",
     images: ["/tshirt/Frame 52.png"],
+    paymentLink:"https://rzp.io/rzp/ZaVPb4lm"
   },
 ];
 
@@ -142,8 +149,9 @@ export const stickers = [
       "Easy Application",
       "Removable",
     ],
-    price: "$5.00",
+    price: "₹149",
     images: ["/sticker/list/star-2.png"],
+    paymentLink:"https://rzp.io/rzp/GG0vD5b"
   },
   {
     id: 15,
@@ -159,8 +167,9 @@ export const stickers = [
       "Easy Application",
       "Removable",
     ],
-    price: "$5.00",
+    price: "₹149",
     images: ["/sticker/list/induced-drip.png"],
+    paymentLink:"https://rzp.io/rzp/jwmmRh5"
   },
 ];
 
@@ -179,10 +188,11 @@ export const patches = [
       "Washable",
       "Made In India",
     ],
-    price: "$10.00",
+    price: "₹299",
     images: [
       "/patches/chatgpt/ChatGPT Image Jun 19, 2025, 01_23_20 PM Background Removed.png",
     ],
+    paymentLink:"https://rzp.io/rzp/V1heuqPV"
   },
   {
     id: 9,
@@ -198,8 +208,9 @@ export const patches = [
       "Washable",
       "Made In India",
     ],
-    price: "$10.00",
+    price: "₹299",
     images: ["/patches/chatgpt/ChatGPT Image Jun 19, 2025, 01_16_13 PM.png"],
+    paymentLink:"https://rzp.io/rzp/v1MDhwz"
   },
   {
     id: 10,
@@ -215,8 +226,9 @@ export const patches = [
       "Washable",
       "Made In India",
     ],
-    price: "$10.00",
+    price: "₹299",
     images: ["/patches/chatgpt/ChatGPT Image Jun 19, 2025, 01_28_09.png"],
+    paymentLink:"https://rzp.io/rzp/0xLzGFVe"
   },
   {
     id: 11,
@@ -232,8 +244,9 @@ export const patches = [
       "Washable",
       "Made In India",
     ],
-    price: "$10.00",
+    price: "₹299",
     images: ["/sticker/list/star.png"],
+    paymentLink:"https://rzp.io/rzp/Rk6Qxvi"
   },
 
   {
@@ -250,8 +263,9 @@ export const patches = [
       "Washable",
       "Made In India",
     ],
-    price: "$10.00",
+    price: "₹299",
     images: ["/sticker/list/induced-logo.png"],
+    paymentLink:"https://rzp.io/rzp/DEFDkgYj"
   },
   {
     id: 14,
@@ -267,7 +281,8 @@ export const patches = [
       "Washable",
       "Made In India",
     ],
-    price: "$10.00",
+    price: "₹299",
     images: ["/sticker/list/ronika-1.png"],
+    paymentLink:"https://rzp.io/rzp/ZuTeWBos"
   },
 ];
