@@ -28,10 +28,10 @@ const Footer = () => {
             </p>
             <p className="font-ppMondwest opacity-70 my-5">
               <span className="font-bold font-sans text-xs">
-                All rights reserved 2025
+                All rights reserved 2025 | Inducedrip
               </span>
               <br />
-              <a className="underline font-semibold">The XD Code Network</a>
+              {/* <a className="underline font-semibold">The XD Code Network</a> */}
             </p>
           </div>
         </div>

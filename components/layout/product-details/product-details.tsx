@@ -66,7 +66,7 @@ const ProductDetails = () => {
                     <div className="max-w-[450px] sticky top-[90px] md:-translate-x-16 pt-[20px] md:pt-[15vh]">
                         <div className="flex flex-col gap-y-1">
                             <div className="cursor-pointer uppercase text-xs font-semibold">
-                                FYI
+                                BUILDL
                             </div>
                             <div className="text-2xl font-semibold">
                                 {data?.product_name}
@@ -110,7 +110,7 @@ const ProductDetails = () => {
                             <div onClick={() => setToggle(prev => prev === "share" ? null : "share")} className="uppercase cursor-pointer tracking-[1.1px]">Share <span className="text-sm">{toggle === "share" ? "-" : "+"}</span></div>
                             <div className={`ml-4 my-4 cursor-pointer ${toggle === "share" ? "block" : "hidden"}`}>
                                 <ul className="list-disc font-semibold">
-                                    <a href='https://www.instagram.com/fyi.wearit/' target='_blank' rel='noreferrer'>INSTAGRAM</a>
+                                    <a href='https://www.instagram.com/suraj.xdd' target='_blank' rel='noreferrer'>INSTAGRAM</a>
                                 </ul>
                             </div>
                         </div>

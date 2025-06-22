@@ -69,7 +69,7 @@ export default function ProductDetailsAccordion({
       >
         <ul className="list-disc font-semibold">
           <a
-            href="https://www.instagram.com/fyi.wearit/"
+            href="https://www.instagram.com/suraj.xdd"
             target="_blank"
             rel="noreferrer"
           >

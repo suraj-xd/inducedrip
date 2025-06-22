@@ -10,7 +10,7 @@ const Navbar = () => {
                 <div className="flex justify-center items-center">
                     <Link href={"/"}>
                         <div className="flex items-center gap-x-4">
-                            <Image src={"/Frame 41.png"} width={150} height={150} alt="fyi-text" />
+                            <Image src={"/Frame 41.png"} width={150} height={150} alt="inducedrip-text" />
                         </div>
                     </Link>
                 </div>
