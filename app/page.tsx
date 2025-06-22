@@ -33,8 +33,8 @@ const productImages = [
   },
   {
     url: "/diary/diary.png",
-    href: "/diary",
-    title: "Book",
+    href: "/notebook",
+    title: "Notebook",
     price: "₹3699.00",
     id: 3,
   },

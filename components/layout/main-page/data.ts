@@ -31,9 +31,9 @@ export const clothes = [
   {
     id: 3,
     max_img_no: 5,
-    product_name: "Diary",
+    product_name: "Notebook",
     tag: "diary",
-    href: "/diary",
+    href: "/notebook",
     description:
       "Capture your thoughts in style with this premium diary. Featuring a durable hardcover and 120 pages of high-quality, acid-free paper, it's perfect for journaling, sketching, or taking notes.",
     details: [
@@ -45,9 +45,6 @@ export const clothes = [
     price: "$30.00",
     images: [
       "/diary/diary.png",
-      // "/diary/book-cover-1.png",
-      // "/diary/book-cover-2.png",
-      // "/diary/book-cover-3.png",
       "/diary/book-cover-4.png",
     ],
   },
