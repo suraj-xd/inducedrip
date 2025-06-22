@@ -6,7 +6,7 @@ export default function ProgressBar() {
       color="var(--muted-foreground)"
       initialPosition={0.08}
       crawlSpeed={200}
-      height={5}
+      height={3}
       crawl={true}
       showSpinner={true}
       easing="ease"
