@@ -32,7 +32,6 @@ export default function CustomHatPage() {
     <section className="w-[90%] md:w-[95%] flex flex-col gap-4 mt-12 md:mt-16 mx-auto">
       <div className="w-full flex justify-end relative flex-col md:flex-row z-[1]">
         {/* Left Side */}
-        <Suspense fallback={<SpinnerLoadingCenter />}>
           <div className="w-full m-auto flex flex-col justify-center items-center gap-y-4 z-[2] ">
             <div
               style={{ aspectRatio: "5/6.3" }}
@@ -63,7 +62,6 @@ export default function CustomHatPage() {
               </div>
             )}
           </div>
-        </Suspense>
 
         {/* Right Side Content */}
         <div className="relative z-[2]">

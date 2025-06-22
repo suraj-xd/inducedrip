@@ -4,6 +4,8 @@
 
 Welcome to Inducedrip, the official swag store for Induced AI. Explore our products with a clean interface, 3D previews, and unique customization options.
 
+> **ℹ️ Note:** This is a demo store. All products, payments, and features are for testing and demonstration purposes only.
+
 ## ✨ Features
 
 - **✨ Minimal UI:** A clean, intuitive, and modern shopping interface.
