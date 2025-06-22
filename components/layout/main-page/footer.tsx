@@ -26,8 +26,8 @@ const Footer = () => {
               <InfoIcon size={16} className="inline-block mr-2" /> This is not
               the official swag store of the company.
             </p>
-            <p className="font-ppMondwest opacity-70 my-5">
-              <span className="font-bold font-sans text-xs">
+            <p className="font-ppMondwest opacity-50">
+              <span className="font-sans text-xs">
                 All rights reserved 2025 | Inducedrip
               </span>
               <br />
