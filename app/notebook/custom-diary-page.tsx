@@ -12,8 +12,8 @@ import { clothes } from "@/components/layout/main-page/data";
 import BackButton from "@/components/command-drip/back-button";
 import { lazy } from "react";
 import SpinnerLoadingCenter from "@/components/command-drip/spinner-loading-center";
-import ThreeDDiaryViewer from "./3d-diary-viewer";
 
+const ThreeDDiaryViewer = lazy(() => import("./3d-diary-viewer"));
 const YouMayAlsoLike = lazy(
   () => import("@/components/comman/you-may-also-like")
 );
@@ -35,7 +35,9 @@ export default function CustomDiaryPage() {
             <AnimatePresence mode="wait">
               {showIn3D ? (
                 <MotionFadeVarientWrapper>
-                  <ThreeDDiaryViewer />
+                  <Suspense fallback={<SpinnerLoadingCenter />}>
+                    <ThreeDDiaryViewer />
+                  </Suspense>
                 </MotionFadeVarientWrapper>
               ) : (
                 <MotionFadeVarientWrapper>
@@ -54,10 +56,7 @@ export default function CustomDiaryPage() {
             {/* Product Name and Price */}
             <ProductInfo name={data?.product_name} price={data?.price} />
             <div className="mt-4 flex flex-col gap-y-2 ">
-              <Toggle3DButton
-                showIn3D={showIn3D}
-                setShowIn3D={setShowIn3D}
-              />
+              <Toggle3DButton showIn3D={showIn3D} setShowIn3D={setShowIn3D} />
             </div>
 
             <p className="mt-4 text-xs">{data?.description}</p>

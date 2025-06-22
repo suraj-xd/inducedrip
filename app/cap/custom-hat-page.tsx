@@ -14,8 +14,9 @@ import { clothes } from "@/components/layout/main-page/data";
 import BackButton from "@/components/command-drip/back-button";
 import { lazy } from "react";
 import SpinnerLoadingCenter from "@/components/command-drip/spinner-loading-center";
-import ThreeDHatViewer from "./3d-hat-viewer";
 import PatchNotIncluded from "@/components/command-drip/patch-not-included";
+
+const ThreeDHatViewer = lazy(() => import("./3d-hat-viewer"));
 
 const YouMayAlsoLike = lazy(
   () => import("@/components/comman/you-may-also-like")
@@ -40,7 +41,9 @@ export default function CustomHatPage() {
               <AnimatePresence mode="wait">
                 {showIn3D ? (
                   <MotionFadeVarientWrapper>
-                    <ThreeDHatViewer />
+                    <Suspense fallback={<SpinnerLoadingCenter />}>
+                      <ThreeDHatViewer />
+                    </Suspense>
                   </MotionFadeVarientWrapper>
                 ) : (
                   <MotionFadeVarientWrapper>
