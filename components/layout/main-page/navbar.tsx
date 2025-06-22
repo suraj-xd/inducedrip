@@ -12,7 +12,7 @@ const Navbar = () => {
                     </div>
                     <Link href={"/"}>
                         <div className="flex items-center gap-x-4">
-                            <Image src={"/Frame 41.svg"} width={150} height={150} alt="fyi-text" />
+                            <Image src={"/Frame 41.png"} width={150} height={150} alt="fyi-text" />
                         </div>
                     </Link>
                     <div className="flex-1 hidden md:flex gap-8 items-center justify-end uppercase font-medium text-[10px] tracking-[1.8px] ">

@@ -25,7 +25,7 @@ const productImages = [
   },
   {
     url: "/sticker/list/induced-logo.png",
-    href: "/patch-2",
+    href: "/patch/13",
     title: "Induced Logo",
     price: "₹299.00",
 
@@ -46,22 +46,22 @@ const productImages = [
     id: 4,
   },
   {
-    url: "/tshirt/Frame 52.svg",
-    href: "/tshirt-2",
+    url: "/tshirt/Frame 52.png",
+    href: "/tshirt/7",
     title: "Overisze Drip Tee",
     price: "₹3699.00",
 
     id: 5,
   },
   {
-    url: "/tshirt/Frame 50.svg",
-    href: "/tshirt-1",
+    url: "/tshirt/Frame 50.png",
+    href: "/tshirt/6",
     title: "Classic Tee",
     price: "₹3699.00",
     id: 6,
   },
   {
-    url: "/sticker/cover/Frame 55.svg",
+    url: "/sticker/cover/Frame 55.png",
     href: "/laptop",
     title: "Laptop Stickers",
     price: "₹3699.00",
@@ -69,7 +69,7 @@ const productImages = [
   },
   {
     url: "/sticker/list/star.png",
-    href: "/patch-1",
+    href: "/patch/11",
     title: "Ronika Patch",
     price: "₹299.00",
     id: 8,

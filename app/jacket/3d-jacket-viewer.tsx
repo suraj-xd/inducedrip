@@ -65,7 +65,7 @@ function Model({
   );
 }
 
-const modelUrl = "/glb/Denim_Elegance.glb";
+const modelUrl = "/public/jacket/3d/Denim_Elegance.glb";
 export default function ThreeDJacketViewer() {
   const [modelRotation, setModelRotation] = useState<[number, number, number]>([
     0, 0, 0,
@@ -301,13 +301,13 @@ export default function ThreeDJacketViewer() {
       {!isEditMode ? (
         <div className="absolute bottom-10 left-0 right-0 flex justify-center z-[100]">
           <ThreeDButton className="px-5 py-3" onClick={handleEditButtonClick}>
-            Select Patch
+            Try on Patch
           </ThreeDButton>
         </div>
       ) : (
         <div className="absolute bottom-3 left-0 right-0 flex justify-center z-[1000]">
           <ThreeDButton className="px-5 py-3" onClick={handleCancelEditClick}>
-            Save Changes
+            Done
           </ThreeDButton>
         </div>
       )}

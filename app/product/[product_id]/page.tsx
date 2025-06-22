@@ -1,13 +1,10 @@
 import ProductDetails from "@/components/layout/product-details/product-details";
-import Navbar from "@/components/layout/main-page/navbar";
-import Footer from "@/components/layout/main-page/footer";
+import ProductsLayout from "@/components/command-drip/products-layout";
 
 export default function Product() {
   return (
-    <>
-      <Navbar />
+    <ProductsLayout>
       <ProductDetails />
-      <Footer />
-    </>
+    </ProductsLayout>
   );
 }

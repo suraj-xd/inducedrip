@@ -15,6 +15,7 @@ import BackButton from "@/components/command-drip/back-button";
 import { lazy } from "react";
 import SpinnerLoadingCenter from "@/components/command-drip/spinner-loading-center";
 import ThreeDJacketViewer from "./3d-jacket-viewer";
+import PatchNotIncluded from "@/components/command-drip/patch-not-included";
 
 const YouMayAlsoLike = lazy(() => import("@/components/comman/you-may-also-like"));
 
@@ -62,6 +63,8 @@ export default function CustomJacketPage() {
             <BackButton />
             {/* Product Name and Price */}
             <ProductInfo name={data?.product_name} price={data?.price} />
+            <PatchNotIncluded />
+
             <div className="mt-4 flex flex-col gap-y-2 ">
               <Toggle3DButton
                 showIn3D={showIn3D}

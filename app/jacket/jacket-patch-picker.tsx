@@ -6,38 +6,13 @@ import { X } from "lucide-react";
 import Image from "next/image";
 
 const initialItemsData = [
-  // {
-  //   id: "item-1",
-  //   label: "Gameboy",
-  //   image: "/patches/png/Gameboy Background Removed.png",
-  //   color: "bg-gradient-to-br from-gray-700 to-gray-900",
-  // },
-  // {
-  //   id: "item-2",
-  //   label: "Space Shuttle",
-  //   image: "/patches/png/NASASpaceShuttle Background Removed.png",
-  //   color: "bg-gradient-to-br from-blue-600 to-blue-900",
-  // },
-  // {
-  //   id: "item-3",
-  //   label: "Tongue",
-  //   image: "/patches/png/TongueWithAcid_1_PC-12881 Background Removed.png",
-  //   color: "bg-gradient-to-br from-green-500 to-green-800",
-  // },
   {
     id: "item-4",
     label: "Bro Code",
     image:
-      "/patches/png/The-Bro-Code-Patch-Rule-Book-Comedy-Embroidered-Iron-On-Patch-Collection-4116088 Background Removed.png",
+      "/public/jacket/patches/The-Bro-Code-Patch-Rule-Book-Comedy-Embroidered-Iron-On-Patch-Collection-4116088 Background Removed.png",
     color: "bg-gradient-to-br from-orange-500 to-red-600",
   },
-  // {
-  //   id: "item-5",
-  //   label: "So Fetch",
-  //   image:
-  //     "/patches/png/That_s-So-Fetch-With-Lips-Box-Embroidered-Iron-On-Patch-Patch-Collection-3458850 Background Removed.png",
-  //   color: "bg-gradient-to-br from-pink-500 to-purple-600",
-  // },
   {
     id: "item-6",
     label: "18-510x510",
@@ -50,18 +25,6 @@ const initialItemsData = [
     image: "/sticker/list/induced-drip.png",
     color: "bg-gradient-to-br from-yellow-500 to-yellow-800",
   },
-  // {
-  //   id: "item-8",
-  //   label: "32-510x510",
-  //   image: "/patches/32-510x510 Background Removed.png",
-  //   color: "bg-gradient-to-br from-teal-500 to-teal-800",
-  // },
-  // {
-  //   id: "item-9",
-  //   label: "33-510x510",
-  //   image: "/patches/33-510x510 Background Removed.png",
-  //   color: "bg-gradient-to-br from-red-500 to-red-800",
-  // },
   {
     id: "item-10",
     label: "35-510x510",
@@ -80,7 +43,6 @@ const initialItemsData = [
     image: "/patches/Skull-copy-510x510 Background Removed.png",
     color: "bg-gradient-to-br from-cyan-500 to-cyan-800",
   },
-  
 ];
 
 interface CircularPickerProps {

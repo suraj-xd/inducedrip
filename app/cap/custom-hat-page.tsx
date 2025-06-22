@@ -15,6 +15,7 @@ import BackButton from "@/components/command-drip/back-button";
 import { lazy } from "react";
 import SpinnerLoadingCenter from "@/components/command-drip/spinner-loading-center";
 import ThreeDHatViewer from "./3d-hat-viewer";
+import PatchNotIncluded from "@/components/command-drip/patch-not-included";
 
 const YouMayAlsoLike = lazy(() => import("@/components/comman/you-may-also-like"));
 
@@ -70,6 +71,7 @@ export default function CustomHatPage() {
             </div>
 
             <p className="mt-4 text-xs">{data?.description}</p>
+            <PatchNotIncluded />
             <div className="flex gap-4 my-5">
               <PaymentButton />
             </div>

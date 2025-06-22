@@ -14,7 +14,7 @@ const initialItemsData = [
   {
     id: "item-7",
     label: "ChatGPT Image 2",
-    image: "/patches/chatgpt/ChatGPT Image Jun 19, 2025, 01_16_13 PM.png",
+    image: "/sticker/list/dntel.png",
     color: "bg-gradient-to-br from-indigo-500 to-indigo-800",
   },
   {

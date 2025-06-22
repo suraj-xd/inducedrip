@@ -306,13 +306,13 @@ export default function ThreeDHatViewer() {
       {!isEditMode ? (
         <div className="absolute bottom-10 left-0 right-0 flex justify-center z-[100]">
           <ThreeDButton className="px-5 py-3" onClick={handleEditButtonClick}>
-            Select Patch
+            Try on Patch
           </ThreeDButton>
         </div>
       ) : (
         <div className="absolute bottom-3 left-0 right-0 flex justify-center z-[1000]">
           <ThreeDButton className="px-5 py-3" onClick={handleCancelEditClick}>
-            Save Changes
+            Done
           </ThreeDButton>
         </div>
       )}

@@ -1,47 +1,62 @@
+"use client"
+
 import Image from "next/image";
 import Link from "next/link";
-import { clothes } from "../layout/main-page/data";
+import { clothes, stickers, patches, tshirts } from "../layout/main-page/data";
+import { useEffect, useState } from "react";
 
 interface YouMayAlsoLikeProps {
   currentProductId?: number;
 }
 
-export default function YouMayAlsoLike({ currentProductId }: YouMayAlsoLikeProps) {
-  // Filter out current product and separate stickers/patches from other products
-  const availableProducts = clothes.filter(product => product.id !== currentProductId);
-  
-  // Stickers and patches are typically IDs 8-15 based on the data
-  const stickersAndPatches = availableProducts.filter(product => product.id >= 8 && product.id <= 15);
-  const otherProducts = availableProducts.filter(product => product.id < 8 || product.id > 15);
-  
-  // Function to get random items from an array
-  const getRandomItems = (array: any[], count: number) => {
-    const shuffled = [...array].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count);
-  };
-  
-  // Prioritize stickers and patches, then fill with other products
-  let selectedProducts = [];
-  
-  // Try to get 3 stickers/patches first
-  const selectedStickersPatches = getRandomItems(stickersAndPatches, 3);
-  selectedProducts.push(...selectedStickersPatches);
-  
-  // Fill remaining slots with other products
-  const remainingSlots = 4 - selectedProducts.length;
-  if (remainingSlots > 0) {
-    const selectedOthers = getRandomItems(otherProducts, remainingSlots);
-    selectedProducts.push(...selectedOthers);
-  }
-  
-  // If we still don't have 4 products, fill with any remaining products
-  if (selectedProducts.length < 4) {
-    const remaining = availableProducts.filter(product => 
-      !selectedProducts.some(selected => selected.id === product.id)
+export default function YouMayAlsoLike({
+  currentProductId,
+}: YouMayAlsoLikeProps) {
+  const [selectedProducts, setSelectedProducts] = useState<any[]>([]);
+
+  useEffect(() => {
+    const availableProducts = [
+      ...clothes,
+      ...stickers,
+      ...patches,
+      ...tshirts,
+    ].filter((product) => product.id !== currentProductId);
+
+    const stickersAndPatches = availableProducts.filter(
+      (product) => product.id >= 8 && product.id <= 15
     );
-    const additionalProducts = getRandomItems(remaining, 4 - selectedProducts.length);
-    selectedProducts.push(...additionalProducts);
-  }
+    const otherProducts = availableProducts.filter(
+      (product) => product.id < 8 || product.id > 15
+    );
+
+    const getRandomItems = (array: any[], count: number) => {
+      const shuffled = [...array].sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, count);
+    };
+
+    let products: any[] = [];
+
+    const selectedStickersPatches = getRandomItems(stickersAndPatches, 3);
+    products.push(...selectedStickersPatches);
+
+    const remainingSlots = 4 - products.length;
+    if (remainingSlots > 0) {
+      const selectedOthers = getRandomItems(otherProducts, remainingSlots);
+      products.push(...selectedOthers);
+    }
+
+    if (products.length < 4) {
+      const remaining = availableProducts.filter(
+        (product) => !products.some((selected) => selected.id === product.id)
+      );
+      const additionalProducts = getRandomItems(
+        remaining,
+        4 - products.length
+      );
+      products.push(...additionalProducts);
+    }
+    setSelectedProducts(products);
+  }, [currentProductId]);
 
   return (
     <div className="mt-20 flex flex-col gap-3">
@@ -64,7 +79,9 @@ export default function YouMayAlsoLike({ currentProductId }: YouMayAlsoLikeProps
             />
             <div className="flex flex-col text-xs text-black group-hover:text-[#767676] transition-all duration-150">
               <div className="uppercase leading-4">{product.product_name}</div>
-              <div className="leading-4">{product.details[0] || 'Premium Quality'}</div>
+              <div className="leading-4">
+                {product.details[0] || "Premium Quality"}
+              </div>
               <div className="text-[#757575] mt-1 font-medium tracking-[1.8px]">
                 {product.price}
               </div>
