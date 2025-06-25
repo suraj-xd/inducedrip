@@ -9,6 +9,7 @@ import { AiTryonNotifications } from "@/components/ai-tryon-notifications";
 import ProgressBar from "@/components/comman/top-progress-bar";
 import { Toaster } from "@/components/ui/sonner";
 import { metadata as appMetadata } from "@/lib/app-info";
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   ...appMetadata,
@@ -50,6 +51,7 @@ export default function RootLayout({
         <TooltipProvider>{children}</TooltipProvider>
         <AiTryonNotifications />
         <Toaster />
+        <Analytics />
       </body>
     </html>
   );
