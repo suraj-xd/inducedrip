@@ -44,7 +44,7 @@ if (!GEMINI_API_KEY) {
 const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
 // Define the model ID for Gemini 2.0 Flash experimental
-const MODEL_ID = "gemini-2.0-flash-preview-image-generation";
+const MODEL_ID = "gemini-2.5-flash-image-preview";
 
 // Removed FormattedHistoryItem interface as history handling is simplified
 
