@@ -6,8 +6,12 @@ export interface AiGeneration {
   userImageUrl: string;
   clothingImageUrl: string;
   resultImageUrl?: string;
+  description?: string;
+  confidence?: number;
+  model?: string;
   error?: string;
   createdAt: Date;
+  completedAt?: Date;
   abortController?: AbortController;
 }
 
@@ -41,7 +45,11 @@ export const useAiTryonStore = create<AiTryonStore>((set, get) => ({
   updateGeneration: (id, updates) => {
     set((state) => ({
       generations: state.generations.map((gen) =>
-        gen.id === id ? { ...gen, ...updates } : gen
+        gen.id === id ? { 
+          ...gen, 
+          ...updates,
+          completedAt: updates.status === 'completed' ? new Date() : gen.completedAt
+        } : gen
       ),
     }));
   },
@@ -75,4 +83,4 @@ export const useAiTryonStore = create<AiTryonStore>((set, get) => ({
       generations: state.generations.filter((gen) => gen.status === 'generating'),
     }));
   },
-})); 
+}));  

@@ -1,7 +1,7 @@
 "use client";
 
 import { AiGeneration } from "@/lib/stores/ai-tryon-store";
-import { X, Download, Share } from "lucide-react";
+import { X, Download, Share, Star } from "lucide-react";
 import Image from "next/image";
 
 interface AiTryonResultDialogProps {
@@ -106,7 +106,19 @@ export function AiTryonResultDialog({ generation, onClose }: AiTryonResultDialog
               </div>
             </div>
 
-            {/* Generation Info */}
+            {generation.description && (
+              <div className="text-center text-sm text-gray-600 max-w-md mx-auto">
+                <p>{generation.description}</p>
+              </div>
+            )}
+            
+            {generation.confidence && (
+              <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
+                <Star className="w-4 h-4" />
+                <span>Quality Score: {Math.round(generation.confidence * 100)}%</span>
+              </div>
+            )}
+
             <div className="text-center text-sm text-gray-500">
               Generated on {generation.createdAt.toLocaleDateString()} at{' '}
               {generation.createdAt.toLocaleTimeString()}
@@ -142,4 +154,4 @@ export function AiTryonResultDialog({ generation, onClose }: AiTryonResultDialog
       </div>
     </div>
   );
-} 
+}  

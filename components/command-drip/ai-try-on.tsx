@@ -189,6 +189,9 @@ export default function AiTryOn({ isOpen, onClose, imageUrl }: AiTryOnProps) {
         updateGeneration(generationId, {
           status: "completed",
           resultImageUrl: result.image,
+          description: result.description,
+          confidence: result.confidence,
+          model: result.model,
           abortController: undefined,
         });
       } else {
