@@ -92,7 +92,28 @@ export async function POST(req: NextRequest) {
     }
 
     // Construct the detailed prompt for the AI
-    const detailedPrompt2 = `{
+    const optimizedPrompt = `
+You are an expert AI fashion stylist. Create a photorealistic virtual try-on by seamlessly integrating the clothing item onto the person in the photo.
+
+**ESSENTIAL REQUIREMENTS:**
+1. **Preserve Identity**: Keep the person's face, body, skin tone, and hair exactly the same
+2. **Natural Fit**: Ensure clothing fits realistically with proper draping and fabric behavior
+3. **Consistent Lighting**: Match the original photo's lighting, shadows, and color temperature
+4. **Seamless Integration**: No visible artifacts or unrealistic blending
+5. **Professional Quality**: Result should look like an authentic fashion photograph
+
+**TECHNICAL GUIDELINES:**
+- Analyze body proportions for accurate clothing placement
+- Consider fabric properties for realistic draping
+- Maintain original background and image quality
+- Add natural shadows where clothing creates them
+- Ensure clothing follows body contours naturally
+
+**OUTPUT:**
+Generate a high-quality virtual try-on image with a brief description of the styling result.
+`;
+
+  const detailedPrompt2 = `{
   "objective": "Intelligent Contextual Virtual Try-On with Dynamic Understanding",
   
   "core_philosophy": "UNDERSTAND, ANALYZE, ADAPT - Don't just place items, intelligently integrate them",
@@ -305,7 +326,7 @@ export async function POST(req: NextRequest) {
         {
           role: "user",
           parts: [
-            { text: detailedPrompt2 }, // Use the constructed detailed prompt
+            { text: optimizedPrompt },
             {
               inlineData: {
                 mimeType: userImageMimeType,
@@ -329,11 +350,30 @@ export async function POST(req: NextRequest) {
         contents: contents, // Use the new contents structure
         // Generation Config - adjust as needed
         config: {
-          temperature: 0.6, // Slightly lower temp might be better for editing tasks
+          temperature: 0.6,
           topP: 0.95,
           topK: 40,
-          // Ensure image modality is requested if the model supports it
           responseModalities: ["Text", "Image"],
+          responseSchema: {
+            type: "object",
+            properties: {
+              image: { 
+                type: "string", 
+                description: "Base64 encoded generated image data" 
+              },
+              description: { 
+                type: "string", 
+                description: "Detailed description of the try-on result and how well the clothing fits" 
+              },
+              confidence: { 
+                type: "number", 
+                description: "Confidence score between 0 and 1 for the generation quality",
+                minimum: 0,
+                maximum: 1
+              }
+            },
+            required: ["image", "description"]
+          }
         },
       });
 
@@ -351,9 +391,9 @@ export async function POST(req: NextRequest) {
 
     let textResponse = null;
     let imageData = null;
-    let imageMimeType = "image/png"; // Default
+    let imageMimeType = "image/png";
+    let confidence = 0.8;
 
-    // Process the response
     if (response.candidates && response.candidates.length > 0) {
       const parts = response.candidates[0]?.content?.parts;
       if (parts) {
@@ -361,7 +401,6 @@ export async function POST(req: NextRequest) {
 
         for (const part of parts) {
           if ("inlineData" in part && part.inlineData) {
-            // Get the image data
             imageData = part.inlineData.data;
             imageMimeType = part.inlineData.mimeType || "image/png";
             if (imageData) {
@@ -371,12 +410,23 @@ export async function POST(req: NextRequest) {
               );
             }
           } else if ("text" in part && part.text) {
-            // Store the text
             textResponse = part.text;
             console.log(
               "Text response received:",
               textResponse.substring(0, 100) + (textResponse.length > 100 ? "..." : "")
             );
+            
+            try {
+              const structuredResponse = JSON.parse(part.text);
+              if (structuredResponse.confidence && typeof structuredResponse.confidence === 'number') {
+                confidence = Math.max(0, Math.min(1, structuredResponse.confidence));
+              }
+              if (structuredResponse.description) {
+                textResponse = structuredResponse.description;
+              }
+            } catch (e) {
+              console.log("Response is not structured JSON, using as plain text");
+            }
           }
         }
       } else {
@@ -384,22 +434,22 @@ export async function POST(req: NextRequest) {
       }
     } else {
       console.log("No candidates found in the API response.");
-      // Attempt to get potential error message from response if available
       const safetyFeedback = response?.promptFeedback?.blockReason;
       if (safetyFeedback) {
         console.error("Content generation blocked:", safetyFeedback);
         throw new Error(`Content generation failed due to safety settings: ${safetyFeedback}`);
       }
-      const responseText = JSON.stringify(response, null, 2); // Log the full response for debugging
+      const responseText = JSON.stringify(response, null, 2);
       console.error("Unexpected API response structure:", responseText);
       throw new Error("Received an unexpected or empty response from the API.");
     }
 
-
-    // Return the base64 image and description as JSON
     return NextResponse.json({
       image: imageData ? `data:${imageMimeType};base64,${imageData}` : null,
-      description: textResponse || "AI description not available.", // Provide default text
+      description: textResponse || "AI description not available.",
+      confidence: confidence,
+      model: "gemini-2.5-flash-image-preview",
+      timestamp: new Date().toISOString()
     });
   } catch (error) {
     console.error("Error processing virtual try-on request:", error);
